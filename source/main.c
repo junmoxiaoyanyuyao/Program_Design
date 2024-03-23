@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <time.h>
+#include <math.h>
 
 #include "definition.h"
 
@@ -17,6 +18,7 @@ int main(int argc, char** argv[]){
     if(c == 'Y')
         GradeInput(head,preListEnd);
     Insert(&preListEnd);
+
     // for(ListNode* temp = head->next;temp != NULL;temp = temp->next){
     //     printf("学号:%s 姓名:%s 加分:%.2f \n",temp->t->studentID,
     //             temp->t->studentName,temp->t->recognizedCredit);

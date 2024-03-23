@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <time.h>
+#include <math.h>
 
 //结构体声明
 typedef struct ListNode ListNode; //链表结点
@@ -21,17 +22,25 @@ typedef struct contest contest;//竞赛
 #define maxJournalNameSize 40 // 最大期刊名称长度
 #define maxConferenceNameSize 40 // 最大会议名称长度
 #define maxIssueInfoSize 20 // 最大卷/期/论文号/页码范围信息长度
+#define maxGradeType 8
+#define maxListNameSize 500
 
 //枚举类型定义
 enum type{THESIS,PROJECT,CONTEST}; //素质项目类型
-enum thesisGrade{G1,G2,G3,G4,G5,G6}; // 论文等级
-enum contestGrade{g1,g2,g3,g4,g5}; //竞赛分类
+enum thesisGrade{G1,G2,G3,G4,G5,G6,G7,G8}; // 论文等级
+enum contestGrade{g1,g2,g3,g4,g5,g6,g7,g8}; //竞赛分类
+enum projectGrade{p1,p2,p3,p4,p5,p6,p7,p8};
 
-//等级
-extern double TheGrade[6];
-extern double ConGrade[5];
-extern char TheGName[6][500];
-extern char ConGName[5][500];
+//全局变量
+extern double TheGrade[maxGradeType];
+extern double ConGrade[maxGradeType];
+extern double ProGrade[maxGradeType];
+extern char TheGName[maxGradeType][maxListNameSize];
+extern char ConGName[maxGradeType][maxListNameSize];
+extern char ProGName[maxGradeType][maxListNameSize];
+extern int maxThesisGradeKind;
+extern int maxContestGradeKind;
+extern int maxProjectGradeKind;
 
 
 //函数声明
@@ -54,6 +63,7 @@ void thesisSingleInput(gradeNode*);
 void contestSingleInput(gradeNode*);
 void pipei(gradeNode*);
 void GradeInput(ListNode*,ListNode*);
+bool StrEqu(char *,char *);
 
 
 //结构体定义
