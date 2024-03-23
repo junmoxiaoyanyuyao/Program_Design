@@ -53,6 +53,12 @@
 
 > 3.18  cxyTest1  修改master 框架，测试Insert功能，未提交分支
 
+### 注意事项：
+
+ >  Chcp 65001改utf-8再执行exe
+
+
+
 
 
 ## 附录
