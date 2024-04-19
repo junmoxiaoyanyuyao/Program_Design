@@ -11,9 +11,10 @@
 #include "Output.h"
 
 void Menu();
-
+void Hello();
 int main(int argc, char** argv[]){
     //freopen("D:\\data\\vscode\\Program_Design\\test.txt","r",stdin);
+    // Hello();
     Menu();
     return 0;
 }

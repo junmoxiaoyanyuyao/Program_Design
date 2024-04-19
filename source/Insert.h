@@ -14,29 +14,29 @@
 #ifndef INSERT
 #define INSERT
 
-#define maxFailNum 5 //æœ€å¤§é”™è¯¯æ¬¡æ•°
+#define maxFailNum 5 //×î´ó´íÎó´ÎÊı
 #define maxSwitchChoiceSIze 11
 
-//ç´ è´¨ç±»é»˜è®¤ä¿¡æ¯å£°æ˜
-extern double TheGrade[maxGradeType]; //é»˜è®¤è®ºæ–‡ç­‰çº§åŠ åˆ†æ•°ç»„
-extern double ConGrade[maxGradeType]; //é»˜è®¤ç«èµ›ç­‰çº§åŠ åˆ†æ•°ç»„
-extern double ProGrade[maxGradeType]; //é»˜è®¤å¤§åˆ›ç­‰çº§åŠ åˆ†æ•°ç»„
-extern char TheGName[maxGradeType][maxListNameSize]; //è®ºæ–‡ä½œè€…åå•
-extern char ConGName[maxGradeType][maxListNameSize]; //ç«èµ›è·å¥–åå•
-extern char ProGName[maxGradeType][maxListNameSize]; //å¤§åˆ›é¡¹ç›®åå•
-extern int maxThesisGradeKind; //è®ºæ–‡ç­‰çº§æ•°é‡
-extern int maxContestGradeKind; //ç«èµ›ç­‰çº§æ•°é‡
-extern int maxProjectGradeKind; //å¤§åˆ›ç­‰çº§æ•°é‡
+//ËØÖÊÀàÄ¬ÈÏĞÅÏ¢ÉùÃ÷
+extern double TheGrade[maxGradeType]; //Ä¬ÈÏÂÛÎÄµÈ¼¶¼Ó·ÖÊı×é
+extern double ConGrade[maxGradeType]; //Ä¬ÈÏ¾ºÈüµÈ¼¶¼Ó·ÖÊı×é
+extern double ProGrade[maxGradeType]; //Ä¬ÈÏ´ó´´µÈ¼¶¼Ó·ÖÊı×é
+extern char TheGName[maxGradeType][maxListNameSize]; //ÂÛÎÄ×÷ÕßÃûµ¥
+extern char ConGName[maxGradeType][maxListNameSize]; //¾ºÈü»ñ½±Ãûµ¥
+extern char ProGName[maxGradeType][maxListNameSize]; //´ó´´ÏîÄ¿Ãûµ¥
+extern int maxThesisGradeKind; //ÂÛÎÄµÈ¼¶ÊıÁ¿
+extern int maxContestGradeKind; //¾ºÈüµÈ¼¶ÊıÁ¿
+extern int maxProjectGradeKind; //´ó´´µÈ¼¶ÊıÁ¿
 
-//æˆç»©ä¿¡æ¯å£°æ˜
+//³É¼¨ĞÅÏ¢ÉùÃ÷
 extern char GPA[11][4];
 extern char CourseType[4][20];
 
 
-//Insertå‡½æ•°å£°æ˜
+//Insertº¯ÊıÉùÃ÷
 void Insert(ListNode* head,ListNode* tailer,ListNode** currentNode);
 
-//ç´ è´¨ç±»è¾“å…¥å‡½æ•°å£°æ˜
+//ËØÖÊÀàÊäÈëº¯ÊıÉùÃ÷
 void QualityFileInsert(ListNode* head,ListNode* tailer,ListNode** currentNode);
 void QualitySingleInsert(ListNode* head,ListNode* tailer,ListNode** currentNode);
 void QualityFileInput(ListNode* head,ListNode* tailer,ListNode** currentNode,FILE* fp);
@@ -49,16 +49,16 @@ void contestSingleInput(QualityGradeNode*);
 void QualityGradeMatch(QualityGradeNode*);
 void QualityGradeInput(ListNode* head,ListNode* tailer);
 
-//æˆç»©è¾“å…¥å‡½æ•°å£°æ˜
+//³É¼¨ÊäÈëº¯ÊıÉùÃ÷
 void CourseFileInsert(ListNode* head,ListNode* tailer,ListNode** currentNode);
 void CourseFileInput(ListNode* head,ListNode* tailer,ListNode** currentNode,FILE* fp);
 void CourseSingleInsert(ListNode* head,ListNode* tailer,ListNode** currentNode);
 
-//åŠŸèƒ½å‡½æ•°å£°æ˜
-bool InsertIDsearch(ListNode* head,ListNode* tailer,ListNode** currentNode,char* info); //æœç´¢ç»“ç‚¹
-unsigned long long GetTime(); //è·å–æ—¶é—´
-void ErrGetLine(); //å¼‚å¸¸å¤„ç†åå™¬é”™è¯¯è¾“å…¥æ•´è¡Œ
-bool CorrectCourseNum(char* info); //æ­£ç¡®çš„è¯¾ç¨‹ç¼–å·
+//¹¦ÄÜº¯ÊıÉùÃ÷
+bool InsertIDsearch(ListNode* head,ListNode* tailer,ListNode** currentNode,char* info); //ËÑË÷½áµã
+unsigned long long GetTime(); //»ñÈ¡Ê±¼ä
+void ErrGetLine(); //Òì³£´¦ÀíÍÌÊÉ´íÎóÊäÈëÕûĞĞ
+bool CorrectCourseNum(char* info); //ÕıÈ·µÄ¿Î³Ì±àºÅ
 bool SwitchCheck(char* choice);
 
 

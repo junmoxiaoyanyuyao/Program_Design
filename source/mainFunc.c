@@ -17,26 +17,27 @@
 
 
 void Menu() {
-    ListNode* head = malloc(sizeof(ListNode)); //é“¾è¡¨å¤´èŠ‚ç‚¹
-    ListNode* tailer = malloc(sizeof(ListNode)); //é“¾è¡¨å°¾ç»“ç‚¹
+    ListNode* head = malloc(sizeof(ListNode)); //Á´±íÍ·½Úµã
+    ListNode* tailer = malloc(sizeof(ListNode)); //Á´±íÎ²½áµã
     head->next = tailer;
     tailer->father = head;
     ListNode* currentNode = head;
     while (true) {
         fflush(stdin);
+        // syetem("cls");
             printf("********************************************\n");
-            printf("*********** å­¦ç”Ÿæˆç»©ä¿¡æ¯ç®¡ç†ç³»ç»Ÿ ***********\n");
+            printf("*********** Ñ§Éú³É¼¨ĞÅÏ¢¹ÜÀíÏµÍ³ ***********\n");
             printf("********************************************\n\n");
-            printf("\t1. æ’å…¥å­¦ç”Ÿä¿¡æ¯\n");
-            printf("\t2. å¯¼å…¥åŠ åˆ†ç»†åˆ™\n");
-            printf("\t3. ä¿®æ”¹å­¦ç”Ÿä¿¡æ¯\n");
-            printf("\t4. å¯¼å‡ºå­¦ç”Ÿä¿¡æ¯\n");
-            printf("\t5. æŸ¥è¯¢å­¦ç”Ÿä¿¡æ¯\n");
-            printf("\t6. åˆ é™¤å­¦ç”Ÿä¿¡æ¯\n");
-            printf("\t7. è½¬ä¸“ä¸šä¿¡æ¯ä¿®æ”¹\n");
-            printf("\t8. é€€å‡ºç™»å½•\n\n");
+            printf("\t1. ²åÈëÑ§ÉúĞÅÏ¢\n");
+            printf("\t2. µ¼Èë¼Ó·ÖÏ¸Ôò\n");
+            printf("\t3. ĞŞ¸ÄÑ§ÉúĞÅÏ¢\n");
+            printf("\t4. µ¼³öÑ§ÉúĞÅÏ¢\n");
+            printf("\t5. ²éÑ¯Ñ§ÉúĞÅÏ¢\n");
+            printf("\t6. É¾³ıÑ§ÉúĞÅÏ¢\n");
+            printf("\t7. ×ª×¨ÒµĞÅÏ¢ĞŞ¸Ä\n");
+            printf("\t8. ÍË³öµÇÂ¼\n\n");
             printf("********************************************\n");
-            printf("è¯·é€‰æ‹©æ“ä½œï¼š");
+            printf("ÇëÑ¡Ôñ²Ù×÷£º");
 
         char choice[100];
         memset(choice, 0, sizeof(choice));
@@ -50,22 +51,22 @@ void Menu() {
         int flag7 = str_same_cmp(choice, "7");
         int flag8 = str_same_cmp(choice, "8");
         while (!flag1 && !flag2 && !flag3 && !flag4 && !flag5&&!flag6&&!flag7&&!flag8) {
-            printf("éæ³•è¾“å…¥ï¼Œè¯·é‡æ–°è¾“å…¥ï¼\n");
+            printf("·Ç·¨ÊäÈë£¬ÇëÖØĞÂÊäÈë£¡\n");
             Sleep(1000);
-            system("cls");
+            // syetem("cls");
             printf("********************************************\n");
-            printf("*********** å­¦ç”Ÿæˆç»©ä¿¡æ¯ç®¡ç†ç³»ç»Ÿ ***********\n");
+            printf("*********** Ñ§Éú³É¼¨ĞÅÏ¢¹ÜÀíÏµÍ³ ***********\n");
             printf("********************************************\n\n");
-            printf("\t1. æ’å…¥å­¦ç”Ÿä¿¡æ¯\n");
-            printf("\t2. å¯¼å…¥åŠ åˆ†ç»†åˆ™\n");
-            printf("\t3. ä¿®æ”¹å­¦ç”Ÿä¿¡æ¯\n");
-            printf("\t4. å¯¼å‡ºå­¦ç”Ÿä¿¡æ¯\n");
-            printf("\t5. æŸ¥è¯¢å­¦ç”Ÿä¿¡æ¯\n");
-            printf("\t6. åˆ é™¤å­¦ç”Ÿä¿¡æ¯\n");
-            printf("\t7. è½¬ä¸“ä¸šä¿¡æ¯ä¿®æ”¹\n");
-            printf("\t8. é€€å‡ºç™»å½•\n\n");
+            printf("\t1. ²åÈëÑ§ÉúĞÅÏ¢\n");
+            printf("\t2. µ¼Èë¼Ó·ÖÏ¸Ôò\n");
+            printf("\t3. ĞŞ¸ÄÑ§ÉúĞÅÏ¢\n");
+            printf("\t4. µ¼³öÑ§ÉúĞÅÏ¢\n");
+            printf("\t5. ²éÑ¯Ñ§ÉúĞÅÏ¢\n");
+            printf("\t6. É¾³ıÑ§ÉúĞÅÏ¢\n");
+            printf("\t7. ×ª×¨ÒµĞÅÏ¢ĞŞ¸Ä\n");
+            printf("\t8. ÍË³öµÇÂ¼\n\n");
             printf("********************************************\n");
-            printf("è¯·é€‰æ‹©æ“ä½œï¼š");
+            printf("ÇëÑ¡Ôñ²Ù×÷£º");
             memset(choice, 0, sizeof(choice));
             s_gets(choice, 100);
             flag1 = str_same_cmp(choice, "1");
@@ -80,6 +81,7 @@ void Menu() {
         }
         if (flag1) {
             Insert(head,tailer,&currentNode);
+            matchFacultyName_list(head, tailer);
              int c;
              while ((c = getchar()) != '\n' && c != EOF) {}
         }
@@ -89,31 +91,31 @@ void Menu() {
               while ((c = getchar()) != '\n' && c != EOF) {}
         }
         else if (flag3) {
-            matchFacultyName_list(head, tailer);
+            // matchFacultyName_list(head, tailer);
             Modify(head,tailer);
              int c;
              while ((c = getchar()) != '\n' && c != EOF) {}
         }
         else if (flag4) {
-            matchFacultyName_list(head, tailer);
+            // matchFacultyName_list(head, tailer);
             Output(head,tailer);
              int c;
              while ((c = getchar()) != '\n' && c != EOF) {}
         }
         else if (flag5) {
-            matchFacultyName_list(head, tailer);
+            // matchFacultyName_list(head, tailer);
             guide_information(head, tailer);
         }
         else if (flag6) {
-            matchFacultyName_list(head, tailer);
+            // matchFacultyName_list(head, tailer);
             Delete_guide(head, tailer);
         }
         else if (flag7) {
-            matchFacultyName_list(head, tailer);
+            // matchFacultyName_list(head, tailer);
             changeFaculty(head, tailer);
         }
         else if (flag8) {
-            printf("é€€å‡ºç™»å½•æˆåŠŸï¼\n");
+            printf("ÍË³öµÇÂ¼³É¹¦£¡\n");
             Sleep(1000);
             return;
         }

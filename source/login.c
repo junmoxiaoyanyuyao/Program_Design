@@ -61,44 +61,44 @@ bool PasswordInput_check(char pd[30]) {
         }
     }
     if (flag) {
-        return false; // å¦‚æœflagä¸º1ï¼Œè¿”å›false
+        return false; // Èç¹ûflagÎª1£¬·µ»Øfalse
     }
     else {
-        return true; // å¦‚æœflagä¸º0ï¼Œè¿”å›true
+        return true; // Èç¹ûflagÎª0£¬·µ»Øtrue
     }
 }
 
 
-void Hello(ListNode* head, ListNode* tailer)
+void Hello()
 {   
     while (true) {
         char choice[100];
         memset(choice, 0, sizeof(choice));
         printf("********************************************\n");
-        printf("********å­¦ç”Ÿæˆç»©ä¿¡æ¯ç®¡ç†ç³»ç»Ÿç™»å½•ç•Œé¢********\n");
+        printf("********Ñ§Éú³É¼¨ĞÅÏ¢¹ÜÀíÏµÍ³µÇÂ¼½çÃæ********\n");
         printf("********************************************\n\n");
-        printf("\t\t1.-ç™»å½•è´¦å·-\n");
-        printf("\t\t2.-æ³¨å†Œè´¦å·-\n");
-        printf("\t\t3.-é€€å‡ºç•Œé¢-\n\n");
-        printf("******************æ¬¢è¿ä½¿ç”¨******************\n");
-        printf("è¯·é€‰æ‹©ï¼š");
+        printf("\t\t1.-µÇÂ¼ÕËºÅ-\n");
+        printf("\t\t2.-×¢²áÕËºÅ-\n");
+        printf("\t\t3.-ÍË³ö½çÃæ-\n\n");
+        printf("******************»¶Ó­Ê¹ÓÃ******************\n");
+        printf("ÇëÑ¡Ôñ£º");
         s_gets(choice, 100);
         int flag1 = str_same_cmp(choice, "1");
         int flag2 = str_same_cmp(choice, "2");
         int flag3 = str_same_cmp(choice, "3");
         while (!flag1 && !flag2 && !flag3) {
             system("cls");
-            printf("è¾“å…¥éæ³•ï¼è¯·é‡æ–°å°è¯•ï¼\n");
+            printf("ÊäÈë·Ç·¨£¡ÇëÖØĞÂ³¢ÊÔ£¡\n");
             system("pause");
             system("cls");
             printf("********************************************\n");
-            printf("********å­¦ç”Ÿæˆç»©ä¿¡æ¯ç®¡ç†ç³»ç»Ÿç™»å½•ç•Œé¢********\n");
+            printf("********Ñ§Éú³É¼¨ĞÅÏ¢¹ÜÀíÏµÍ³µÇÂ¼½çÃæ********\n");
             printf("********************************************\n\n");
-            printf("\t\t1.-ç™»å½•è´¦å·-\n");
-            printf("\t\t2.-æ³¨å†Œè´¦å·-\n");
-            printf("\t\t3.-é€€å‡ºç•Œé¢-\n\n");
-            printf("******************æ¬¢è¿ä½¿ç”¨******************\n");
-            printf("è¯·é€‰æ‹©ï¼š");
+            printf("\t\t1.-µÇÂ¼ÕËºÅ-\n");
+            printf("\t\t2.-×¢²áÕËºÅ-\n");
+            printf("\t\t3.-ÍË³ö½çÃæ-\n\n");
+            printf("******************»¶Ó­Ê¹ÓÃ******************\n");
+            printf("ÇëÑ¡Ôñ£º");
             memset(choice, 0, sizeof(choice));
             s_gets(choice, 100);
             flag1 = str_same_cmp(choice, "1");
@@ -106,37 +106,37 @@ void Hello(ListNode* head, ListNode* tailer)
             flag3 = str_same_cmp(choice, "3");
         }
         if (flag1) {
-            login(head,tailer);
+            login();
         }
         else if (flag2) {
             registeruser();
         }
         else if (flag3) {
-            printf("\n\t\tã€æˆåŠŸé€€å‡ºã€‘\n");
+            printf("\n\t\t¡¾³É¹¦ÍË³ö¡¿\n");
             exit(0);
             system("pause");
         }
     }
 }
 
-// æ³¨å†Œè´¦å·åŠŸèƒ½ 
+// ×¢²áÕËºÅ¹¦ÄÜ 
 void registeruser(){
     char account[30];
     char pw[30];
     memset(account, 0, sizeof(account));
     memset(pw, 0, sizeof(pw));
-    printf("\t\tã€æ³¨å†Œå¸å·ã€‘\n");
+    printf("\t\t¡¾×¢²áÕÊºÅ¡¿\n");
     FILE* fp = fopen("account.txt", "a+");
     if (fp == NULL) {
-        printf("æ‰“å¼€æ–‡ä»¶å¤±è´¥ï¼\n");
+        printf("´ò¿ªÎÄ¼şÊ§°Ü£¡\n");
         return;
     }
     memset(account,0, sizeof(account));
-    printf("è¯·è¾“å…¥ç”¨æˆ·è´¦å·å’Œå¯†ç (è´¦å·åªèƒ½ä¸ºæ•°å­—å’Œè‹±æ–‡å­—æ¯ï¼Œå¯†ç å¯ä»¥ä¸ºæ•°å­—,è‹±æ–‡å­—æ¯,ç¬¦å·ã€‚è´¦å·ã€å¯†ç æœ€å°‘6ä½ï¼Œæœ€å¤š12ä½)\n\n\n");
-    printf("\tè¯·è¾“å…¥è´¦å·ï¼š");
+    printf("ÇëÊäÈëÓÃ»§ÕËºÅºÍÃÜÂë(ÕËºÅÖ»ÄÜÎªÊı×ÖºÍÓ¢ÎÄ×ÖÄ¸£¬ÃÜÂë¿ÉÒÔÎªÊı×Ö,Ó¢ÎÄ×ÖÄ¸,·ûºÅ¡£ÕËºÅ¡¢ÃÜÂë×îÉÙ6Î»£¬×î¶à12Î»)\n\n\n");
+    printf("\tÇëÊäÈëÕËºÅ£º");
     s_gets(account, 30);
     if (!AccountInput_check(account)) {
-        printf("è´¦å·è¾“å…¥éæ³•\n");
+        printf("ÕËºÅÊäÈë·Ç·¨\n");
         Sleep(1000);
         system("cls");
         return;
@@ -144,79 +144,79 @@ void registeruser(){
     char existing_account[30];
     int i = 1;
     while (file_s_gets(existing_account,30,fp)!=NULL) {
-        xor_encrypt_decrypt(existing_account, 'K');  // è§£å¯†è´¦å·
+        xor_encrypt_decrypt(existing_account, 'K');  // ½âÃÜÕËºÅ
         if (i%2==1&&str_same_cmp(existing_account, account) == 1) {
             fclose(fp);
-            printf("è´¦å·å·²è¢«æ³¨å†Œ\n");
+            printf("ÕËºÅÒÑ±»×¢²á\n");
             Sleep(1000);
             system("cls");
             return;
         }
         i++;
     }
-    printf("\n\tè¯·è¾“å…¥å¯†ç ï¼š");
+    printf("\n\tÇëÊäÈëÃÜÂë£º");
     memset(pw, 0, sizeof(pw));
     s_gets(pw, 30);
     if (!PasswordInput_check(pw)) {
-        printf("å¯†ç è¾“å…¥éæ³•\n");
+        printf("ÃÜÂëÊäÈë·Ç·¨\n");
         Sleep(1000);
         system("cls");
         return;
     }
-    printf("\n\n\tå†æ¬¡ç¡®è®¤å¯†ç ï¼š");
+    printf("\n\n\tÔÙ´ÎÈ·ÈÏÃÜÂë£º");
     char pd[30];
     memset(pd, 0, sizeof(pd));
     s_gets(pd, 30);
     for (i = 0; i < sizeof(pw); i++) {
         if (pd[i] != pw[i]) {
-            printf("ä¸¤æ¬¡å¯†ç è¾“å…¥ä¸ä¸€è‡´\n");
+            printf("Á½´ÎÃÜÂëÊäÈë²»Ò»ÖÂ\n");
             Sleep(1000);
             system("cls");
             return;
         }
     }
    
-    xor_encrypt_decrypt(account, 'K');  // ä½¿ç”¨å¯†é’¥'K'åŠ å¯†è´¦å·
-    xor_encrypt_decrypt(pw, 'K');       // ä½¿ç”¨å¯†é’¥'K'åŠ å¯†å¯†ç 
-    fprintf(fp, "%s\n", account);       // å­˜å‚¨åŠ å¯†åçš„è´¦å·
-    fprintf(fp, "%s\n", pw);            // å­˜å‚¨åŠ å¯†åçš„å¯†ç 
+    xor_encrypt_decrypt(account, 'K');  // Ê¹ÓÃÃÜÔ¿'K'¼ÓÃÜÕËºÅ
+    xor_encrypt_decrypt(pw, 'K');       // Ê¹ÓÃÃÜÔ¿'K'¼ÓÃÜÃÜÂë
+    fprintf(fp, "%s\n", account);       // ´æ´¢¼ÓÃÜºóµÄÕËºÅ
+    fprintf(fp, "%s\n", pw);            // ´æ´¢¼ÓÃÜºóµÄÃÜÂë
 	fclose(fp);
 
-	printf("æ³¨å†ŒæˆåŠŸï¼\n");
-	printf("æŒ‰ä»»æ„é”®è¿”å›ç™»å½•ç•Œé¢\n");
+	printf("×¢²á³É¹¦£¡\n");
+	printf("°´ÈÎÒâ¼ü·µ»ØµÇÂ¼½çÃæ\n");
 	system("pause");
 	system("cls");
     return;
 }
 
 
-//ç™»å½•è´¦å·åŠŸèƒ½ 
-void login(ListNode*head,ListNode*tailer){
+//µÇÂ¼ÕËºÅ¹¦ÄÜ 
+void login(){
     char account[30];
     char pw[30];
-    printf("--------ã€ç™»å½•è´¦å·ã€‘--------\n");
+    printf("--------¡¾µÇÂ¼ÕËºÅ¡¿--------\n");
     FILE* fp;
-    fp = fopen("è´¦å·ä¿¡æ¯æ¡£æ¡ˆ.txt", "r");
+    fp = fopen("account.txt", "r");
     if(fp==NULL){
-		printf("æ‰“å¼€æ–‡ä»¶å¤±è´¥ï¼\n");
+		printf("´ò¿ªÎÄ¼şÊ§°Ü£¡\n");
         Sleep(1000);
 		return;
 	}
-    printf("è¯·è¾“å…¥å¸å·:");
+    printf("ÇëÊäÈëÕÊºÅ:");
     memset(account, 0, sizeof(account));
     s_gets(account, 30);
     if (!AccountInput_check(account)) {
-        printf("è´¦å·è¾“å…¥éæ³•\n");
+        printf("ÕËºÅÊäÈë·Ç·¨\n");
         Sleep(1000);
         system("cls");
         return;
     }
 
-    printf("è¯·è¾“å…¥å¯†ç :");
+    printf("ÇëÊäÈëÃÜÂë:");
     memset(pw, 0, sizeof(pw));
     s_gets(pw, 30);
     if (!PasswordInput_check(pw)) {
-        printf("å¯†ç è¾“å…¥éæ³•\n");
+        printf("ÃÜÂëÊäÈë·Ç·¨\n");
 		Sleep(1000);
 		system("cls");
 		return;
@@ -225,16 +225,16 @@ void login(ListNode*head,ListNode*tailer){
     char existing_pw[30];
     int i = 1;
     while (file_s_gets(existing_account, 30, fp) != NULL){
-        xor_encrypt_decrypt(existing_account, 'K');  // è§£å¯†è´¦å·
+        xor_encrypt_decrypt(existing_account, 'K');  // ½âÃÜÕËºÅ
         if (i % 2 == 1 && str_same_cmp(existing_account, account) == 1) {
             i++;
             file_s_gets(existing_pw, 30, fp);
-            xor_encrypt_decrypt(existing_pw, 'K');  // è§£å¯†å¯†ç 
+            xor_encrypt_decrypt(existing_pw, 'K');  // ½âÃÜÃÜÂë
             int wrongtime = 0;
             while(wrongtime<=3){
 				if (str_same_cmp(existing_pw, pw) == 1) {
-					printf("ç™»å½•æˆåŠŸï¼\n");
-					printf("æŒ‰ä»»æ„é”®è¿›å…¥å­¦ç”Ÿä¿¡æ¯ç®¡ç†ç³»ç»Ÿ!\n");
+					printf("µÇÂ¼³É¹¦£¡\n");
+					printf("°´ÈÎÒâ¼ü½øÈëÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³!\n");
 					system("pause");
 					system("cls");
 					Menu();
@@ -243,14 +243,14 @@ void login(ListNode*head,ListNode*tailer){
                     return;
 				}
 				else {
-					printf("å¯†ç é”™è¯¯ï¼ä½ è¿˜æœ‰%dæ¬¡æœºä¼šï¼Œè¯·é‡æ–°è¾“å…¥:", 4 - wrongtime);
+					printf("ÃÜÂë´íÎó£¡Äã»¹ÓĞ%d´Î»ú»á£¬ÇëÖØĞÂÊäÈë:", 4 - wrongtime);
 					memset(pw, 0, sizeof(pw));
 					s_gets(pw, 30);
 					wrongtime++;
 				}
 			}
             if (wrongtime == 4) {
-                printf("å¯†ç é”™è¯¯æ¬¡æ•°è¿‡å¤šï¼\n");
+                printf("ÃÜÂë´íÎó´ÎÊı¹ı¶à£¡\n");
                 Sleep(1000);
                 system("cls");
                 return;
@@ -258,7 +258,7 @@ void login(ListNode*head,ListNode*tailer){
         }
         i++;
     }
-    printf("è´¦å·æœªæ³¨å†Œï¼\n");
+    printf("ÕËºÅÎ´×¢²á£¡\n");
     Sleep(1000);
     system("cls");
     return;
@@ -267,7 +267,7 @@ void login(ListNode*head,ListNode*tailer){
 
 
 void changeFaculty(ListNode* head, ListNode* tailer) {
-    printf("è¯·è¾“å…¥è½¬ä¸“ä¸šå­¦ç”Ÿçš„å­¦å·:");
+    printf("ÇëÊäÈë×ª×¨ÒµÑ§ÉúµÄÑ§ºÅ:");
     char studentID[100];
     memset(studentID, 0, sizeof(studentID));
     s_gets(studentID, 100);
@@ -278,7 +278,7 @@ void changeFaculty(ListNode* head, ListNode* tailer) {
     while (p != tailer) {
         if (str_same_cmp(p->studentID, studentID)) {
             Faculty_Search();
-            printf("è¯·è¾“å…¥è¯¥å­¦ç”Ÿè½¬åå­¦é™¢ç¼–å·(è¾“å…¥-1è¿”å›ä¸»èœå•):");
+            printf("ÇëÊäÈë¸ÃÑ§Éú×ªºóÑ§Ôº±àºÅ(ÊäÈë-1·µ»ØÖ÷²Ëµ¥):");
             char number[100];
             memset(number, 0, sizeof(number));
             s_gets(number, 100);
@@ -291,10 +291,10 @@ void changeFaculty(ListNode* head, ListNode* tailer) {
             }
             while (flag) {
                 system("cls");
-                printf("ç¼–å·è¾“å…¥éæ³•ï¼\n");
+                printf("±àºÅÊäÈë·Ç·¨£¡\n");
                 Sleep(1000);
                 Faculty_Search();
-                printf("è¯·è¾“å…¥è¯¥å­¦ç”Ÿè½¬åå­¦é™¢ç¼–å·(è¾“å…¥-1è¿”å›ä¸»èœå•):");
+                printf("ÇëÊäÈë¸ÃÑ§Éú×ªºóÑ§Ôº±àºÅ(ÊäÈë-1·µ»ØÖ÷²Ëµ¥):");
                 memset(number, 0, sizeof(number));
                 s_gets(number, 100);
                 flag = 0;
@@ -303,271 +303,273 @@ void changeFaculty(ListNode* head, ListNode* tailer) {
             }
 
             matchFacultyName_one(number, p);
-            printf("å·²ä¿®æ”¹è¯¥å­¦ç”Ÿå­¦é™¢ä¿¡æ¯ï¼\n");
+            printf("ÒÑĞŞ¸Ä¸ÃÑ§ÉúÑ§ÔºĞÅÏ¢£¡\n");
             break;
         }
         p = p->next;
     }
     if (p == tailer) {
-        printf("æœªæ‰¾åˆ°è¯¥å­¦ç”Ÿä¿¡æ¯ï¼\n");
+        printf("Î´ÕÒµ½¸ÃÑ§ÉúĞÅÏ¢£¡\n");
         return;
     }
 }
-//å­¦é™¢è¯†åˆ«å­¦å·
+//Ñ§ÔºÊ¶±ğÑ§ºÅ
 
 void matchFacultyName_list(ListNode* head, ListNode* tailer) {
     ListNode* node = head->next;
     while (node != tailer) {
-        // åˆ¤æ–­å­¦å·å‰ä¸¤ä½
+        // ÅĞ¶ÏÑ§ºÅÇ°Á½Î»
         char prefix[3];
         strncpy(prefix, node->studentID, 2);
         prefix[2] = '\0';
-        // åŒ¹é…å­¦é™¢å
+        // Æ¥ÅäÑ§ÔºÃû
         if (str_same_cmp(prefix, "01")) {
-            strcpy(node->studentFaculty, "å“²å­¦ç¤¾ä¼š");
+            strcpy(node->studentFaculty, "ÕÜÑ§Éç»á");
         }
         else if (str_same_cmp(prefix, "02")) {
-            strcpy(node->studentFaculty, "æ–‡å­¦");
+            strcpy(node->studentFaculty, "ÎÄÑ§");
         }
         else if (str_same_cmp(prefix, "03")) {
-            strcpy(node->studentFaculty, "å¤–å›½è¯­");
+            strcpy(node->studentFaculty, "Íâ¹úÓï");
         }
         else if (str_same_cmp(prefix, "04")) {
-            strcpy(node->studentFaculty, "è‰ºæœ¯");
+            strcpy(node->studentFaculty, "ÒÕÊõ");
         }
         else if (str_same_cmp(prefix, "05")) {
-            strcpy(node->studentFaculty, "ä½“è‚²");
+            strcpy(node->studentFaculty, "ÌåÓı");
         }
         else if (str_same_cmp(prefix, "06")) {
-            strcpy(node->studentFaculty, "ç»æµ");
+            strcpy(node->studentFaculty, "¾­¼Ã");
         }
         else if (str_same_cmp(prefix, "07")) {
-            strcpy(node->studentFaculty, "æ³•");
+            strcpy(node->studentFaculty, "·¨");
         }
         else if (str_same_cmp(prefix, "08")) {
-            strcpy(node->studentFaculty, "è¡Œæ”¿");
+            strcpy(node->studentFaculty, "ĞĞÕş");
         }
         else if (str_same_cmp(prefix, "09")) {
-            strcpy(node->studentFaculty, "å•†å­¦ä¸ç®¡ç†");
+            strcpy(node->studentFaculty, "ÉÌÑ§Óë¹ÜÀí");
         }
         else if (str_same_cmp(prefix, "10")) {
-            strcpy(node->studentFaculty, "æ•°å­¦");
+            strcpy(node->studentFaculty, "ÊıÑ§");
         }
         else if (str_same_cmp(prefix, "11")) {
-            strcpy(node->studentFaculty, "ç‰©ç†");
+            strcpy(node->studentFaculty, "ÎïÀí");
         }
         else if (str_same_cmp(prefix, "12")) {
-            strcpy(node->studentFaculty, "åŒ–å­¦");
+            strcpy(node->studentFaculty, "»¯Ñ§");
         }
         else if (str_same_cmp(prefix, "13")) {
-            strcpy(node->studentFaculty, "ç”Ÿå‘½ç§‘å­¦");
+            strcpy(node->studentFaculty, "ÉúÃü¿ÆÑ§");
         }
         else if (str_same_cmp(prefix, "14")) {
-            strcpy(node->studentFaculty, "æœºæ¢°ä¸èˆªç©ºèˆªå¤©");
+            strcpy(node->studentFaculty, "»úĞµÓëº½¿Õº½Ìì");
         }
         else if (str_same_cmp(prefix, "15")) {
-            strcpy(node->studentFaculty, "æ±½è½¦å·¥ç¨‹");
+            strcpy(node->studentFaculty, "Æû³µ¹¤³Ì");
         }
         else if (str_same_cmp(prefix, "16")) {
-            strcpy(node->studentFaculty, "ææ–™ç§‘å­¦ä¸å·¥ç¨‹");
+            strcpy(node->studentFaculty, "²ÄÁÏ¿ÆÑ§Óë¹¤³Ì");
         }
         else if (str_same_cmp(prefix, "17")) {
-            strcpy(node->studentFaculty, "äº¤é€š");
+            strcpy(node->studentFaculty, "½»Í¨");
         }
         else if (str_same_cmp(prefix, "18")) {
-            strcpy(node->studentFaculty, "ç”Ÿç‰©ä¸å†œä¸šå·¥ç¨‹");
+            strcpy(node->studentFaculty, "ÉúÎïÓëÅ©Òµ¹¤³Ì");
         }
         else if (str_same_cmp(prefix, "19")) {
-            strcpy(node->studentFaculty, "ç”µå­ç§‘å­¦ä¸å·¥ç¨‹");
+            strcpy(node->studentFaculty, "µç×Ó¿ÆÑ§Óë¹¤³Ì");
         }
         else if (str_same_cmp(prefix, "20")) {
-            strcpy(node->studentFaculty, "é€šä¿¡å·¥ç¨‹");
+            strcpy(node->studentFaculty, "Í¨ĞÅ¹¤³Ì");
         }
         else if (str_same_cmp(prefix, "21")) {
-            strcpy(node->studentFaculty, "è®¡ç®—æœºç§‘å­¦ä¸æŠ€æœ¯");
+            strcpy(node->studentFaculty, "¼ÆËã»ú¿ÆÑ§Óë¼¼Êõ");
         }
         else if (str_same_cmp(prefix, "22")) {
-            strcpy(node->studentFaculty, "åœ°çƒç§‘å­¦");
+            strcpy(node->studentFaculty, "µØÇò¿ÆÑ§");
         }
         else if (str_same_cmp(prefix, "23")) {
-            strcpy(node->studentFaculty, "åœ°çƒæ¢æµ‹ç§‘å­¦ä¸æŠ€æœ¯");
+            strcpy(node->studentFaculty, "µØÇòÌ½²â¿ÆÑ§Óë¼¼Êõ");
         }
         else if (str_same_cmp(prefix, "24")) {
-            strcpy(node->studentFaculty, "å»ºè®¾å·¥ç¨‹");
+            strcpy(node->studentFaculty, "½¨Éè¹¤³Ì");
         }
         else if (str_same_cmp(prefix, "25")) {
-            strcpy(node->studentFaculty, "ç¯å¢ƒä¸èµ„æº");
+            strcpy(node->studentFaculty, "»·¾³Óë×ÊÔ´");
         }
         else if (str_same_cmp(prefix, "26")) {
-            strcpy(node->studentFaculty, "é‡‘è");
+            strcpy(node->studentFaculty, "½ğÈÚ");
         }
         else if (str_same_cmp(prefix, "27")) {
-            strcpy(node->studentFaculty, "å…¬å…±å«ç”Ÿ");
+            strcpy(node->studentFaculty, "¹«¹²ÎÀÉú");
         }
         else if (str_same_cmp(prefix, "28")) {
-            strcpy(node->studentFaculty, "è¯");
+            strcpy(node->studentFaculty, "Ò©");
         }
         else if (str_same_cmp(prefix, "29")) {
-            strcpy(node->studentFaculty, "æŠ¤ç†");
+            strcpy(node->studentFaculty, "»¤Àí");
         }
         else if (str_same_cmp(prefix, "30")) {
-            strcpy(node->studentFaculty, "ä¸œåŒ—äºš");
+            strcpy(node->studentFaculty, "¶«±±ÑÇ");
         }
         else if (str_same_cmp(prefix, "33")) {
-            strcpy(node->studentFaculty, "å£è…”åŒ»");
+            strcpy(node->studentFaculty, "¿ÚÇ»Ò½");
         }
         else if (str_same_cmp(prefix, "37")) {
-            strcpy(node->studentFaculty, "æ–°é—»ä¸ä¼ æ’­");
+            strcpy(node->studentFaculty, "ĞÂÎÅÓë´«²¥");
         }
         else if (str_same_cmp(prefix, "38")) {
-            strcpy(node->studentFaculty, "è€ƒå¤");
+            strcpy(node->studentFaculty, "¿¼¹Å");
         }
         else if (str_same_cmp(prefix, "39")) {
-            strcpy(node->studentFaculty, "é©¬å…‹æ€ä¸»ä¹‰");
+            strcpy(node->studentFaculty, "Âí¿ËË¼Ö÷Òå");
         }
         else if (str_same_cmp(prefix, "40")) {
-            strcpy(node->studentFaculty, "äººå·¥æ™ºèƒ½");
+            strcpy(node->studentFaculty, "ÈË¹¤ÖÇÄÜ");
         }
         else if (str_same_cmp(prefix, "55")) {
-            strcpy(node->studentFaculty, "è½¯ä»¶");
+            strcpy(node->studentFaculty, "Èí¼ş");
         }
         else if (str_same_cmp(prefix, "65")) {
-            strcpy(node->studentFaculty, "ä»ªå™¨ç§‘å­¦ä¸ç”µæ°”å·¥ç¨‹");
+            strcpy(node->studentFaculty, "ÒÇÆ÷¿ÆÑ§ÓëµçÆø¹¤³Ì");
         }
         else if (str_same_cmp(prefix, "70")) {
-            strcpy(node->studentFaculty, "ä¸´åºŠåŒ»");
+            strcpy(node->studentFaculty, "ÁÙ´²Ò½");
         }
         else if (str_same_cmp(prefix, "81")) {
-            strcpy(node->studentFaculty, "åŠ¨ç‰©åŒ»å­¦");
+            strcpy(node->studentFaculty, "¶¯ÎïÒ½Ñ§");
         }
         else {
-            // å¦‚æœæ²¡æœ‰åŒ¹é…åˆ°ï¼Œå¯ä»¥å°†å­¦é™¢åç•™ç©ºæˆ–è€…åšå…¶ä»–å¤„ç†
-            strcpy(node->studentFaculty, "å…¶å®ƒ");
+            // Èç¹ûÃ»ÓĞÆ¥Åäµ½£¬¿ÉÒÔ½«Ñ§ÔºÃûÁô¿Õ»òÕß×öÆäËû´¦Àí
+            strcpy(node->studentFaculty, "ÆäËü");
         }
         node = node->next;
     }
 }
 
 void matchFacultyName_one(char number[3], ListNode* p) {
+    memset(p->studentFaculty,0,sizeof(p->studentFaculty));
     if (str_same_cmp(number, "01")) {
-        strcpy(p->studentFaculty, "å“²å­¦ç¤¾ä¼š");
+        strcpy(p->studentFaculty, "ÕÜÑ§Éç»á");
     }
     else if (str_same_cmp(number, "02")) {
-        strcpy(p->studentFaculty, "æ–‡å­¦");
+        strcpy(p->studentFaculty, "ÎÄÑ§");
     }
     else if (str_same_cmp(number, "03")) {
-        strcpy(p->studentFaculty, "å¤–å›½è¯­");
+        strcpy(p->studentFaculty, "Íâ¹úÓï");
     }
     else if (str_same_cmp(number, "04")) {
-        strcpy(p->studentFaculty, "è‰ºæœ¯");
+        strcpy(p->studentFaculty, "ÒÕÊõ");
     }
     else if (str_same_cmp(number, "05")) {
-        strcpy(p->studentFaculty, "ä½“è‚²");
+        strcpy(p->studentFaculty, "ÌåÓı");
     }
     else if (str_same_cmp(number, "06")) {
-        strcpy(p->studentFaculty, "ç»æµ");
+        strcpy(p->studentFaculty, "¾­¼Ã");
     }
     else if (str_same_cmp(number, "07")) {
-        strcpy(p->studentFaculty, "æ³•");
+        strcpy(p->studentFaculty, "·¨");
     }
     else if (str_same_cmp(number, "08")) {
-        strcpy(p->studentFaculty, "è¡Œæ”¿");
+        strcpy(p->studentFaculty, "ĞĞÕş");
     }
     else if (str_same_cmp(number, "09")) {
-        strcpy(p->studentFaculty, "å•†å­¦ä¸ç®¡ç†");
+        strcpy(p->studentFaculty, "ÉÌÑ§Óë¹ÜÀí");
     }
     else if (str_same_cmp(number, "10")) {
-        strcpy(p->studentFaculty, "æ•°å­¦");
+        strcpy(p->studentFaculty, "ÊıÑ§");
     }
     else if (str_same_cmp(number, "11")) {
-        strcpy(p->studentFaculty, "ç‰©ç†");
+        strcpy(p->studentFaculty, "ÎïÀí");
     }
     else if (str_same_cmp(number, "12")) {
-        strcpy(p->studentFaculty, "åŒ–å­¦");
+        strcpy(p->studentFaculty, "»¯Ñ§");
     }
     else if (str_same_cmp(number, "13")) {
-        strcpy(p->studentFaculty, "ç”Ÿå‘½ç§‘å­¦");
+        strcpy(p->studentFaculty, "ÉúÃü¿ÆÑ§");
     }
     else if (str_same_cmp(number, "14")) {
-        strcpy(p->studentFaculty, "æœºæ¢°ä¸èˆªç©ºèˆªå¤©");
+        strcpy(p->studentFaculty, "»úĞµÓëº½¿Õº½Ìì");
     }
     else if (str_same_cmp(number, "15")) {
-        strcpy(p->studentFaculty, "æ±½è½¦å·¥ç¨‹");
+        strcpy(p->studentFaculty, "Æû³µ¹¤³Ì");
     }
     else if (str_same_cmp(number, "16")) {
-        strcpy(p->studentFaculty, "ææ–™ç§‘å­¦ä¸å·¥ç¨‹");
+        strcpy(p->studentFaculty, "²ÄÁÏ¿ÆÑ§Óë¹¤³Ì");
     }
     else if (str_same_cmp(number, "17")) {
-        strcpy(p->studentFaculty, "äº¤é€š");
+        strcpy(p->studentFaculty, "½»Í¨");
     }
     else if (str_same_cmp(number, "18")) {
-        strcpy(p->studentFaculty, "ç”Ÿç‰©ä¸å†œä¸šå·¥ç¨‹");
+        strcpy(p->studentFaculty, "ÉúÎïÓëÅ©Òµ¹¤³Ì");
     }
     else if (str_same_cmp(number, "19")) {
-        strcpy(p->studentFaculty, "ç”µå­ç§‘å­¦ä¸å·¥ç¨‹");
+        strcpy(p->studentFaculty, "µç×Ó¿ÆÑ§Óë¹¤³Ì");
     }
     else if (str_same_cmp(number, "20")) {
-        strcpy(p->studentFaculty, "é€šä¿¡å·¥ç¨‹");
+        strcpy(p->studentFaculty, "Í¨ĞÅ¹¤³Ì");
     }
     else if (str_same_cmp(number, "21")) {
-        strcpy(p->studentFaculty, "è®¡ç®—æœºç§‘å­¦ä¸æŠ€æœ¯");
+        strcpy(p->studentFaculty, "¼ÆËã»ú¿ÆÑ§Óë¼¼Êõ");
     }
     else if (str_same_cmp(number, "22")) {
-        strcpy(p->studentFaculty, "åœ°çƒç§‘å­¦");
+        strcpy(p->studentFaculty, "µØÇò¿ÆÑ§");
     }
     else if (str_same_cmp(number, "23")) {
-        strcpy(p->studentFaculty, "åœ°çƒæ¢æµ‹ç§‘å­¦ä¸æŠ€æœ¯");
+        strcpy(p->studentFaculty, "µØÇòÌ½²â¿ÆÑ§Óë¼¼Êõ");
     }
     else if (str_same_cmp(number, "24")) {
-        strcpy(p->studentFaculty, "å»ºè®¾å·¥ç¨‹");
+        strcpy(p->studentFaculty, "½¨Éè¹¤³Ì");
     }
     else if (str_same_cmp(number, "25")) {
-        strcpy(p->studentFaculty, "ç¯å¢ƒä¸èµ„æº");
+        strcpy(p->studentFaculty, "»·¾³Óë×ÊÔ´");
     }
     else if (str_same_cmp(number, "26")) {
-        strcpy(p->studentFaculty, "é‡‘è");
+        strcpy(p->studentFaculty, "½ğÈÚ");
     }
     else if (str_same_cmp(number, "27")) {
-        strcpy(p->studentFaculty, "å…¬å…±å«ç”Ÿ");
+        strcpy(p->studentFaculty, "¹«¹²ÎÀÉú");
     }
     else if (str_same_cmp(number, "28")) {
-        strcpy(p->studentFaculty, "è¯");
+        strcpy(p->studentFaculty, "Ò©");
     }
     else if (str_same_cmp(number, "29")) {
-        strcpy(p->studentFaculty, "æŠ¤ç†");
+        strcpy(p->studentFaculty, "»¤Àí");
     }
     else if (str_same_cmp(number, "30")) {
-        strcpy(p->studentFaculty, "ä¸œåŒ—äºš");
+        strcpy(p->studentFaculty, "¶«±±ÑÇ");
     }
     else if (str_same_cmp(number, "33")) {
-        strcpy(p->studentFaculty, "å£è…”åŒ»");
+        strcpy(p->studentFaculty, "¿ÚÇ»Ò½");
     }
     else if (str_same_cmp(number, "37")) {
-        strcpy(p->studentFaculty, "æ–°é—»ä¸ä¼ æ’­");
+        strcpy(p->studentFaculty, "ĞÂÎÅÓë´«²¥");
     }
     else if (str_same_cmp(number, "38")) {
-        strcpy(p->studentFaculty, "è€ƒå¤");
+        strcpy(p->studentFaculty, "¿¼¹Å");
     }
     else if (str_same_cmp(number, "39")) {
-        strcpy(p->studentFaculty, "é©¬å…‹æ€ä¸»ä¹‰");
+        strcpy(p->studentFaculty, "Âí¿ËË¼Ö÷Òå");
     }
     else if (str_same_cmp(number, "40")) {
-        strcpy(p->studentFaculty, "äººå·¥æ™ºèƒ½");
+        strcpy(p->studentFaculty, "ÈË¹¤ÖÇÄÜ");
     }
     else if (str_same_cmp(number, "55")) {
-        strcpy(p->studentFaculty, "è½¯ä»¶");
+        strcpy(p->studentFaculty, "Èí¼ş");
     }
     else if (str_same_cmp(number, "65")) {
-        strcpy(p->studentFaculty, "ä»ªå™¨ç§‘å­¦ä¸ç”µæ°”å·¥ç¨‹");
+        strcpy(p->studentFaculty, "ÒÇÆ÷¿ÆÑ§ÓëµçÆø¹¤³Ì");
     }
     else if (str_same_cmp(number, "70")) {
-        strcpy(p->studentFaculty, "ä¸´åºŠåŒ»");
+        strcpy(p->studentFaculty, "ÁÙ´²Ò½");
     }
     else if (str_same_cmp(number, "81")) {
-        strcpy(p->studentFaculty, "åŠ¨ç‰©åŒ»å­¦");
+        strcpy(p->studentFaculty, "¶¯ÎïÒ½Ñ§");
     }
     else {
-        // å¦‚æœæ²¡æœ‰åŒ¹é…åˆ°ï¼Œå¯ä»¥å°†å­¦é™¢åç•™ç©ºæˆ–è€…åšå…¶ä»–å¤„ç†
-        strcpy(p->studentFaculty, "æœªçŸ¥å­¦é™¢");
+        // Èç¹ûÃ»ÓĞÆ¥Åäµ½£¬¿ÉÒÔ½«Ñ§ÔºÃûÁô¿Õ»òÕß×öÆäËû´¦Àí
+        strcpy(p->studentFaculty, "Î´ÖªÑ§Ôº");
     }
+
 }

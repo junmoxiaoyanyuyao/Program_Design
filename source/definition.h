@@ -18,117 +18,117 @@
 #define _CRT_SECURE_NO_WARNINGS
 #pragma warning(disable: 4996)
 
-void showMenu();
+void Menu();
 
-// å¸¸é‡å®šä¹‰
-#define maxNameFaculty 30 //å­¦é™¢åé•¿åº¦
-#define maxNameSize 20 //æœ€å¤§å§“åé•¿åº¦
-#define maxThesisNameSize 500 //æœ€å¤§è®ºæ–‡åé•¿åº¦
-#define maxProjectNameSize 500 //æœ€å¤§é¡¹ç›®åé•¿åº¦
-#define maxTotalNumPerson 10 //å¤§åˆ›é¡¹ç›®æœ€å¤§äººæ•°
-#define maxContestNameSize 500 //æœ€å¤§ç«èµ›åé•¿åº¦
-#define maxJournalNameSize 500 // æœ€å¤§æœŸåˆŠåç§°é•¿åº¦
-#define maxConferenceNameSize 500 // æœ€å¤§ä¼šè®®åç§°é•¿åº¦
-#define maxIssueInfoSize 20 // æœ€å¤§å·/æœŸ/è®ºæ–‡å·/é¡µç èŒƒå›´ä¿¡æ¯é•¿åº¦
-#define maxGradeType 8 //ç´ è´¨é¡¹ç›®æœ€å¤§ç­‰çº§æ•°é‡
+// ³£Á¿¶¨Òå
+#define maxNameFaculty 30 //Ñ§ÔºÃû³¤¶È
+#define maxNameSize 20 //×î´óĞÕÃû³¤¶È
+#define maxThesisNameSize 500 //×î´óÂÛÎÄÃû³¤¶È
+#define maxProjectNameSize 500 //×î´óÏîÄ¿Ãû³¤¶È
+#define maxTotalNumPerson 10 //´ó´´ÏîÄ¿×î´óÈËÊı
+#define maxContestNameSize 500 //×î´ó¾ºÈüÃû³¤¶È
+#define maxJournalNameSize 500 // ×î´óÆÚ¿¯Ãû³Æ³¤¶È
+#define maxConferenceNameSize 500 // ×î´ó»áÒéÃû³Æ³¤¶È
+#define maxIssueInfoSize 20 // ×î´ó¾í/ÆÚ/ÂÛÎÄºÅ/Ò³Âë·¶Î§ĞÅÏ¢³¤¶È
+#define maxGradeType 8 //ËØÖÊÏîÄ¿×î´óµÈ¼¶ÊıÁ¿
 #define maxListNameSize 500
-#define maxQualiityGradeNum 10 //ä¸€äººæœ€å¤§ç´ è´¨é¡¹ç›®æ•°é‡
-#define maxCourseNameSize 200 //è¯¾ç¨‹åæœ€å¤§é•¿åº¦
-#define maxCOurseNum 100 //æœ€å¤§è¯¾ç¨‹æ•°é‡
-#define CourseNumSize 11 //é»˜è®¤è¯¾ç¨‹å·ä½æ•°10 + '\0'
+#define maxQualiityGradeNum 10 //Ò»ÈË×î´óËØÖÊÏîÄ¿ÊıÁ¿
+#define maxCourseNameSize 200 //¿Î³ÌÃû×î´ó³¤¶È
+#define maxCOurseNum 100 //×î´ó¿Î³ÌÊıÁ¿
+#define CourseNumSize 11 //Ä¬ÈÏ¿Î³ÌºÅÎ»Êı10 + '\0'
 #define maxQualityAddGrade 0.4
 
 
 
-//ç»“æ„ä½“å£°æ˜
-typedef struct ListNode ListNode; //é“¾è¡¨ç»“ç‚¹
-typedef struct QualityGradeNode QualityGradeNode;//ç´ è´¨é¡¹ç›®ç»“ç‚¹
-typedef struct thesis thesis;//ç§‘ç ”
-typedef struct project project;//é¡¹ç›®
-typedef struct contest contest;//ç«èµ›
+//½á¹¹ÌåÉùÃ÷
+typedef struct ListNode ListNode; //Á´±í½áµã
+typedef struct QualityGradeNode QualityGradeNode;//ËØÖÊÏîÄ¿½áµã
+typedef struct thesis thesis;//¿ÆÑĞ
+typedef struct project project;//ÏîÄ¿
+typedef struct contest contest;//¾ºÈü
 typedef struct CourseGradeNode CourseGradeNode;
 
 
-//æšä¸¾ç±»å‹å®šä¹‰
-enum type { THESIS, PROJECT, CONTEST }; //ç´ è´¨é¡¹ç›®ç±»å‹
-enum thesisGrade { G1, G2, G3, G4, G5, G6, G7, G8 }; // è®ºæ–‡ç­‰çº§
-enum contestGrade { g1, g2, g3, g4, g5, g6, g7, g8 }; //ç«èµ›ç­‰çº§
-enum projectGrade { p1, p2, p3, p4, p5, p6, p7, p8 }; //å¤§åˆ›ç­‰çº§
-enum GradeType { PubRequired, PubElective, ProRequired, ProElective, Revise }; //è¯¾ç¨‹ç±»å‹:å…¬å…±å¿…ä¿®,å…¬å…±é€‰ä¿®,ä¸“ä¸šå¿…ä¿®,ä¸“ä¸šé€‰ä¿®,å†ä¿®
+//Ã¶¾ÙÀàĞÍ¶¨Òå
+enum type { THESIS, PROJECT, CONTEST }; //ËØÖÊÏîÄ¿ÀàĞÍ
+enum thesisGrade { G1, G2, G3, G4, G5, G6, G7, G8 }; // ÂÛÎÄµÈ¼¶
+enum contestGrade { g1, g2, g3, g4, g5, g6, g7, g8 }; //¾ºÈüµÈ¼¶
+enum projectGrade { p1, p2, p3, p4, p5, p6, p7, p8 }; //´ó´´µÈ¼¶
+enum GradeType { PubRequired, PubElective, ProRequired, ProElective, Revise }; //¿Î³ÌÀàĞÍ:¹«¹²±ØĞŞ,¹«¹²Ñ¡ĞŞ,×¨Òµ±ØĞŞ,×¨ÒµÑ¡ĞŞ,¹Ò¿ÆÔÙĞŞ
 struct thesis {
-    char thesisName[maxThesisNameSize]; //è®ºæ–‡åç§°
-    int publicationTime; //å‡ºç‰ˆæ—¶é—´
-    enum thesisGrade Grade; //è®ºæ–‡ç­‰çº§
+    char thesisName[maxThesisNameSize]; //ÂÛÎÄÃû³Æ
+    int publicationTime; //³ö°æÊ±¼ä
+    enum thesisGrade Grade; //ÂÛÎÄµÈ¼¶
 
-    //å·/æœŸ/è®ºæ–‡å·/é¡µç èŒƒå›´ï¼ˆéƒ¨åˆ†ä¿¡æ¯å¯èƒ½æ²¡æœ‰ï¼‰ å°šæœªæ·»åŠ 
-    char journalName[maxJournalNameSize]; // æœŸåˆŠåç§°
-    char conferenceName[maxConferenceNameSize]; // ä¼šè®®åç§°
-    char issueInfo[maxIssueInfoSize]; // å·/æœŸ/è®ºæ–‡å·/é¡µç èŒƒå›´ï¼ˆéƒ¨åˆ†ä¿¡æ¯å¯èƒ½æ²¡æœ‰ï¼‰
+    //¾í/ÆÚ/ÂÛÎÄºÅ/Ò³Âë·¶Î§£¨²¿·ÖĞÅÏ¢¿ÉÄÜÃ»ÓĞ£© ÉĞÎ´Ìí¼Ó
+    char journalName[maxJournalNameSize]; // ÆÚ¿¯Ãû³Æ
+    char conferenceName[maxConferenceNameSize]; // »áÒéÃû³Æ
+    char issueInfo[maxIssueInfoSize]; // ¾í/ÆÚ/ÂÛÎÄºÅ/Ò³Âë·¶Î§£¨²¿·ÖĞÅÏ¢¿ÉÄÜÃ»ÓĞ£©
 
 
     //and so on
-}; //è®ºæ–‡ä¿¡æ¯ç»“æ„ä½“å®šä¹‰
+}; //ÂÛÎÄĞÅÏ¢½á¹¹Ìå¶¨Òå
 
 struct project {
     int memberNum;
-    char members[maxTotalNumPerson][maxNameSize]; //å¤§åˆ›åå•ï¼Œ[äººå‘˜é¡ºåº][å§“å]
-    char instructor[maxNameSize]; //æŒ‡å¯¼è€å¸ˆå§“å
-    char projrectName[maxProjectNameSize]; //é¡¹ç›®å
-    enum projectGrade proG; //å¤§åˆ›ç­‰çº§
-    int itemNum; //é¡¹ç›®ç¼–å·
-    int approvalTime; //å¼€é¢˜æ—¶é—´
-    int endTime; // ç»“é¢˜æ—¶é—´
+    char members[maxTotalNumPerson][maxNameSize]; //´ó´´Ãûµ¥£¬[ÈËÔ±Ë³Ğò][ĞÕÃû]
+    char instructor[maxNameSize]; //Ö¸µ¼ÀÏÊ¦ĞÕÃû
+    char projrectName[maxProjectNameSize]; //ÏîÄ¿Ãû
+    enum projectGrade proG; //´ó´´µÈ¼¶
+    int itemNum; //ÏîÄ¿±àºÅ
+    int approvalTime; //¿ªÌâÊ±¼ä
+    int endTime; // ½áÌâÊ±¼ä
 
 
 
     //and so on
-}; //å¤§åˆ›
+}; //´ó´´
 
 struct contest {
-    char contestName[maxContestNameSize]; //ç«èµ›å
-    char organizer[maxNameSize]; //ä¸»åŠå•ä½
-    char winners[maxTotalNumPerson][maxNameSize];  //æ‰€æœ‰è·å¥–äºº [é¡ºåº][å§“å]
-    bool winnersOrder; // è·å¥–äººæ˜¯å¦æœ‰å…ˆåé¡ºåº
-    enum contestGrade conG; //ç«èµ›ç­‰çº§
-    bool ifCsContest; // æ˜¯å¦æ˜¯è®¡ç®—æœºç±»ç«èµ›
-    int prizeTIme; //è·å¥–æ—¶é—´
+    char contestName[maxContestNameSize]; //¾ºÈüÃû
+    char organizer[maxNameSize]; //Ö÷°ìµ¥Î»
+    char winners[maxTotalNumPerson][maxNameSize];  //ËùÓĞ»ñ½±ÈË [Ë³Ğò][ĞÕÃû]
+    bool winnersOrder; // »ñ½±ÈËÊÇ·ñÓĞÏÈºóË³Ğò
+    enum contestGrade conG; //¾ºÈüµÈ¼¶
+    bool ifCsContest; // ÊÇ·ñÊÇ¼ÆËã»úÀà¾ºÈü
+    int prizeTIme; //»ñ½±Ê±¼ä
 
     //and so on
-};// ç«èµ›
+};// ¾ºÈü
 
 struct QualityGradeNode {
-    enum type QualityGradeType; //ç´ è´¨é¡¹ç›®ç±»å‹
+    enum type QualityGradeType; //ËØÖÊÏîÄ¿ÀàĞÍ
     thesis* Thesis;
     project* Project;
-    contest* Contest; //å¯¹åº”å…·ä½“ä¿¡æ¯æŒ‡é’ˆ
-    double recognizedCredit; //è®¤å®šåŠ åˆ†
+    contest* Contest; //¶ÔÓ¦¾ßÌåĞÅÏ¢Ö¸Õë
+    double recognizedCredit; //ÈÏ¶¨¼Ó·Ö
 
-    unsigned long long addTime; //14ä½æ—¶é—´æˆ³ type:YYYY MM DD HH MM SS
+    unsigned long long addTime; //14Î»Ê±¼ä´Á type:YYYY MM DD HH MM SS
 
     //and so on
 };
 
 struct CourseGradeNode {
-    char CourseName[maxCourseNameSize]; //è¯¾ç¨‹å
-    char CourseNum[CourseNumSize]; //è¯¾ç¨‹å·
+    char CourseName[maxCourseNameSize]; //¿Î³ÌÃû
+    char CourseNum[CourseNumSize]; //¿Î³ÌºÅ
 
-    //å¼€è¯¾å•ä½ æ—¶é—´  ä¿®è¯»æ–¹å¼  æ˜¯å¦ä¸»ä¿®  ...  å°šæœªæ·»åŠ 
+    //¿ª¿Îµ¥Î» Ê±¼ä  ĞŞ¶Á·½Ê½  ÊÇ·ñÖ÷ĞŞ  ...  ÉĞÎ´Ìí¼Ó
 
-    enum GradeType gradeType; //è¯¾ç¨‹æ€§è´¨ ç±»å‹:å…¬å…±å¿…ä¿®,å…¬å…±é€‰ä¿®,ä¸“ä¸šå¿…ä¿®,ä¸“ä¸šé€‰ä¿®,å†ä¿®
+    enum GradeType gradeType; //¿Î³ÌĞÔÖÊ ÀàĞÍ:¹«¹²±ØĞŞ,¹«¹²Ñ¡ĞŞ,×¨Òµ±ØĞŞ,×¨ÒµÑ¡ĞŞ,ÔÙĞŞ
 
-    char CourseCredit[20]; //å­¦åˆ†
-    char CourseGrade[20]; //æˆç»©
-    char GPA[20]; //ç»©ç‚¹
+    char CourseCredit[20]; //Ñ§·Ö
+    char CourseGrade[20]; //³É¼¨
+    char GPA[20]; //¼¨µã
 };
 
 
 struct ListNode {
-    char studentID[9]; //8ä½å­¦å·
-    char studentName[maxNameSize];//å­¦ç”Ÿå§“å
-    char studentFaculty[maxNameFaculty]; //å­¦é™¢å
+    char studentID[9]; //8Î»Ñ§ºÅ
+    char studentName[maxNameSize];//Ñ§ÉúĞÕÃû
+    char studentFaculty[maxNameFaculty]; //Ñ§ÔºÃû
 
     int QualityGradeNum;
-    QualityGradeNode* QGrade[maxQualiityGradeNum]; //ç´ è´¨ç±»é¡¹ç›®æ•°ç»„
+    QualityGradeNode* QGrade[maxQualiityGradeNum]; //ËØÖÊÀàÏîÄ¿Êı×é
     double AddQualityGrade;
 
     int CourseNum;
@@ -138,7 +138,7 @@ struct ListNode {
 
     ListNode* next;
     ListNode* father;
-}; //é“¾è¡¨
+}; //Á´±í
 
 double UpdateGPA(ListNode* t);
 double UpdataQualityGrade(ListNode* t);

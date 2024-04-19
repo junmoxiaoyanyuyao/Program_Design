@@ -12,19 +12,20 @@
 #include "definition.h"
 // #endif
 
-#define RECYCLE_BIN_SIZE 5  // å›æ”¶ç«™çš„å¤§å°
+#define RECYCLE_BIN_SIZE 5  // »ØÊÕÕ¾µÄ´óĞ¡
 typedef struct RecycleBinEntry {
     ListNode* node;
-    time_t deletionTime;  // æ—¶é—´æˆ³ï¼Œè®°å½•åˆ é™¤æ—¶çš„æ—¶é—´
+    time_t deletionTime;  // Ê±¼ä´Á£¬¼ÇÂ¼É¾³ıÊ±µÄÊ±¼ä
 } RecycleBinEntry;
-// extern RecycleBinEntry recycleBin[RECYCLE_BIN_SIZE]; // å›æ”¶ç«™æ•°ç»„
-extern int recycleBinIndex; // å½“å‰å›æ”¶ç«™çš„ç´¢å¼•
+// extern RecycleBinEntry recycleBin[RECYCLE_BIN_SIZE]; // »ØÊÕÕ¾Êı×é
+extern int recycleBinIndex; // µ±Ç°»ØÊÕÕ¾µÄË÷Òı
 
 extern bool str_same_cmp(char*, char*);
 extern char* s_gets(char*, int);
 extern bool Input_check(char[100]);
 extern void Print_stu_Information(ListNode*, int, FILE*, int);
 
+void delete_factor(ListNode*head,ListNode*tailer);
 void delete_Information(ListNode*, ListNode*);
 void printRecycleBin();
 void Delete_guide(ListNode*,ListNode*);

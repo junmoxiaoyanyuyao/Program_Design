@@ -15,11 +15,11 @@
 bool AccountInput_check(char account[30]);
 bool PasswordInput_check(char pd[30]);
 void registeruser();
-void Hello(ListNode* head, ListNode* tailer);
-void login(ListNode* head, ListNode* tailer);
+void Hello();
+void login();
 void xor_encrypt_decrypt(char* str, char key);
 void Menu();
-//转专业
+//תרҵ
 void changeFaculty(ListNode*, ListNode*);
 void matchFacultyName_list(ListNode*, ListNode*);
 extern void matchFacultyName_one(char [3],ListNode*);

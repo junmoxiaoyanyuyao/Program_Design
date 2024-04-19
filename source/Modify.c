@@ -10,11 +10,11 @@
 #include "Modify.h"
 
 char CourseType[5][20] = {
-    "å…¬å…±å¿…ä¿®",
-    "å…¬å…±é€‰ä¿®",
-    "ä¸“ä¸šå¿…ä¿®",
-    "ä¸“ä¸šé€‰ä¿®",
-    "å†ä¿®"
+    "¹«¹²±ØĞŞ",
+    "¹«¹²Ñ¡ĞŞ",
+    "×¨Òµ±ØĞŞ",
+    "×¨ÒµÑ¡ĞŞ",
+    "¹Ò¿ÆÔÙĞŞ"
 };
 
 void CourseGradeModify(ListNode* t){
@@ -22,25 +22,25 @@ void CourseGradeModify(ListNode* t){
     for(int i = 0;i < (t->CourseNum);i++){
         c = t->gradeNode[i];
         printf("%d\t",i + 1);
-        printf("è¯¾ç¨‹å:%s\tè¯¾ç¨‹å·:%s\tè¯¾ç¨‹ç±»å‹:%s\t",c->CourseName,c->CourseNum,CourseType[c->gradeType]);
-        printf("å­¦åˆ†:%s\tæˆç»©:%s\tç»©ç‚¹:%s\n",c->CourseCredit,c->CourseGrade,c->GPA);
+        printf("¿Î³ÌÃû:%s\t¿Î³ÌºÅ:%s\t¿Î³ÌÀàĞÍ:%s\t",c->CourseName,c->CourseNum,CourseType[c->gradeType]);
+        printf("Ñ§·Ö:%s\t³É¼¨:%s\t¼¨µã:%s\n",c->CourseCredit,c->CourseGrade,c->GPA);
     }
-    printf("è¯·è¾“å…¥æƒ³ä¿®æ”¹æ¡ç›®çš„ç¼–å·:");
+    printf("ÇëÊäÈëÏëĞŞ¸ÄÌõÄ¿µÄ±àºÅ:");
     int index;
     scanf("%d",&index);
     while(index < 1 || index > t->CourseNum){
-        printf("ç¼–å·é”™è¯¯,é‡æ–°è¾“å…¥:");
+        printf("±àºÅ´íÎó,ÖØĞÂÊäÈë:");
         scanf("%d",&index);
     }
 
     c = t->gradeNode[index - 1];
 
-    printf("1.è¯¾ç¨‹å\t2.è¯¾ç¨‹å·\t3.è¯¾ç¨‹ç±»å‹\t4.å­¦åˆ†\t5.æˆç»©\t6.è¿”å›\n");
+    printf("1.¿Î³ÌÃû\t2.¿Î³ÌºÅ\t3.¿Î³ÌÀàĞÍ\t4.Ñ§·Ö\t5.³É¼¨\t6.·µ»Ø\n");
 LOOP:
-    printf("è¯·è¾“å…¥æƒ³è¦ä¿®æ”¹å“ªæ¡æ•°æ®:");
+    printf("ÇëÊäÈëÏëÒªĞŞ¸ÄÄÄÌõÊı¾İ:");
     scanf("%d",&index);
     while(index < 1 && index > 6){
-        printf("ç¼–å·é”™è¯¯,é‡æ–°è¾“å…¥:");
+        printf("±àºÅ´íÎó,ÖØĞÂÊäÈë:");
         scanf("%d",&index);        
     }
     char info[100];
@@ -49,53 +49,54 @@ LOOP:
         case 1 : 
             memset(info,'\0',sizeof(info));
             strcpy(info,c->CourseName);
-            printf("è¾“å…¥ä¿®æ”¹åçš„è¯¾ç¨‹å:");
+            printf("ÊäÈëĞŞ¸ÄºóµÄ¿Î³ÌÃû:");
             scanf("%s",c->CourseName);
-            printf("ä¿®æ”¹æˆåŠŸ,%s->%s\n",info,c->CourseName);
+            printf("ĞŞ¸Ä³É¹¦,%s->%s\n",info,c->CourseName);
             break;
         case 2 : 
             memset(info,'\0',sizeof(info));
             strcpy(info,c->CourseNum);
-            printf("è¾“å…¥ä¿®æ”¹åçš„è¯¾ç¨‹å·:");
+            printf("ÊäÈëĞŞ¸ÄºóµÄ¿Î³ÌºÅ:");
             scanf("%s",c->CourseNum);
-            printf("ä¿®æ”¹æˆåŠŸ,%s->%s\n",info,c->CourseName);
+            printf("ĞŞ¸Ä³É¹¦,%s->%s\n",info,c->CourseName);
             break;
         case 3 : 
-            printf("1.å…¬å…±å¿…ä¿®\t2.å…¬å…±é€‰ä¿®\t3.ä¸“ä¸šå¿…ä¿®\t4.ä¸“ä¸šé€‰ä¿®\t5.å†ä¿®\n");
-            printf("è¾“å…¥ä¿®æ”¹åçš„è¯¾ç¨‹ç±»å‹:");
+            printf("1.¹«¹²±ØĞŞ\t2.¹«¹²Ñ¡ĞŞ\t3.×¨Òµ±ØĞŞ\t4.×¨ÒµÑ¡ĞŞ\t5.ÔÙĞŞ\n");
+            printf("ÊäÈëĞŞ¸ÄºóµÄ¿Î³ÌÀàĞÍ:");
             int d = c->gradeType;
             scanf("%d",&(c->gradeType));
             while(c->gradeType < 0 || c->gradeType > 4){
-                printf("é”™è¯¯,è¯·é‡æ–°è¾“å…¥:");
+                printf("´íÎó,ÇëÖØĞÂÊäÈë:");
                 scanf("%d",&(c->gradeType));
             }
             c->gradeType--;
-            printf("ä¿®æ”¹æˆåŠŸ,%s->%s\n",CourseType[d],CourseType[c->gradeType]);
+            printf("ĞŞ¸Ä³É¹¦,%s->%s\n",CourseType[d],CourseType[c->gradeType]);
+            t->AverageGrade = UpdateGPA(t);
             break;
         case 4 : 
             memset(info,'\0',sizeof(info));
             strcpy(info,c->CourseCredit);
-            printf("è¾“å…¥ä¿®æ”¹åçš„å­¦åˆ†:");
+            printf("ÊäÈëĞŞ¸ÄºóµÄÑ§·Ö:");
             scanf("%s",c->CourseCredit);
             while(strtod(c->CourseCredit,&ptr) < 0.0){
-                printf("è¾“å…¥å­¦åˆ†ä¸ºè´Ÿæ•°,è¯·é‡æ–°è¾“å…¥:");
+                printf("ÊäÈëÑ§·ÖÎª¸ºÊı,ÇëÖØĞÂÊäÈë:");
                 scanf("%s",c->CourseCredit);
             }
-            printf("ä¿®æ”¹æˆåŠŸ,%s->%s\n",info,c->CourseCredit);
+            printf("ĞŞ¸Ä³É¹¦,%s->%s\n",info,c->CourseCredit);
             t->AverageGrade = UpdateGPA(t);
             break;
         case 5 : 
             memset(info,'\0',sizeof(info));
             strcpy(info,c->CourseGrade);
-            printf("è¾“å…¥ä¿®æ”¹åçš„æˆç»©:");
+            printf("ÊäÈëĞŞ¸ÄºóµÄ³É¼¨:");
             scanf("%s",c->CourseGrade);
             double grade = strtod(c->CourseGrade,&ptr);
             while(grade < 0.0 || grade > 100.0){
-                printf("æˆç»©åº”åœ¨0~100ä¹‹é—´,è¯·é‡æ–°è¾“å…¥:");
+                printf("³É¼¨Ó¦ÔÚ0~100Ö®¼ä,ÇëÖØĞÂÊäÈë:");
                 scanf("%s",c->CourseGrade);
                 grade = strtod(c->CourseGrade,&ptr);
             }
-            printf("ä¿®æ”¹æˆåŠŸ,%s->%s\n",info,c->CourseGrade);
+            printf("ĞŞ¸Ä³É¹¦,%s->%s\n",info,c->CourseGrade);
             GPAMatch(c);
             t->AverageGrade = UpdateGPA(t);
             break;
@@ -119,21 +120,22 @@ void QualityGradeModify(ListNode* node){
         switch(q->QualityGradeType){
             case THESIS :
                 t = q->Thesis;
-                printf("è®ºæ–‡\tè®ºæ–‡å:%s\tå‡ºç‰ˆæ—¶é—´:%d\n",t->thesisName,t->publicationTime);
+                printf("ÂÛÎÄ\tÂÛÎÄÃû:%s\t³ö°æÊ±¼ä:%d\n",t->thesisName,t->publicationTime);
                 break;
             case PROJECT :
                 p = q->Project;
-                printf("å¤§åˆ›\täººå‘˜åå•:");
+                printf("´ó´´\tÈËÔ±Ãûµ¥:");
                 for(int j = 0;j < p->memberNum;j++)
                     printf("%s ",p->members[j]);
-                printf("\né¡¹ç›®å:%s\té¡¹ç›®ç¼–å·:%d\tå¼€é¢˜æ—¶é—´:%d\tç»“é¢˜æ—¶é—´:%d\n",p->projrectName,p->itemNum,p->approvalTime,p->endTime);
+                printf("\tÏîÄ¿Ãû:%s\tÏîÄ¿±àºÅ:%d\t¿ªÌâÊ±¼ä:%d\t½áÌâÊ±¼ä:%d\n",p->projrectName,p->itemNum,p->approvalTime,p->endTime);
                 break;
             case CONTEST :
                 c = q->Contest;
-                printf("ç«èµ›å:%s\tä¸»åŠå•ä½:%s\n",c->contestName,c->organizer);
-                printf("è·å¥–åå•:");
+                printf("¾ºÈü\t¾ºÈüÃû:%s\tÖ÷°ìµ¥Î»:%s\t",c->contestName,c->organizer);
+                printf("»ñ½±Ãûµ¥:");
                 for(int j = 0;c->winners[j][0] != '\0';j++)
                     printf("%s ",c->winners[j]);
+                printf("\t»ñ½±Ê±¼ä:%d\n",c->prizeTIme);
                 break;
             default :
                 break;
@@ -142,30 +144,30 @@ void QualityGradeModify(ListNode* node){
     }
 LOOP:
     int index;
-    printf("è¾“å…¥æƒ³ä¿®æ”¹ä¿¡æ¯çš„ç¼–å·(è¾“å…¥'0'è¿”å›):");
+    printf("ÊäÈëÏëĞŞ¸ÄĞÅÏ¢µÄ±àºÅ(ÊäÈë'0'·µ»Ø):");
     scanf("%d",&index);
     if(index == 0)
         return;
     while(index < 1 || index > node->QualityGradeNum){
-        printf("ç¼–å·é”™è¯¯,é‡æ–°è¾“å…¥:");
+        printf("±àºÅ´íÎó,ÖØĞÂÊäÈë:");
         scanf("%d",&index);
     }
     q = node->QGrade[index - 1];
     switch(q->QualityGradeType){
         case THESIS :
-            printf("1.è®ºæ–‡åç§°\t2.å‡ºç‰ˆæ—¶é—´\t3.è¿”å›\n");
-            printf("è¯·é€‰æ‹©æƒ³ä¿®æ”¹çš„ä¿¡æ¯:");
+            printf("1.ÂÛÎÄÃû³Æ\t2.³ö°æÊ±¼ä\t3.·µ»Ø\n");
+            printf("ÇëÑ¡ÔñÏëĞŞ¸ÄµÄĞÅÏ¢:");
             scanf("%d",&index);
             switch(index){
                 case 1 : 
-                    printf("è¯·è¾“å…¥ä¿®æ”¹åçš„è®ºæ–‡åç§°:");
+                    printf("ÇëÊäÈëĞŞ¸ÄºóµÄÂÛÎÄÃû³Æ:");
                     scanf("%s",q->Thesis->thesisName);
-                    printf("ä¿®æ”¹æˆåŠŸ\n");
+                    printf("ĞŞ¸Ä³É¹¦\n");
                     break;
                 case 2 :
-                    printf("è¯·è¾“å…¥ä¿®æ”¹åçš„å‡ºç‰ˆæ—¶é—´:");
+                    printf("ÇëÊäÈëĞŞ¸ÄºóµÄ³ö°æÊ±¼ä:");
                     scanf("%s",q->Thesis->thesisName);
-                    printf("ä¿®æ”¹æˆåŠŸ\n");
+                    printf("ĞŞ¸Ä³É¹¦\n");
                     goto LOOP;
                     break;
                 case 3 :
@@ -175,42 +177,42 @@ LOOP:
             }
             break;
         case PROJECT :
-            printf("1.é¡¹ç›®å\t2.äººå‘˜åå•\t3.æŒ‡å¯¼è€å¸ˆ\t4.é¡¹ç›®ç¼–å·\t5.å¼€é¢˜æ—¶é—´\t6.ç»“é¢˜æ—¶é—´\t7.è¿”å›\n");
-            printf("è¯·è¾“å…¥æƒ³ä¿®æ”¹çš„ä¿¡æ¯");
+            printf("1.ÏîÄ¿Ãû\t2.ÈËÔ±Ãûµ¥\t3.Ö¸µ¼ÀÏÊ¦\t4.ÏîÄ¿±àºÅ\t5.¿ªÌâÊ±¼ä\t6.½áÌâÊ±¼ä\t7.·µ»Ø\n");
+            printf("ÇëÊäÈëÏëĞŞ¸ÄµÄĞÅÏ¢");
             scanf("%d",&index);
             switch(index){
                 case 1 : 
-                    printf("è¯·è¾“å…¥ä¿®æ”¹åçš„é¡¹ç›®åç§°:");
+                    printf("ÇëÊäÈëĞŞ¸ÄºóµÄÏîÄ¿Ãû³Æ:");
                     scanf("%s",q->Project->projrectName);
-                    printf("ä¿®æ”¹æˆåŠŸ\n");
+                    printf("ĞŞ¸Ä³É¹¦\n");
                     break;
                 case 2 :
-                    printf("è¯·è¾“å…¥ä¿®æ”¹åçš„äººå‘˜åå•äººæ•°:");
+                    printf("ÇëÊäÈëĞŞ¸ÄºóµÄÈËÔ±Ãûµ¥ÈËÊı:");
                     scanf("%d",&(q->Project->memberNum));
-                    printf("è¯·è¾“å…¥ä¿®æ”¹åçš„äººå‘˜åå•:");
+                    printf("ÇëÊäÈëĞŞ¸ÄºóµÄÈËÔ±Ãûµ¥:");
                     for(int i = 0;i < q->Project->memberNum;i++)
                         scanf("%s",q->Project->members[i]);
-                    printf("ä¿®æ”¹æˆåŠŸ\n");
+                    printf("ĞŞ¸Ä³É¹¦\n");
                     break;
                 case 3 :
-                    printf("è¯·è¾“å…¥ä¿®æ”¹åçš„æŒ‡å¯¼è€å¸ˆ:");
+                    printf("ÇëÊäÈëĞŞ¸ÄºóµÄÖ¸µ¼ÀÏÊ¦:");
                     scanf("%s",q->Project->instructor);
-                    printf("ä¿®æ”¹æˆåŠŸ\n");
+                    printf("ĞŞ¸Ä³É¹¦\n");
                     break;
                 case 4 :
-                    printf("è¯·è¾“å…¥ä¿®æ”¹åçš„é¡¹ç›®ç¼–å·:");
+                    printf("ÇëÊäÈëĞŞ¸ÄºóµÄÏîÄ¿±àºÅ:");
                     scanf("%s",q->Project->itemNum);
-                    printf("ä¿®æ”¹æˆåŠŸ\n");
+                    printf("ĞŞ¸Ä³É¹¦\n");
                     break;
                 case 5 :
-                    printf("è¯·è¾“å…¥ä¿®æ”¹åçš„å¼€é¢˜æ—¶é—´");
+                    printf("ÇëÊäÈëĞŞ¸ÄºóµÄ¿ªÌâÊ±¼ä:");
                     scanf("%d",&(q->Project->approvalTime));
-                    printf("ä¿®æ”¹æˆåŠŸ\n");
+                    printf("ĞŞ¸Ä³É¹¦\n");
                     break;
                 case 6 :
-                    printf("è¯·è¾“å…¥ä¿®æ”¹åçš„ç»“é¢˜æ—¶é—´");
+                    printf("ÇëÊäÈëĞŞ¸ÄºóµÄ½áÌâÊ±¼ä:");
                     scanf("%d",&(q->Project->endTime));
-                    printf("ä¿®æ”¹æˆåŠŸ\n");
+                    printf("ĞŞ¸Ä³É¹¦\n");
                 case 7 :
                     break;
                 default :
@@ -218,31 +220,31 @@ LOOP:
             }
             break;
         case CONTEST :
-            printf("1.ç«èµ›å\t2.ä¸»åŠå•ä½\t3.è·å¥–åå•\t4.è·å¥–æ—¶é—´\t5.è¿”å›\n");
-            printf("è¯·è¾“å…¥æƒ³ä¿®æ”¹çš„é€‰é¡¹");
+            printf("1.¾ºÈüÃû\t2.Ö÷°ìµ¥Î»\t3.»ñ½±Ãûµ¥\t4.»ñ½±Ê±¼ä\t5.·µ»Ø\n");
+            printf("ÇëÊäÈëÏëĞŞ¸ÄµÄÑ¡Ïî:");
             scanf("%d",&index);
             switch(index){
                 case 1 : 
-                    printf("è¯·è¾“å…¥ä¿®æ”¹åçš„ç«èµ›å:");
+                    printf("ÇëÊäÈëĞŞ¸ÄºóµÄ¾ºÈüÃû:");
                     scanf("%s",q->Contest->contestName);
-                    printf("ä¿®æ”¹æˆåŠŸ\n");
+                    printf("ĞŞ¸Ä³É¹¦\n");
                     break;
                 case 2 :
-                    printf("è¯·è¾“å…¥ä¿®æ”¹åçš„ä¸»åŠå•ä½åç§°:");
+                    printf("ÇëÊäÈëĞŞ¸ÄºóµÄÖ÷°ìµ¥Î»Ãû³Æ:");
                     scanf("%s",q->Contest->organizer);
-                    printf("ä¿®æ”¹æˆåŠŸ\n");
+                    printf("ĞŞ¸Ä³É¹¦\n");
                     break;
                 case 3 :
-                    printf("è¯·è¾“å…¥ä¿®æ”¹åçš„è·å¥–åå•äººæ•°:");
+                    printf("ÇëÊäÈëĞŞ¸ÄºóµÄ»ñ½±Ãûµ¥ÈËÊı:");
                     scanf("%d",&index);
                     for(int i = 0;i < index;i++)
                         scanf("%s",q->Contest->winners);
-                    printf("ä¿®æ”¹æˆåŠŸ\n");
+                    printf("ĞŞ¸Ä³É¹¦\n");
                     break;
                 case 4 :
-                    printf("è¯·è¾“å…¥ä¿®æ”¹åçš„è·å¥–æ—¶é—´");
+                    printf("ÇëÊäÈëĞŞ¸ÄºóµÄ»ñ½±Ê±¼ä:");
                     scanf("%d",&(q->Contest->prizeTIme));
-                    printf("ä¿®æ”¹æˆåŠŸ\n");
+                    printf("ĞŞ¸Ä³É¹¦\n");
                     break;
                 case 5 :
                     break;
@@ -253,12 +255,12 @@ LOOP:
         default :
             break;
     }
-    // printf("ä¿®æ”¹æˆåŠŸ\n");
+    // printf("ĞŞ¸Ä³É¹¦\n");
     return;
 }
 
 void Modify(ListNode* head,ListNode* tailer){
-    printf("è¯·è¾“å…¥æƒ³ä¿®æ”¹ä¿¡æ¯çš„å­¦å·('#'è¿”å›):");
+    printf("ÇëÊäÈëÏëĞŞ¸ÄĞÅÏ¢µÄÑ§ºÅ('#'·µ»Ø):");
     char studentID[9];
     scanf("%s",studentID);
     ListNode* t = head->next;
@@ -270,18 +272,18 @@ void Modify(ListNode* head,ListNode* tailer){
         t = t->next;
     }
     if(t == tailer){
-        printf("å­¦å·ä¸å­˜åœ¨,è¿”å›\n");
+        printf("Ñ§ºÅ²»´æÔÚ,·µ»Ø\n");
         return;
     }
-    printf("æŸ¥æ‰¾æˆåŠŸ\nå­¦å·:%s\tå§“å:%s\n",t->studentID,t->studentName);
+    printf("²éÕÒ³É¹¦\nÑ§ºÅ:%s\tĞÕÃû:%s\n",t->studentID,t->studentName);
 LOOP:
     int choose;
-    printf("1.æˆç»© 2.ç´ è´¨ 3.è¿”å›\nè¯·è¾“å…¥ä½ æƒ³ä¿®æ”¹çš„ç±»å‹:");
+    printf("1.³É¼¨ 2.ËØÖÊ 3.·µ»Ø\nÇëÊäÈëÄãÏëĞŞ¸ÄµÄÀàĞÍ:");
     scanf("%d",&choose);
     switch(choose){
         case 1 :
             if(t->CourseNum == 0)
-                printf("æ— å¯ä¿®æ”¹æ•°æ®,è¿”å›");
+                printf("ÎŞ¿ÉĞŞ¸ÄÊı¾İ,·µ»Ø\n");
             else{
                 CourseGradeModify(t);
                 goto LOOP;
@@ -289,7 +291,7 @@ LOOP:
             break;
         case 2 :
             if(t->QualityGradeNum == 0)
-                printf("æ— å¯ä¿®æ”¹æ•°æ®,è¿”å›");
+                printf("ÎŞ¿ÉĞŞ¸ÄÊı¾İ,·µ»Ø\n");
             else{
                 QualityGradeModify(t);
                 goto LOOP;
@@ -298,7 +300,7 @@ LOOP:
         case 3 :
             break;
         default :
-            printf("é”™è¯¯,è¿”å›\n");
+            printf("´íÎó,·µ»Ø\n");
             break;
     }
     return;

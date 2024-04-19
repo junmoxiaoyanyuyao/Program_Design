@@ -9,37 +9,38 @@
 #include "definition.h"
 #include "Output.h"
 
-char TYPE[5][30] = {"å…¬å…±å¿…ä¿®","å…¬å…±é€‰ä¿®","ä¸“ä¸šå¿…ä¿®","ä¸“ä¸šé€‰ä¿®","å†ä¿®"};
+char TYPE[5][30] = {"¹«¹²±ØĞŞ","¹«¹²Ñ¡ĞŞ","×¨Òµ±ØĞŞ","×¨ÒµÑ¡ĞŞ","¹Ò¿ÆÔÙĞŞ"};
 
 void Output(ListNode* head,ListNode* tailer){
     FILE* fp;
     char FileName[30];
     ListNode* tt = head->next;
     // setlocale(LC_ALL,"");
-    printf("1.txt 2.csv\né€‰æ‹©å¯¼å‡ºæ ¼å¼:");
+    printf("1.txt 2.csv\nÑ¡Ôñµ¼³ö¸ñÊ½:");
     int choice;
     scanf("%d",&choice);
     switch(choice){
         case 1 :
-            printf("è¾“å…¥å¯¼å‡ºæ–‡ä»¶å(txt):");
+            printf("ÊäÈëµ¼³öÎÄ¼şÃû(txt):");
             scanf("%s",FileName);
-            fp = fopen(FileName,"wt+, ccs=UTF-8");
+            fp = fopen(FileName,"w");
             if(!fp){
-                printf("åˆ›å»ºæ–‡ä»¶å¤±è´¥");
+                printf("´´½¨ÎÄ¼şÊ§°Ü");
                 return;
             }
-            fprintf(fp,"å­¦å·,å§“å,å­¦é™¢,ç±»å‹\n");
+            fprintf(fp,"Ñ§ºÅ\tĞÕÃû\tÑ§Ôº\tÀàĞÍ\n");
             while(tt != tailer){
                 fprintf(fp,"%s\t%s\t%s\n",tt->studentID,tt->studentName,tt->studentFaculty);
                 if(tt->CourseNum > 0)
-                    fprintf(fp,"\t\t\tæˆç»©\tè¯¾ç¨‹å\tè¯¾ç¨‹å·\tè¯¾ç¨‹æ€§è´¨\tå­¦åˆ†\tæˆç»©\tç»©ç‚¹\n");
+                    fprintf(fp,"\t\t\t¿Î³Ì³É¼¨\t¿Î³ÌÃû\t¿Î³ÌºÅ\t¿Î³ÌĞÔÖÊ\tÑ§·Ö\t³É¼¨\t¼¨µã\n");
                 CourseGradeNode* c;
                 for(int i = 0;i < tt->CourseNum;i++){
                     c = tt->gradeNode[i];
-                    fprintf(fp,"\t\t\t\t%s\t%s\t%s\t%s\t%s\t%s\n",c->CourseName,c->CourseNum,TYPE[(int)c->gradeType],c->CourseCredit,c->CourseGrade,c->GPA);
+                    fprintf(fp,"\t\t\t\t\t%s\t%s\t%s\t%s\t%s\t%s\n",c->CourseName,c->CourseNum,TYPE[(int)c->gradeType],c->CourseCredit,c->CourseGrade,c->GPA);
                 }
+                fprintf(fp,"\t\t\t\tÆ½¾ù¼ÓÈ¨¼¨µã:%.2lf\n\n",tt->AverageGrade);
                 if(tt->QualityGradeNum > 0)
-                    fprintf(fp,"\t\t\t\tç´ è´¨é¡¹ç›®\n");
+                    fprintf(fp,"\t\t\tËØÖÊÏîÄ¿\n");
                 thesis* t;
                 project* p;
                 contest* c1;
@@ -47,52 +48,56 @@ void Output(ListNode* head,ListNode* tailer){
                     switch(tt->QGrade[i]->QualityGradeType){
                         case THESIS :
                             t = tt->QGrade[i]->Thesis;
-                            fprintf(fp,"\t\t\t\tè®ºæ–‡\tè®ºæ–‡å\tå‡ºç‰ˆæ—¶é—´\n");
-                            fprintf(fp,"\t\t\t\t\t%s\t%d\n",t->thesisName,t->publicationTime);
+                            fprintf(fp,"\t\t\t\tÂÛÎÄ\tÂÛÎÄÃû\t³ö°æÊ±¼ä\n");
+                            fprintf(fp,"\t\t\t\t\t%s\t%d\t",t->thesisName,t->publicationTime);
                             break;
                         case PROJECT :
                             p = tt->QGrade[i]->Project;
-                            fprintf(fp,"\t\t\t\tå¤§åˆ›\té¡¹ç›®å\täººå‘˜åå•\tæŒ‡å¯¼è€å¸ˆ\té¡¹ç›®ç¼–å·\tå¼€é¢˜æ—¶é—´\tç»“é¢˜æ—¶é—´\n");
+                            fprintf(fp,"\t\t\t\t´ó´´\tÏîÄ¿Ãû\tÈËÔ±Ãûµ¥\tÖ¸µ¼ÀÏÊ¦\tÏîÄ¿±àºÅ\t¿ªÌâÊ±¼ä\t½áÌâÊ±¼ä\n");
                             fprintf(fp,"\t\t\t\t\t%s\t",p->projrectName);
                             for(int i = 0;i < p->memberNum;i++){
                                 fprintf(fp,"%s ",p->members[i]);
                             }
-                            fprintf(fp,"\t%s\t%d\t%d\t%d\n",p->instructor,p->itemNum,p->approvalTime,p->endTime);
+                            fprintf(fp,"\t%s\t%d\t%d\t%d\t",p->instructor,p->itemNum,p->approvalTime,p->endTime);
                             break;
                         case CONTEST :
                             c1 = tt->QGrade[i]->Contest;
-                            fprintf(fp,"\t\t\t\tç«èµ›\tç«èµ›å\tè·å¥–äºº\tä¸»åŠå•ä½\tè·å¥–æ—¶é—´\n");
-                            fprintf(fp,"\t\t\t\t\t%s\t%s\t%s\t%d\n",c1->contestName,c1->winners[0],c1->organizer,c1->prizeTIme);
+                            fprintf(fp,"\t\t\t\t¾ºÈü\t¾ºÈüÃû\t»ñ½±ÈË\tÖ÷°ìµ¥Î»\t»ñ½±Ê±¼ä\n");
+                            fprintf(fp,"\t\t\t\t\t%s\t%s\t%s\t%d\t",c1->contestName,c1->winners[0],c1->organizer,c1->prizeTIme);
                             break;
                         default :
                             break;
                     }
+                    fprintf(fp,"\tÈÏ¶¨¼Ó·Ö:%.2lf\n",tt->QGrade[i]->recognizedCredit);
                 }
+                fprintf(fp,"\t\t\t\t×ÜËØÖÊ¼Ó·Ö:%.2lf\n\n",tt->AddQualityGrade);
+                fprintf(fp,"\t\t\t\t×Ü¼¨µã:%.2lf\n\n",tt->AverageGrade + tt->AddQualityGrade);
                 tt = tt->next;
             }
-            printf("å¯¼å‡ºæˆåŠŸ\n");
+            printf("µ¼³ö³É¹¦\n");
             fclose(fp);
             break;
         case 2 :
-            printf("è¾“å…¥å¯¼å‡ºæ–‡ä»¶å(csv):");
+            printf("ÊäÈëµ¼³öÎÄ¼şÃû(csv):");
             scanf("%s",FileName);
             fp = fopen(FileName,"w");
             if(!fp){
-                printf("åˆ›å»ºæ–‡ä»¶å¤±è´¥");
+                printf("´´½¨ÎÄ¼şÊ§°Ü");
                 return;
             }
-            fprintf(fp,"å­¦å·,å§“å,å­¦é™¢,ç±»å‹\n");
+            fprintf(fp,"Ñ§ºÅ,ĞÕÃû,Ñ§Ôº,³É¼¨ÀàĞÍ\n");
             while(tt != tailer){
                 fprintf(fp,"%s,%s,%s\n",tt->studentID,tt->studentName,tt->studentFaculty);
                 if(tt->CourseNum > 0)
-                    fprintf(fp,",,,æˆç»©,è¯¾ç¨‹å,è¯¾ç¨‹å·,è¯¾ç¨‹æ€§è´¨,å­¦åˆ†,æˆç»©,ç»©ç‚¹\n");
+                    fprintf(fp," , , ,¿Î³Ì³É¼¨,¿Î³ÌÃû,¿Î³ÌºÅ,¿Î³ÌĞÔÖÊ,Ñ§·Ö,³É¼¨,¼¨µã\n");
                 CourseGradeNode* c;
                 for(int i = 0;i < tt->CourseNum;i++){
                     c = tt->gradeNode[i];
-                    fprintf(fp,",,,,%s,%s,%s,%s,%s,%s\n",c->CourseName,c->CourseNum,TYPE[(int)c->gradeType],c->CourseCredit,c->CourseGrade,c->GPA);
+                    fprintf(fp," , , , ,%s,%s,%s,%s,%s,%s\n",c->CourseName,c->CourseNum,TYPE[(int)c->gradeType],c->CourseCredit,c->CourseGrade,c->GPA);
                 }
+                fprintf(fp," , , , ,Æ½¾ù¼ÓÈ¨¼¨µã:%.2lf\n\n",tt->AverageGrade);
                 if(tt->QualityGradeNum > 0)
-                    fprintf(fp,",,,ç´ è´¨é¡¹ç›®\n");
+                    fprintf(fp," , , ,ËØÖÊÏîÄ¿\n");
                 thesis* t;
                 project* p;
                 contest* c1;
@@ -100,34 +105,37 @@ void Output(ListNode* head,ListNode* tailer){
                     switch(tt->QGrade[i]->QualityGradeType){
                         case THESIS :
                             t = tt->QGrade[i]->Thesis;
-                            fprintf(fp,",,,,è®ºæ–‡,è®ºæ–‡å,å‡ºç‰ˆæ—¶é—´\n");
-                            fprintf(fp,",,,,,%s,%d\n",t->thesisName,t->publicationTime);
+                            fprintf(fp," , , , ,ÂÛÎÄ,ÂÛÎÄÃû,³ö°æÊ±¼ä\n");
+                            fprintf(fp," , , , , ,%s,%d,",t->thesisName,t->publicationTime);
                             break;
                         case PROJECT :
                             p = tt->QGrade[i]->Project;
-                            fprintf(fp,",,,,å¤§åˆ›,é¡¹ç›®å,äººå‘˜åå•,æŒ‡å¯¼è€å¸ˆ,é¡¹ç›®ç¼–å·,å¼€é¢˜æ—¶é—´,ç»“é¢˜æ—¶é—´\n");
-                            fprintf(fp,",,,,,%s,",p->projrectName);
+                            fprintf(fp," , , , ,´ó´´,ÏîÄ¿Ãû,ÈËÔ±Ãûµ¥,Ö¸µ¼ÀÏÊ¦,ÏîÄ¿±àºÅ,¿ªÌâÊ±¼ä,½áÌâÊ±¼ä\n");
+                            fprintf(fp," , , , , ,%s,",p->projrectName);
                             for(int i = 0;i < p->memberNum;i++){
                                 fprintf(fp,"%s ",p->members[i]);
                             }
-                            fprintf(fp,",%s,%d,%d,%d\n",p->instructor,p->itemNum,p->approvalTime,p->endTime);
+                            fprintf(fp," ,%s,%d,%d,%d,",p->instructor,p->itemNum,p->approvalTime,p->endTime);
                             break;
                         case CONTEST :
                             c1 = tt->QGrade[i]->Contest;
-                            fprintf(fp,",,,,ç«èµ›,ç«èµ›å,è·å¥–äºº,ä¸»åŠå•ä½,è·å¥–æ—¶é—´\n");
-                            fprintf(fp,",,,,,%s,%s,%s,%d\n",c1->contestName,c1->winners[0],c1->organizer,c1->prizeTIme);
+                            fprintf(fp," , , , ,¾ºÈü,¾ºÈüÃû,»ñ½±ÈË,Ö÷°ìµ¥Î»,»ñ½±Ê±¼ä\n");
+                            fprintf(fp," , , , , ,%s,%s,%s,%d,",c1->contestName,c1->winners[0],c1->organizer,c1->prizeTIme);
                             break;
                         default :
                             break;
                     }
+                    fprintf(fp," ,ÈÏ¶¨¼Ó·Ö:%.2lf\n",tt->QGrade[i]->recognizedCredit);
                 }
+                fprintf(fp," , , , ,×ÜËØÖÊ¼Ó·Ö:%.2lf\n\n",tt->AddQualityGrade);
+                fprintf(fp," , , , ,×Ü¼¨µã:%.2lf\n\n",tt->AverageGrade + tt->AddQualityGrade);
                 tt = tt->next;
             }
-            printf("å¯¼å‡ºæˆåŠŸ\n");
+            printf("µ¼³ö³É¹¦\n");
             fclose(fp);
             break;
     }
-    
+    system("pause");
     return;
 }
 

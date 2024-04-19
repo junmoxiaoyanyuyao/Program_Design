@@ -10,33 +10,47 @@
 #pragma warning(disable: 4996)
 #include "delete.h"
 
-RecycleBinEntry recycleBin[RECYCLE_BIN_SIZE]; // å›žæ”¶ç«™æ•°ç»„
+RecycleBinEntry recycleBin[RECYCLE_BIN_SIZE]; // »ØÊÕÕ¾Êý×é
 int recycleBinIndex=0;
 
+char courseType[5][20] = {
+    "¹«¹²±ØÐÞ",
+    "¹«¹²Ñ¡ÐÞ",
+    "×¨Òµ±ØÐÞ",
+    "×¨ÒµÑ¡ÐÞ",
+    "ÔÙÐÞ"
+};
+
 void Delete_guide(ListNode* head, ListNode* tailer) {
-    printf("è¯·é€‰æ‹©æƒ³è¦æ‰§è¡Œçš„æ“ä½œï¼š1.åˆ é™¤å­¦ç”Ÿä¿¡æ¯ 2.æŸ¥çœ‹å›žæ”¶ç«™ 3.è¿”å›žä¸Šçº§èœå• è¾“å…¥:");
+    printf("ÇëÑ¡ÔñÏëÒªÖ´ÐÐµÄ²Ù×÷£º1.É¾³ýÑ§ÉúÕû¸öÐÅÏ¢ 2.É¾³ýÑ§Éú²¿·ÖÐÅÏ¢ 3.²é¿´»ØÊÕÕ¾ 4.·µ»ØÉÏ¼¶²Ëµ¥ ÊäÈë:");
     char choice[100];
     memset(choice, 0, sizeof(choice));
     s_gets(choice, 100);
     int flag1 = str_same_cmp(choice, "1");
     int flag2 = str_same_cmp(choice, "2");
     int flag3 = str_same_cmp(choice, "3");
-    while (!flag1 && !flag2 && !flag3) {
-        printf("éžæ³•è¾“å…¥ï¼Œè¯·é‡æ–°è¾“å…¥ï¼\n");
+    int flag4 = str_same_cmp(choice, "4");
+    while (!flag1 && !flag2 && !flag3&&!flag4) {
+        printf("·Ç·¨ÊäÈë£¬ÇëÖØÐÂÊäÈë£¡\n");
         Sleep(1000);
         system("cls");
-        printf("è¯·é€‰æ‹©æƒ³è¦æ‰§è¡Œçš„æ“ä½œï¼š1.åˆ é™¤å­¦ç”Ÿä¿¡æ¯ 2.æŸ¥çœ‹å›žæ”¶ç«™ 3.è¿”å›žä¸Šçº§èœå• è¾“å…¥:");
+        printf("ÇëÑ¡ÔñÏëÒªÖ´ÐÐµÄ²Ù×÷£º1.É¾³ýÑ§ÉúÕû¸öÐÅÏ¢ 2.É¾³ýÑ§Éú²¿·ÖÐÅÏ¢ 3.²é¿´»ØÊÕÕ¾ 4.·µ»ØÉÏ¼¶²Ëµ¥ ÊäÈë:");
         memset(choice, 0, sizeof(choice));
         s_gets(choice, 100);
         flag1 = str_same_cmp(choice, "1");
         flag2 = str_same_cmp(choice, "2");
         flag3 = str_same_cmp(choice, "3");
+        flag4 = str_same_cmp(choice, "4");
     }
     if (flag1) {
         delete_Information(head, tailer);
         return;
     }
-    else if (flag2) {
+    else if(flag2){
+        delete_factor(head,tailer);
+        return;
+    }
+    else if (flag3) {
         printRecycleBin(head, tailer);
         return;
     }
@@ -46,7 +60,7 @@ void Delete_guide(ListNode* head, ListNode* tailer) {
 }
 
 void delete_Information(ListNode* head, ListNode* tailer) {
-    printf("è¯·è¾“å…¥è¦åˆ é™¤çš„å­¦ç”Ÿå­¦å·(ä¸èƒ½æœ‰ç©ºæ ¼):");
+    printf("ÇëÊäÈëÒªÉ¾³ýµÄÑ§ÉúÑ§ºÅ(²»ÄÜÓÐ¿Õ¸ñ):");
     char studentID[100];
     memset(studentID, 0, sizeof(studentID));
     s_gets(studentID, 100);
@@ -58,15 +72,15 @@ void delete_Information(ListNode* head, ListNode* tailer) {
         while (p != tailer) {
             if (str_same_cmp(p->studentID, studentID)) {
                 Print_stu_Information(p, 0, NULL, 0);
-                printf("æ˜¯å¦ç¡®è®¤åˆ é™¤è¯¥å­¦ç”Ÿä¿¡æ¯ï¼Ÿ 1.æ˜¯ 2.å¦ è¾“å…¥ï¼š");
+                printf("ÊÇ·ñÈ·ÈÏÉ¾³ý¸ÃÑ§ÉúÐÅÏ¢£¿ 1.ÊÇ 2.·ñ ÊäÈë£º");
                 char choice[100];
                 memset(choice, 0, sizeof(choice));
                 s_gets(choice, 100);
                 bool flag1 = str_same_cmp(choice, "1");
                 bool flag2 = str_same_cmp(choice, "2");
                 while (!flag1 && !flag2) {
-                    printf("éžæ³•è¾“å…¥ï¼\n");
-                    printf("æ˜¯å¦ç¡®è®¤åˆ é™¤è¯¥å­¦ç”Ÿä¿¡æ¯ï¼Ÿ 1.æ˜¯ 2.å¦ è¾“å…¥ï¼š");
+                    printf("·Ç·¨ÊäÈë£¡\n");
+                    printf("ÊÇ·ñÈ·ÈÏÉ¾³ý¸ÃÑ§ÉúÐÅÏ¢£¿ 1.ÊÇ 2.·ñ ÊäÈë£º");
                     memset(choice, 0, sizeof(choice));
                     s_gets(choice, 100);
                     flag1 = str_same_cmp(choice, "1");
@@ -74,12 +88,12 @@ void delete_Information(ListNode* head, ListNode* tailer) {
                 }
                 if (flag1) {
                     recycleBin[recycleBinIndex].node = p;
-                    recycleBin[recycleBinIndex].deletionTime = time(NULL);  // è®°å½•åˆ é™¤æ—¶é—´
+                    recycleBin[recycleBinIndex].deletionTime = time(NULL);  // ¼ÇÂ¼É¾³ýÊ±¼ä
                     recycleBinIndex = (recycleBinIndex + 1) % RECYCLE_BIN_SIZE;
 
                     p->father->next = p->next;
                     p->next->father = p->father;
-                    printf("å·²åˆ é™¤è¯¥å­¦ç”Ÿä¿¡æ¯ï¼\n");
+                    printf("ÒÑÉ¾³ý¸ÃÑ§ÉúÐÅÏ¢£¡\n");
                     Sleep(1000);
                     system("cls");
                     return;
@@ -90,20 +104,155 @@ void delete_Information(ListNode* head, ListNode* tailer) {
             }
             p = p->next;
         }
-        printf("æœªæ‰¾åˆ°è¯¥å­¦ç”Ÿä¿¡æ¯ï¼\n");
-        Sleep(1000);
+        printf("Î´ÕÒµ½¸ÃÑ§ÉúÐÅÏ¢£¡\n");
+        Sleep(2000);
         system("cls");
         return;
     }
 }
 
+void delete_factor(ListNode*head,ListNode*tailer){
+    printf("ÇëÊäÈëÒªÉ¾³ýµÄÑ§ÉúÑ§ºÅ(²»ÄÜÓÐ¿Õ¸ñ):");
+    char studentID[100];
+    memset(studentID, 0, sizeof(studentID));
+    s_gets(studentID, 100);
+    if (!Input_check(studentID)) {
+        return;
+    }
+    else{
+        ListNode* p = head->next;
+        while (p != tailer) {
+            if (str_same_cmp(p->studentID, studentID)) {
+                printf("ÇëÑ¡ÔñÏëÒªÉ¾³ýµÄÑ§ÉúÐÅÏ¢ÄÚÈÝ£º1.³É¼¨ÐÅÏ¢ 2.ËØÖÊ¼Ó·ÖÐÅÏ¢ 3.·µ»ØÉÏ¼¶²Ëµ¥ ÊäÈë£º");
+                char choice[100];
+                memset(choice, 0, sizeof(choice));
+                s_gets(choice, 100);
+                int flag1 = str_same_cmp(choice, "1");
+                int flag2 = str_same_cmp(choice, "2");
+                int flag3 = str_same_cmp(choice, "3");
+                while (!flag1 && !flag2 && !flag3) {
+                    printf("·Ç·¨ÊäÈë£¡\n");
+                    printf("ÇëÑ¡ÔñÏëÒªÉ¾³ýµÄÑ§ÉúÐÅÏ¢ÄÚÈÝ£º1.³É¼¨ÐÅÏ¢ 2.ËØÖÊ¼Ó·ÖÐÅÏ¢ 3.·µ»ØÉÏ¼¶²Ëµ¥ ÊäÈë£º");
+                    memset(choice, 0, sizeof(choice));
+                    s_gets(choice, 100);
+                    flag1 = str_same_cmp(choice, "1");
+                    flag2 = str_same_cmp(choice, "2");
+                    flag3 = str_same_cmp(choice, "3");
+                }
+                if(flag1){  
+                        CourseGradeNode* c;
+                        if(p->CourseNum == 0){
+                            printf("ÎÞ³É¼¨ÐÅÏ¢\n");
+                            Sleep(2000);
+                            return;
+                        }
+                        for(int i = 0;i < (p->CourseNum);i++){
+                            c = p->gradeNode[i];
+                            printf("%d\t",i + 1);
+                            printf("¿Î³ÌÃû:%s\t¿Î³ÌºÅ:%s\t¿Î³ÌÀàÐÍ:%s\t",c->CourseName,c->CourseNum,courseType[c->gradeType]);
+                            printf("Ñ§·Ö:%s\t³É¼¨:%s\t¼¨µã:%s\n",c->CourseCredit,c->CourseGrade,c->GPA);
+                        }
+                        printf("ÇëÊäÈëÏëÉ¾³ý²¿·ÖµÄ±àºÅ:");
+                        int index;
+                        // memset(index, 0, sizeof(index));
+                        // s_gets(index, 100);
+                        scanf("%d",&index);
+                        getchar();
+                        while(index < 1 || index > p->CourseNum){
+                            printf("±àºÅ·Ç·¨,ÖØÐÂÊäÈë:");
+                            scanf("%d",&index);
+                            getchar();
+                        // memset(index, 0, sizeof(index));
+                        // s_gets(index, 100);
+                        }
+                        c=p->gradeNode[index - 1];
+                        for(int j=index;j < p->CourseNum;j++){
+                            p->gradeNode[j-1]=p->gradeNode[j];
+                        }
+                        p->CourseNum--;
+                        p->AverageGrade = UpdateGPA(p);
+                        printf("É¾³ý³É¹¦\n");
+                        Sleep(2000);
+                        return;
+                }
+            else if(flag2){
+                QualityGradeNode* q;
+                thesis* t;
+                project* P;
+                contest* c;
+                if(p->QualityGradeNum == 0){
+                    printf("ÎÞËØÖÊ¼Ó·ÖÐÅÏ¢\n");
+                    Sleep(2000);
+                    return;
+                }
+                for(int i = 0;i < (p->QualityGradeNum);i++){
+                    q = p->QGrade[i];
+                    printf("%d\t",i + 1);
+                    switch(q->QualityGradeType){
+                        case THESIS :
+                            t = q->Thesis;
+                            printf("ÂÛÎÄ\tÂÛÎÄÃû:%s\t³ö°æÊ±¼ä:%d\n",t->thesisName,t->publicationTime);
+                            break;
+                        case PROJECT :
+                            P = q->Project;
+                            printf("´ó´´\tÈËÔ±Ãûµ¥:");
+                            for(int j = 0;j < P->memberNum;j++)
+                                printf("%s ",P->members[j]);
+                            printf("\tÏîÄ¿Ãû:%s\tÏîÄ¿±àºÅ:%d\t¿ªÌâÊ±¼ä:%d\t½áÌâÊ±¼ä:%d\n",P->projrectName,P->itemNum,P->approvalTime,P->endTime);
+                            break;
+                        case CONTEST :
+                            c = q->Contest;
+                            printf("¾ºÈü\t¾ºÈüÃû:%s\tÖ÷°ìµ¥Î»:%s\t",c->contestName,c->organizer);
+                            printf("»ñ½±Ãûµ¥:");
+                            for(int j = 0;c->winners[j][0] != '\0';j++)
+                                printf("%s ",c->winners[j]);
+                            printf("\t»ñ½±Ê±¼ä:%d\n",c->prizeTIme);
+                            break;
+                        default :
+                            break;
+                    }
+                    }
+                        printf("ÇëÊäÈëÏëÉ¾³ý²¿·ÖµÄ±àºÅ:");
+                        int index;
+                        scanf("%d",&index);
+                        getchar();
+                        while(index < 1 || index > p->QualityGradeNum){
+                            printf("±àºÅ·Ç·¨,ÖØÐÂÊäÈë:");
+                            scanf("%d",&index);
+                            getchar();
+                        // memset(index, 0, sizeof(index));
+                        // s_gets(index, 100);
+                        }
+                        q=p->QGrade[index - 1];
+                        for(int j = index;j < p->QualityGradeNum;j++){
+                            p->QGrade[j-1]=p->QGrade[j];
+                        }
+                        p->QualityGradeNum--;
+                        p->AddQualityGrade = UpdataQualityGrade(p);
+                        printf("É¾³ý³É¹¦\n");
+                        Sleep(2000);
+                        return;
+                }
+
+                else if(flag3){
+                    return;
+                }
+            }
+        }
+        printf("Î´ÕÒµ½¸ÃÑ§ÉúÐÅÏ¢£¡\n");
+        Sleep(2000);
+        system("cls");
+    }
+    return;
+}
+
 void printRecycleBin() {
-    printf("å›žæ”¶ç«™å†…å®¹ï¼š\n");
+    printf("»ØÊÕÕ¾ÄÚÈÝ£º\n");
     for (int i = 0; i < RECYCLE_BIN_SIZE; i++) {
         if (recycleBin[i].node != NULL) {
             ListNode* p = recycleBin[i].node;
-            printf("å­¦å·:%s    å§“å:%s    å­¦é™¢:%s    å¹³å‡ç»©ç‚¹ï¼ˆåŠ åˆ†å‰ï¼‰:%.2f    å¹³å‡ç»©ç‚¹ï¼ˆåŠ åˆ†åŽï¼‰:%.2f     åˆ é™¤æ—¶é—´:%s\n", p->studentID,
-                p->studentName, p->studentFaculty, p->AverageGrade - p->AddQualityGrade, p->AverageGrade, ctime(&recycleBin[i].deletionTime));
+            printf("Ñ§ºÅ:%s    ÐÕÃû:%s    Ñ§Ôº:%s    Æ½¾ù¼¨µã£¨¼Ó·ÖÇ°£©:%.2f    Æ½¾ù¼¨µã£¨¼Ó·Öºó£©:%.2f     É¾³ýÊ±¼ä:%s\n", p->studentID,
+                p->studentName, p->studentFaculty, p->AverageGrade, p->AverageGrade + p->AddQualityGrade, ctime(&recycleBin[i].deletionTime));
         }
     }
     system("pause");

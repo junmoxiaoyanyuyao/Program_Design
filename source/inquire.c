@@ -11,20 +11,20 @@
 
 void Faculty_Search() {
     printf("******************************************************************************\n");
-    printf("01 å“²å­¦ç¤¾ä¼š\t\t 02 æ–‡å­¦\t\t 03 å¤–å›½è¯­\n");
-    printf("04 è‰ºæœ¯\t\t\t 05 ä½“è‚²\t\t 06 ç»æµ\n");
-    printf("07 æ³•\t\t\t 08 è¡Œæ”¿\t\t 09 å•†å­¦ä¸ç®¡ç†\n");
-    printf("10 æ•°å­¦\t\t\t 11 ç‰©ç†\t\t 12 åŒ–å­¦\n");
-    printf("13 ç”Ÿå‘½ç§‘å­¦\t\t 14 æœºæ¢°ä¸èˆªç©ºèˆªå¤©\t 15 æ±½è½¦å·¥ç¨‹\n");
-    printf("16 ææ–™ç§‘å­¦ä¸å·¥ç¨‹\t 17 äº¤é€š\t\t 18 ç”Ÿç‰©ä¸å†œä¸šå·¥ç¨‹\n");
-    printf("19 ç”µå­ç§‘å­¦ä¸å·¥ç¨‹\t 20 é€šä¿¡å·¥ç¨‹\t\t 21 è®¡ç®—æœºç§‘å­¦ä¸æŠ€æœ¯\n");
-    printf("22 åœ°çƒç§‘å­¦\t\t 23 åœ°çƒæ¢æµ‹ç§‘å­¦ä¸æŠ€æœ¯\t 24 å»ºè®¾å·¥ç¨‹\n");
-    printf("25 ç¯å¢ƒä¸èµ„æº\t\t 26 é‡‘è\t\t 27 å…¬å…±å«ç”Ÿ\n");
-    printf("28 è¯\t\t\t 29 æŠ¤ç†\t\t 30 ä¸œåŒ—äºš\n");
-    printf("33 å£è…”åŒ»\t\t 37 æ–°é—»ä¸ä¼ æ’­\t\t 38 è€ƒå¤\n");
-    printf("39 é©¬å…‹æ€ä¸»ä¹‰\t\t 40 äººå·¥æ™ºèƒ½\t\t 55 è½¯ä»¶\n");
-    printf("65 ä»ªå™¨ç§‘å­¦ä¸ç”µæ°”å·¥ç¨‹\t 70 ä¸´åºŠåŒ»\n");
-    printf("81 åŠ¨ç‰©åŒ»å­¦\n");
+    printf("01 ÕÜÑ§Éç»á\t\t 02 ÎÄÑ§\t\t 03 Íâ¹úÓï\n");
+    printf("04 ÒÕÊõ\t\t\t 05 ÌåÓı\t\t 06 ¾­¼Ã\n");
+    printf("07 ·¨\t\t\t 08 ĞĞÕş\t\t 09 ÉÌÑ§Óë¹ÜÀí\n");
+    printf("10 ÊıÑ§\t\t\t 11 ÎïÀí\t\t 12 »¯Ñ§\n");
+    printf("13 ÉúÃü¿ÆÑ§\t\t 14 »úĞµÓëº½¿Õº½Ìì\t 15 Æû³µ¹¤³Ì\n");
+    printf("16 ²ÄÁÏ¿ÆÑ§Óë¹¤³Ì\t 17 ½»Í¨\t\t 18 ÉúÎïÓëÅ©Òµ¹¤³Ì\n");
+    printf("19 µç×Ó¿ÆÑ§Óë¹¤³Ì\t 20 Í¨ĞÅ¹¤³Ì\t\t 21 ¼ÆËã»ú¿ÆÑ§Óë¼¼Êõ\n");
+    printf("22 µØÇò¿ÆÑ§\t\t 23 µØÇòÌ½²â¿ÆÑ§Óë¼¼Êõ\t 24 ½¨Éè¹¤³Ì\n");
+    printf("25 »·¾³Óë×ÊÔ´\t\t 26 ½ğÈÚ\t\t 27 ¹«¹²ÎÀÉú\n");
+    printf("28 Ò©\t\t\t 29 »¤Àí\t\t 30 ¶«±±ÑÇ\n");
+    printf("33 ¿ÚÇ»Ò½\t\t 37 ĞÂÎÅÓë´«²¥\t\t 38 ¿¼¹Å\n");
+    printf("39 Âí¿ËË¼Ö÷Òå\t\t 40 ÈË¹¤ÖÇÄÜ\t\t 55 Èí¼ş\n");
+    printf("65 ÒÇÆ÷¿ÆÑ§ÓëµçÆø¹¤³Ì\t 70 ÁÙ´²Ò½\n");
+    printf("81 ¶¯ÎïÒ½Ñ§\n");
     printf("******************************************************************************\n");
 }
 
@@ -34,19 +34,19 @@ int compare_grade(const void* p1, const void* p2) {
     return (*a)->AverageGrade <= (*b)->AverageGrade;
 }
 
-void sort_cmp_grade(ListNode* head, ListNode* tailer,char faculty[30], int flag, FILE* fp) {//å½“flagä¸º0æ—¶ä¸éœ€è¦è¾“å…¥æ–‡ä»¶ ä¸éœ€è¦æŒ‰å­¦é™¢è¾“å‡º
-    ListNode* p = head->next;                                           //å½“flagä¸º1æ—¶ä¸éœ€è¦è¾“å…¥æ–‡ä»¶ éœ€è¦æŒ‰å­¦é™¢è¾“å‡º
-    int num = 0;                                                        //å½“flagä¸º2æ—¶éœ€è¦è¾“å…¥æ–‡ä»¶ ä¸éœ€è¦æŒ‰å­¦é™¢è¾“å‡º
-    while (p != tailer) {                                               //å½“flagä¸º3æ—¶éœ€è¦è¾“å…¥æ–‡ä»¶ éœ€è¦æŒ‰å­¦é™¢è¾“å‡º
+void sort_cmp_grade(ListNode* head, ListNode* tailer,char faculty[30], int flag, FILE* fp) {//µ±flagÎª0Ê±²»ĞèÒªÊäÈëÎÄ¼ş ²»ĞèÒª°´Ñ§ÔºÊä³ö
+    ListNode* p = head->next;                                           //µ±flagÎª1Ê±²»ĞèÒªÊäÈëÎÄ¼ş ĞèÒª°´Ñ§ÔºÊä³ö
+    int num = 0;                                                        //µ±flagÎª2Ê±ĞèÒªÊäÈëÎÄ¼ş ²»ĞèÒª°´Ñ§ÔºÊä³ö
+    while (p != tailer) {                                               //µ±flagÎª3Ê±ĞèÒªÊäÈëÎÄ¼ş ĞèÒª°´Ñ§ÔºÊä³ö
         num++;
         p = p->next;
     }
     if (num == 0) {
-        printf("æœªå­˜å‚¨å­¦ç”Ÿä¿¡æ¯ï¼\n");
+        printf("Î´´æ´¢Ñ§ÉúĞÅÏ¢£¡\n");
         return;
     }
     int sizeof_p_array = num + 10;
-    ListNode** p_array = (ListNode**)malloc(sizeof(ListNode*) * sizeof_p_array);    //æŒ‡é’ˆæ•°ç»„
+    ListNode** p_array = (ListNode**)malloc(sizeof(ListNode*) * sizeof_p_array);    //Ö¸ÕëÊı×é
     p = head->next;
     for (int i = 0; i < num; i++) {
         p_array[i] = p;
@@ -54,13 +54,21 @@ void sort_cmp_grade(ListNode* head, ListNode* tailer,char faculty[30], int flag,
     }
     qsort(p_array, num, sizeof(ListNode*), compare_grade);
     for (int i = 0; i < num; i++) {
-        if (flag == 0)Print_stu_Information(p_array[i], 0, NULL,2);
-        else if (flag == 1) {
-            if (str_same_cmp(p_array[i]->studentFaculty, faculty))Print_stu_Information(p_array[i], 0, NULL,2);
+        if (flag == 0 && p_array[i]->CourseNum != 0){
+            Print_stu_Information(p_array[i], 0, NULL,2);
         }
-        else if (flag == 2)Print_stu_Information(p_array[i], 1, fp,2);
+        else if (flag == 1) {
+            if (str_same_cmp(p_array[i]->studentFaculty, faculty) && p_array[i]->CourseNum != 0){
+                Print_stu_Information(p_array[i], 0, NULL,2);
+            }
+        }
+        else if (flag == 2 && p_array[i]->CourseNum != 0){
+            Print_stu_Information(p_array[i], 1, fp,2);
+        }
         else if (flag == 3) {
-            if (str_same_cmp(p_array[i]->studentFaculty, faculty))Print_stu_Information(p_array[i], 1, fp,2);
+            if (str_same_cmp(p_array[i]->studentFaculty, faculty) && p_array[i]->CourseNum != 0){
+                Print_stu_Information(p_array[i], 1, fp,2);
+            }
         }
     }
     free(p_array);
@@ -103,7 +111,7 @@ char* file_s_gets(char* st, int n, FILE* fp) {
             *find = '\0';
         }
         else {
-            // if (feof(fp))return;
+            if (feof(fp)) return NULL;
             while (getchar() != '\n')continue;
         }
     }
@@ -114,7 +122,7 @@ char* file_s_gets(char* st, int n, FILE* fp) {
 void guide_information(ListNode* head, ListNode* tailer) {
     while (true) {
         char choice[100];
-        printf("è¯·é€‰æ‹©éœ€è¦æ‰§è¡Œçš„åŠŸèƒ½: 1.æ‰‹åŠ¨æŸ¥è¯¢å•ä¸ªå­¦ç”Ÿä¿¡æ¯ 2.æŸ¥è¯¢å­¦é™¢å­¦ç”Ÿä¿¡æ¯ 3.æ–‡ä»¶æŸ¥è¯¢ 4.è¿”å›ä¸»èœå• è¾“å…¥ï¼š"); //è€ƒè™‘ç©ºæ ¼
+        printf("ÇëÑ¡ÔñĞèÒªÖ´ĞĞµÄ¹¦ÄÜ: 1.ÊÖ¶¯²éÑ¯µ¥¸öÑ§ÉúĞÅÏ¢ 2.²éÑ¯Ñ§ÔºÑ§ÉúĞÅÏ¢ 3.ÎÄ¼ş²éÑ¯ 4.·µ»ØÖ÷²Ëµ¥ ÊäÈë£º"); //¿¼ÂÇ¿Õ¸ñ
         fflush(stdout);
         memset(choice, 0, sizeof(choice));
         s_gets(choice, 100);
@@ -123,8 +131,8 @@ void guide_information(ListNode* head, ListNode* tailer) {
         bool flag3 = str_same_cmp(choice, "3");
         bool flag4 = str_same_cmp(choice, "4");
         while (!flag1 && !flag2 && !flag3 && !flag4) {
-            printf("éæ³•è¾“å…¥ï¼Œè¯·é‡æ–°è¾“å…¥ï¼\n");
-            printf("è¯·é€‰æ‹©éœ€è¦æ‰§è¡Œçš„åŠŸèƒ½: 1.æ‰‹åŠ¨æŸ¥è¯¢å•ä¸ªå­¦ç”Ÿä¿¡æ¯ 2.æŸ¥è¯¢å­¦é™¢å­¦ç”Ÿä¿¡æ¯ 3.æ–‡ä»¶æŸ¥è¯¢ 4.è¿”å›ä¸»èœå• è¾“å…¥ï¼š");
+            printf("·Ç·¨ÊäÈë£¬ÇëÖØĞÂÊäÈë£¡\n");
+            printf("ÇëÑ¡ÔñĞèÒªÖ´ĞĞµÄ¹¦ÄÜ: 1.ÊÖ¶¯²éÑ¯µ¥¸öÑ§ÉúĞÅÏ¢ 2.²éÑ¯Ñ§ÔºÑ§ÉúĞÅÏ¢ 3.ÎÄ¼ş²éÑ¯ 4.·µ»ØÖ÷²Ëµ¥ ÊäÈë£º");
             fflush(stdout);
             memset(choice, 0, sizeof(choice));
             s_gets(choice, 100);
@@ -139,7 +147,7 @@ void guide_information(ListNode* head, ListNode* tailer) {
         }
         else if (flag2) {
             faculty_Inquire(head, tailer);
-            system("pause");
+            system("cls");
         }
         else if (flag3) {
             file_Inquire(head, tailer);
@@ -162,16 +170,16 @@ bool Input_check(char studentID[100]) {
             }
         }
         if (flag) {
-            printf("å­¦å·è¾“å…¥éæ³•ï¼\n");
-            printf("è¯·é€‰æ‹©: 1.é‡æ–°è¾“å…¥å­¦å· 2.è¿”å›ä¸»èœå• è¾“å…¥ï¼š");
+            printf("Ñ§ºÅÊäÈë·Ç·¨£¡\n");
+            printf("ÇëÑ¡Ôñ: 1.ÖØĞÂÊäÈëÑ§ºÅ 2.·µ»ØÖ÷²Ëµ¥ ÊäÈë£º");
             char a[100];
             memset(a, 0, sizeof(a));
             s_gets(a, 100);
             bool flag1 = str_same_cmp(a, "1");
             bool flag2 = str_same_cmp(a, "2");
             while (!flag1 && !flag2) {
-                printf("éæ³•è¾“å…¥ï¼\n");
-                printf("è¯·é€‰æ‹©: 1.é‡æ–°è¾“å…¥å­¦å· 2.è¿”å›ä¸»èœå• è¾“å…¥ï¼š");
+                printf("·Ç·¨ÊäÈë£¡\n");
+                printf("ÇëÑ¡Ôñ: 1.ÖØĞÂÊäÈëÑ§ºÅ 2.·µ»ØÖ÷²Ëµ¥ ÊäÈë£º");
                 memset(a, 0, sizeof(a));
                 s_gets(a, 100);
                 flag1 = str_same_cmp(a, "1");
@@ -180,7 +188,7 @@ bool Input_check(char studentID[100]) {
             if (flag2)return false;
             else {
                 memset(studentID, 0, sizeof(a));
-                printf("è¾“å…¥å­¦å·(ä¸èƒ½æœ‰ç©ºæ ¼):");
+                printf("ÊäÈëÑ§ºÅ(²»ÄÜÓĞ¿Õ¸ñ):");
                 s_gets(studentID, 100);
             }
         }
@@ -189,25 +197,25 @@ bool Input_check(char studentID[100]) {
 }
 
 void Print_stu_Information(ListNode* p, int flag, FILE* fp, int isheader) {
-    // è¡¨å¤´æ ¼å¼
+    // ±íÍ·¸ñÊ½
     char* headerFormat = "%-10s\t%-15s\t%-20s\t%-20s\t%-20s\n";
-    // æ•°æ®è¡Œæ ¼å¼
+    // Êı¾İĞĞ¸ñÊ½
     char* dataFormat = "%-10s\t%-15s\t%-20s\t%-20.2f\t%-20.2f\n";
 
     if (isheader == 1) {
-        if (flag == 0) printf(headerFormat, "å­¦å·", "å§“å", "å­¦é™¢", "å¹³å‡ç»©ç‚¹ï¼ˆåŠ åˆ†å‰ï¼‰", "å¹³å‡ç»©ç‚¹ï¼ˆåŠ åˆ†åï¼‰");
-        if (flag == 1) fprintf(fp, headerFormat, "å­¦å·", "å§“å", "å­¦é™¢", "å¹³å‡ç»©ç‚¹ï¼ˆåŠ åˆ†å‰ï¼‰", "å¹³å‡ç»©ç‚¹ï¼ˆåŠ åˆ†åï¼‰");
+        if (flag == 0) printf(headerFormat, "Ñ§ºÅ", "ĞÕÃû", "Ñ§Ôº", "Æ½¾ù¼¨µã£¨¼Ó·ÖÇ°£©", "Æ½¾ù¼¨µã£¨¼Ó·Öºó£©");
+        if (flag == 1) fprintf(fp, headerFormat, "Ñ§ºÅ", "ĞÕÃû", "Ñ§Ôº", "Æ½¾ù¼¨µã£¨¼Ó·ÖÇ°£©", "Æ½¾ù¼¨µã£¨¼Ó·Öºó£©");
     }
 
     if (isheader == 2) {
-        if (flag == 0) printf(dataFormat, p->studentID, p->studentName, p->studentFaculty, p->AverageGrade, p->AverageGrade + p->AddQualityGrade);
-        if (flag == 1) fprintf(fp, dataFormat, p->studentID, p->studentName, p->studentFaculty, p->AverageGrade, p->AverageGrade  + p->AddQualityGrade);
+        if (flag == 0) printf(dataFormat, p->studentID, p->studentName, p->studentFaculty, p->AverageGrade - p->AddQualityGrade, p->AverageGrade);
+        if (flag == 1) fprintf(fp, dataFormat, p->studentID, p->studentName, p->studentFaculty, p->AverageGrade - p->AddQualityGrade, p->AverageGrade);
     }
     if (isheader == 0) {
-        if (flag == 0)printf("å­¦å·:%s    å§“å:%s    å­¦é™¢:%s    å¹³å‡ç»©ç‚¹ï¼ˆåŠ åˆ†å‰ï¼‰:%.2f    å¹³å‡ç»©ç‚¹ï¼ˆåŠ åˆ†åï¼‰:%.2f\n", p->studentID,
-            p->studentName, p->studentFaculty, p->AverageGrade, p->AverageGrade + p->AddQualityGrade);   //strtodå­—ç¬¦ä¸²è½¬doubleè¦æ±‚å­—ç¬¦ä¸²å·²åˆæ³•
-        if (flag == 1)fprintf(fp, "å­¦å·:%s    å§“å:%s    å­¦é™¢:%s    å¹³å‡ç»©ç‚¹ï¼ˆåŠ åˆ†å‰ï¼‰:%.2f    å¹³å‡ç»©ç‚¹ï¼ˆåŠ åˆ†åï¼‰:%.2f\n", p->studentID,
-            p->studentName, p->studentFaculty, p->AverageGrade, p->AverageGrade  + p->AddQualityGrade);
+        if (flag == 0)printf("Ñ§ºÅ:%s    ĞÕÃû:%s    Ñ§Ôº:%s    Æ½¾ù¼¨µã£¨¼Ó·ÖÇ°£©:%.2f    Æ½¾ù¼¨µã£¨¼Ó·Öºó£©:%.2f\n", p->studentID,
+            p->studentName, p->studentFaculty, p->AverageGrade,p->AverageGrade + p->AddQualityGrade);   //strtod×Ö·û´®×ªdoubleÒªÇó×Ö·û´®ÒÑºÏ·¨
+        if (flag == 1)fprintf(fp, "Ñ§ºÅ:%s    ĞÕÃû:%s    Ñ§Ôº:%s    Æ½¾ù¼¨µã£¨¼Ó·ÖÇ°£©:%.2f    Æ½¾ù¼¨µã£¨¼Ó·Öºó£©:%.2f\n", p->studentID,
+            p->studentName, p->studentFaculty, p->AverageGrade,p->AverageGrade + p->AddQualityGrade);
     }
 }
 
@@ -215,42 +223,43 @@ void Print_stu_Grade(ListNode* p) {
     char coursetype[maxCourseNameSize];
     memset(coursetype, 0, sizeof(coursetype));
     for (int i = 0; i < p->CourseNum; i++) {
-        if(p->gradeNode[i]->gradeType==0){//å…¬å…±å¿…ä¿®,å…¬å…±é€‰ä¿®,ä¸“ä¸šå¿…ä¿®,ä¸“ä¸šé€‰ä¿®,å†ä¿®
-            strcpy(coursetype,"å…¬å…±å¿…ä¿®");
+        if(p->gradeNode[i]->gradeType==0){//¹«¹²±ØĞŞ,¹«¹²Ñ¡ĞŞ,×¨Òµ±ØĞŞ,×¨ÒµÑ¡ĞŞ,ÔÙĞŞ
+            strcpy(coursetype,"¹«¹²±ØĞŞ");
         }
         else if(p->gradeNode[i]->gradeType==1){
-            strcpy(coursetype,"å…¬å…±é€‰ä¿®");
+            strcpy(coursetype,"¹«¹²Ñ¡ĞŞ");
         }
         else if(p->gradeNode[i]->gradeType==2){
-            strcpy(coursetype,"ä¸“ä¸šå¿…ä¿®");
+            strcpy(coursetype,"×¨Òµ±ØĞŞ");
         }
         else if(p->gradeNode[i]->gradeType==3){
-            strcpy(coursetype,"ä¸“ä¸šé€‰ä¿®");
+            strcpy(coursetype,"×¨ÒµÑ¡ĞŞ");
         }
         else if(p->gradeNode[i]->gradeType==4){
-            strcpy(coursetype,"å†ä¿®");
+            strcpy(coursetype,"¹Ò¿ÆÔÙĞŞ");
         }
-        printf("è¯¾ç¨‹åï¼š%s\tè¯¾ç¨‹å·ï¼š%s\tè¯¾ç¨‹æ€§è´¨ï¼š%s\tå­¦åˆ†ï¼š%s\tæˆç»©ï¼š%s\tç»©ç‚¹ï¼š%s\n", p->gradeNode[i]->CourseName, p->gradeNode[i]->CourseNum, coursetype, p->gradeNode[i]->CourseCredit, p->gradeNode[i]->CourseGrade,p->gradeNode[i]->GPA);
+        printf("¿Î³ÌÃû£º%s\t\t¿Î³ÌºÅ£º%s\t¿Î³ÌĞÔÖÊ£º%s\tÑ§·Ö£º%s\t³É¼¨£º%s\t¼¨µã£º%s\n", p->gradeNode[i]->CourseName, p->gradeNode[i]->CourseNum, coursetype, p->gradeNode[i]->CourseCredit, p->gradeNode[i]->CourseGrade,p->gradeNode[i]->GPA);
     }
 }
 
 void Print_stu_credit(ListNode* p) {
     for (int i = 0; i < p->QualityGradeNum; i++) {
         if (p->QGrade[i]->QualityGradeType == THESIS) {
-            printf("è®ºæ–‡åç§°:%s å‡ºç‰ˆæ—¶é—´:%d è®ºæ–‡ç­‰çº§:%d æœŸåˆŠåç§°:%s\n", p->QGrade[i]->Thesis->thesisName, p->QGrade[i]->Thesis->publicationTime, p->QGrade[i]->Thesis->Grade, p->QGrade[i]->Thesis->journalName);
+            printf("ÂÛÎÄÃû³Æ:%s ³ö°æÊ±¼ä:%d ÂÛÎÄµÈ¼¶:%d ÆÚ¿¯Ãû³Æ:%s ", p->QGrade[i]->Thesis->thesisName, p->QGrade[i]->Thesis->publicationTime, p->QGrade[i]->Thesis->Grade, p->QGrade[i]->Thesis->journalName);
         }
         else if (p->QGrade[i]->QualityGradeType == PROJECT) {
-            printf("é¡¹ç›®å:%s é¡¹ç›®ç¼–å·:%d å¼€é¢˜æ—¶é—´:%d ç»“é¢˜æ—¶é—´:%d\n", p->QGrade[i]->Project->projrectName, p->QGrade[i]->Project->itemNum, p->QGrade[i]->Project->approvalTime, p->QGrade[i]->Project->endTime);
+            printf("ÏîÄ¿Ãû:%s ÏîÄ¿±àºÅ:%d ¿ªÌâÊ±¼ä:%d ½áÌâÊ±¼ä:%d ", p->QGrade[i]->Project->projrectName, p->QGrade[i]->Project->itemNum, p->QGrade[i]->Project->approvalTime, p->QGrade[i]->Project->endTime);
         }
         else if (p->QGrade[i]->QualityGradeType == CONTEST) {
-            printf("ç«èµ›å:%s ä¸»åŠå•ä½:%s ç«èµ›ç­‰çº§:%d è·å¥–æ—¶é—´:%d\n", p->QGrade[i]->Contest->contestName, p->QGrade[i]->Contest->organizer, p->QGrade[i]->Contest->conG, p->QGrade[i]->Contest->prizeTIme);
+            printf("¾ºÈüÃû:%s Ö÷°ìµ¥Î»:%s ¾ºÈüµÈ¼¶:%d »ñ½±Ê±¼ä:%d ", p->QGrade[i]->Contest->contestName, p->QGrade[i]->Contest->organizer, p->QGrade[i]->Contest->conG, p->QGrade[i]->Contest->prizeTIme);
         }
+        printf("ÈÏ¶¨¼Ó·Ö:%.2lf\n",p->QGrade[i]->recognizedCredit);
     }
 }
 
 void single_Inquire(ListNode* head, ListNode* tailar) {
     char studentID[100];
-    printf("è¯·è¾“å…¥ä½ è¦æŸ¥è¯¢çš„å­¦ç”Ÿå­¦å·(ä¸èƒ½æœ‰ç©ºæ ¼):");
+    printf("ÇëÊäÈëÄãÒª²éÑ¯µÄÑ§ÉúÑ§ºÅ(²»ÄÜÓĞ¿Õ¸ñ):");
     s_gets(studentID, 100);
     if (!Input_check(studentID)) {
         return;
@@ -259,8 +268,13 @@ void single_Inquire(ListNode* head, ListNode* tailar) {
         ListNode* p = head->next;
         while (p != tailar) {
             if (str_same_cmp(p->studentID, studentID)) {
+                // if(p->CourseNum==0||p->AverageGrade==0.0){
+                //     printf("¸ÃÑ§ÉúĞÅÏ¢²»È«£¡Çë´æÈëÍêÕûĞÅÏ¢ºóÔÚ²éÑ¯£¡\n");
+                //     Sleep(1000);
+                //     return;
+                // }
                 while (true) {
-                    printf("è¯·è¾“å…¥æƒ³è¦æŸ¥è¯¢çš„å†…å®¹:1.å­¦ç”ŸåŸºæœ¬å­¦ç”Ÿä¿¡æ¯ 2.å­¦ç”Ÿè¯¦ç»†æˆç»©ä¿¡æ¯ 3.å­¦ç”Ÿè¯¦ç»†ç´ è´¨åŠ åˆ†ä¿¡æ¯ 4.è¿”å›ä¸»èœå• è¾“å…¥ï¼š");
+                    printf("ÇëÊäÈëÏëÒª²éÑ¯µÄÄÚÈİ:1.Ñ§Éú»ù±¾Ñ§ÉúĞÅÏ¢ 2.Ñ§ÉúÏêÏ¸³É¼¨ĞÅÏ¢ 3.Ñ§ÉúÏêÏ¸ËØÖÊ¼Ó·ÖĞÅÏ¢ 4.·µ»ØÖ÷²Ëµ¥ ÊäÈë£º");
                     char choice[100];
                     memset(choice, 0, sizeof(choice));
                     s_gets(choice, 100);
@@ -269,8 +283,8 @@ void single_Inquire(ListNode* head, ListNode* tailar) {
                     bool flag3 = str_same_cmp(choice, "3");
                     bool flag4 = str_same_cmp(choice, "4");
                     while (!flag1 && !flag2 && !flag3 && !flag4) {
-                        printf("éæ³•è¾“å…¥ï¼\n");
-                        printf("è¯·è¾“å…¥æƒ³è¦æŸ¥è¯¢çš„å†…å®¹:1.å­¦ç”ŸåŸºæœ¬å­¦ç”Ÿä¿¡æ¯ 2.å­¦ç”Ÿè¯¦ç»†æˆç»©ä¿¡æ¯ 3.å­¦ç”Ÿè¯¦ç»†ç´ è´¨åŠ åˆ†ä¿¡æ¯ 4.è¿”å›ä¸»èœå• è¾“å…¥ï¼š");
+                        printf("·Ç·¨ÊäÈë£¡\n");
+                        printf("ÇëÊäÈëÏëÒª²éÑ¯µÄÄÚÈİ:1.Ñ§Éú»ù±¾Ñ§ÉúĞÅÏ¢ 2.Ñ§ÉúÏêÏ¸³É¼¨ĞÅÏ¢ 3.Ñ§ÉúÏêÏ¸ËØÖÊ¼Ó·ÖĞÅÏ¢ 4.·µ»ØÖ÷²Ëµ¥ ÊäÈë£º");
                         memset(choice, 0, sizeof(choice));
                         s_gets(choice, 100);
                         flag1 = str_same_cmp(choice, "1");
@@ -279,22 +293,37 @@ void single_Inquire(ListNode* head, ListNode* tailar) {
                         flag4 = str_same_cmp(choice, "4");
                     }
                     if (flag1) {
-                        Print_stu_Information(p, 0, NULL,0);
-                        
+                        if(p->CourseNum == 0){
+                            printf("¸ÃÑ§ÉúĞÅÏ¢²»È«£¡Çë´æÈëÍêÕûĞÅÏ¢ºóÔÚ²éÑ¯£¡\n");
+                            system("pause");
+                        }
+                        else{
+                            Print_stu_Information(p, 0, NULL,0);
+                            system("pause");
+                        }
                     }
                     else if (flag2) {
-                        printf("å­¦å·:%s å§“å:%s å­¦é™¢ï¼š%s å¹³å‡ç»©ç‚¹:%.2lf\n", p->studentID, p->studentName, p->studentFaculty, p->AverageGrade);
-                        printf("å­¦ç”Ÿæˆç»©å…·ä½“ä¿¡æ¯ï¼š\n");
+                        if(p->CourseNum==0){
+                            printf("¸ÃÑ§ÉúÃ»ÓĞ¿Î³ÌĞÅÏ¢£¡\n");
+                            system("pause");
+                        }
+                        else{
+                        printf("Ñ§ºÅ:%s ĞÕÃû:%s Ñ§Ôº£º%s Æ½¾ù¼¨µã:%.2lf\n", p->studentID, p->studentName, p->studentFaculty, p->AverageGrade);
+                        printf("Ñ§Éú³É¼¨¾ßÌåĞÅÏ¢£º\n");
                         Print_stu_Grade(p);
+                        system("pause");
+                        }
                     }
                     else if (flag3) {
                         if (p->QualityGradeNum == 0) {
-                            printf("è¯¥å­¦ç”Ÿæ²¡æœ‰ç´ è´¨åŠ åˆ†ä¿¡æ¯ï¼\n");
+                            printf("¸ÃÑ§ÉúÃ»ÓĞËØÖÊ¼Ó·ÖĞÅÏ¢£¡\n");
+                            system("pause");
                         }
                         else {
-                            printf("å­¦å·:%s å§“å:%s å­¦é™¢ï¼š%s ç´ è´¨åŠ åˆ†:%.2f\n", p->studentID, p->studentName, p->studentFaculty, p->AddQualityGrade);
-                            printf("å­¦ç”Ÿç´ è´¨åŠ åˆ†å…·ä½“ä¿¡æ¯ï¼š\n");
+                            printf("Ñ§ºÅ:%s ĞÕÃû:%s Ñ§Ôº£º%s ËØÖÊ¼Ó·Ö:%.2f\n", p->studentID, p->studentName, p->studentFaculty, p->AddQualityGrade);
+                            printf("Ñ§ÉúËØÖÊ¼Ó·Ö¾ßÌåĞÅÏ¢£º\n");
                             Print_stu_credit(p);
+                            system("pause");
                         }
                     }
                     else if (flag4) {
@@ -304,14 +333,15 @@ void single_Inquire(ListNode* head, ListNode* tailar) {
             }
             p = p->next;
         }
-        printf("æœªæ‰¾åˆ°è¯¥å­¦ç”Ÿä¿¡æ¯ï¼\n");
+        printf("Î´ÕÒµ½¸ÃÑ§ÉúĞÅÏ¢£¡\n");
+        system("pause");
         return;
     }
 }
 
 void faculty_Inquire(ListNode* head, ListNode* tailer) {
     Faculty_Search();
-    printf("è¯·è¾“å…¥ä½ è¦æŸ¥è¯¢çš„å­¦é™¢ç¼–å·(ä¸èƒ½æœ‰ç©ºæ ¼):");       //éœ€è¦è€ƒè™‘æ˜¯å¦åˆæ³•
+    printf("ÇëÊäÈëÄãÒª²éÑ¯µÄÑ§Ôº±àºÅ(²»ÄÜÓĞ¿Õ¸ñ):");       //ĞèÒª¿¼ÂÇÊÇ·ñºÏ·¨
     char number[100];
     memset(number, 0, sizeof(number));
     s_gets(number, 100);
@@ -319,8 +349,8 @@ void faculty_Inquire(ListNode* head, ListNode* tailer) {
     if (number[2] != '\0')flag = 1;
     else if (number[0] < '0' || number[0]>'9' || number[1] < '0' || number[1]>'9')flag = 1;
     while (flag) {
-        printf("ç¼–å·è¾“å…¥éæ³•ï¼\n");
-        printf("è¯·è¾“å…¥ä½ è¦æŸ¥è¯¢çš„å­¦é™¢ç¼–å·(ä¸èƒ½æœ‰ç©ºæ ¼):");
+        printf("±àºÅÊäÈë·Ç·¨£¡\n");
+        printf("ÇëÊäÈëÄãÒª²éÑ¯µÄÑ§Ôº±àºÅ(²»ÄÜÓĞ¿Õ¸ñ):");
         memset(number, 0, sizeof(number));
         s_gets(number, 100);
         flag = 0;
@@ -340,11 +370,12 @@ void faculty_Inquire(ListNode* head, ListNode* tailer) {
         p = p->next;
     }
     if (num == 0) {
-        printf("æœªæ‰¾åˆ°è¯¥å­¦é™¢å­¦ç”Ÿä¿¡æ¯ï¼\n");
+        printf("Î´ÕÒµ½¸ÃÑ§ÔºÑ§ÉúĞÅÏ¢£¡\n");
+        system("pause");
         return;
     }
     else {
-        printf("é€‰æ‹©æ’åºæ–¹å¼ 1.å­¦å·é»˜è®¤é¡ºåº 2.åŠ åˆ†åç»©ç‚¹é«˜ä½é¡ºåº 3.è¿”å›ä¸»èœå• è¾“å…¥ï¼š");
+        printf("Ñ¡ÔñÅÅĞò·½Ê½ 1.Ñ§ºÅÄ¬ÈÏË³Ğò 2.¼Ó·Öºó¼¨µã¸ßµÍË³Ğò 3.·µ»ØÖ÷²Ëµ¥ ÊäÈë£º");
         char choice[100];
         memset(choice, 0, sizeof(choice));
         s_gets(choice, 100);
@@ -352,8 +383,8 @@ void faculty_Inquire(ListNode* head, ListNode* tailer) {
         bool flag2 = str_same_cmp(choice, "2");
         bool flag3 = str_same_cmp(choice, "3");
         while (!flag1 && !flag2 && !flag3) {
-            printf("éæ³•è¾“å…¥ï¼\n");
-            printf("é€‰æ‹©æ’åºæ–¹å¼ 1.å­¦å·é»˜è®¤é¡ºåº 2.åŠ åˆ†åç»©ç‚¹é«˜ä½é¡ºåº 3.è¿”å›ä¸»èœå• è¾“å…¥ï¼š");
+            printf("·Ç·¨ÊäÈë£¡\n");
+            printf("Ñ¡ÔñÅÅĞò·½Ê½ 1.Ñ§ºÅÄ¬ÈÏË³Ğò 2.¼Ó·Öºó¼¨µã¸ßµÍË³Ğò 3.·µ»ØÖ÷²Ëµ¥ ÊäÈë£º");
             memset(choice, 0, sizeof(choice));
             s_gets(choice, 100);
             flag1 = str_same_cmp(choice, "1");
@@ -361,14 +392,14 @@ void faculty_Inquire(ListNode* head, ListNode* tailer) {
             flag3 = str_same_cmp(choice, "3");
         }
         if (flag3)return;
-        printf("æ˜¯å¦éœ€è¦å°†è¾“å‡ºç»“æœå†™å…¥æ–‡ä»¶ï¼Ÿ 1.æ˜¯ 2.å¦ è¾“å…¥ï¼š");
+        printf("ÊÇ·ñĞèÒª½«Êä³ö½á¹ûĞ´ÈëÎÄ¼ş£¿ 1.ÊÇ 2.·ñ ÊäÈë£º");
         memset(choice, 0, 100);
         s_gets(choice, 100);
         bool flag4 = str_same_cmp(choice, "1");
         bool flag5 = str_same_cmp(choice, "2");
         while (!flag4 && !flag5) {
-            printf("éæ³•è¾“å…¥ï¼\n");
-            printf("æ˜¯å¦éœ€è¦å°†è¾“å‡ºç»“æœå†™å…¥æ–‡ä»¶ï¼Ÿ 1.æ˜¯ 2.å¦ è¾“å…¥ï¼š");
+            printf("·Ç·¨ÊäÈë£¡\n");
+            printf("ÊÇ·ñĞèÒª½«Êä³ö½á¹ûĞ´ÈëÎÄ¼ş£¿ 1.ÊÇ 2.·ñ ÊäÈë£º");
             memset(choice, 0, sizeof(choice));
             s_gets(choice, 100);
             flag4 = str_same_cmp(choice, "1");
@@ -383,64 +414,70 @@ void faculty_Inquire(ListNode* head, ListNode* tailer) {
             char name[100] = "D:\\data\\vscode\\Program_Design\\build\\faculty_search.txt";
             fp = fopen(name, "w");
             if (fp == NULL) {
-                printf("æ‰“å¼€æ–‡ä»¶å¤±è´¥ï¼\n");
+                printf("´ò¿ªÎÄ¼şÊ§°Ü£¡\n");
+                system("pause");
                 return;
             }
             ListNode* p = head->next;
             if (flag1) {
-                fprintf(fp,"%så­¦é™¢å­¦ç”ŸåŸºæœ¬ä¿¡æ¯:\n", faculty);
+                fprintf(fp,"%sÑ§ÔºÑ§Éú»ù±¾ĞÅÏ¢:\n", faculty);
                 Print_stu_Information(p, 1, fp, 1);
                 while (p != tailer) {
-                    if (str_same_cmp(p->studentFaculty, faculty)) {
+                    if (str_same_cmp(p->studentFaculty, faculty) && p->CourseNum != 0) {
                         Print_stu_Information(p, 1, fp,2);
                     }
                     p = p->next;
                 }
             }
             else if (flag2) {
-                fprintf(fp,"%så­¦é™¢å­¦ç”ŸåŸºæœ¬ä¿¡æ¯:\n", faculty);
+                fprintf(fp,"%sÑ§ÔºÑ§Éú»ù±¾ĞÅÏ¢:\n", faculty);
                 Print_stu_Information(p, 1, fp, 1);
                 sort_cmp_grade(head, tailer, faculty, 3, fp);
             }
-            printf("å­¦ç”Ÿä¿¡æ¯å·²å†™å…¥åˆ°'faculty_search.txt'æ–‡ä»¶(æºæ–‡ä»¶ç›®å½•ä¸‹)\n");
+            printf("Ñ§ÉúĞÅÏ¢ÒÑĞ´Èëµ½'faculty_search.txt'ÎÄ¼ş(Ô´ÎÄ¼şÄ¿Â¼ÏÂ)\n");
             fclose(fp);
+            system("pause");
         }
         else {
-            printf("%så­¦é™¢å­¦ç”ŸåŸºæœ¬ä¿¡æ¯:\n", faculty);
+            printf("%sÑ§ÔºÑ§Éú»ù±¾ĞÅÏ¢:\n", faculty);
             Print_stu_Information(p, 0, NULL, 1);
             if (flag1) {
                 ListNode* p = head->next;
                 while (p != tailer) {
-                    if (str_same_cmp(p->studentFaculty, faculty))Print_stu_Information(p, 0, NULL,2);
+                    if (str_same_cmp(p->studentFaculty, faculty) && p->CourseNum != 0){
+                        Print_stu_Information(p, 0, NULL,2);
+                    }
                     p = p->next;
                 }
             }
             else if (flag2) {
                 sort_cmp_grade(head, tailer, faculty, 1, NULL);
             }
+            system("pause");
         }
     }
 }
 
 void file_Inquire(ListNode* head, ListNode* tailer) {
-    printf("è¯·å°†éœ€è¦æŸ¥è¯¢çš„å­¦ç”Ÿå­¦å·å†™å…¥æ–‡ä»¶ä¸­\n");
-    printf("è¦æ±‚ï¼šæ¯è¡Œä¸€ä¸ªå­¦å·ï¼Œæ¯ä¸¤ä¸ªå­¦å·é—´ç”¨ä¸€ä¸ªå›è½¦åˆ†éš”ï¼Œä¸èƒ½æœ‰ç©ºæ ¼\n");
-    printf("æœ€å¤§æŸ¥è¯¢ä¸Šé™ä¸º1000ä¸ªï¼Œè¶…å‡ºå†…å®¹æ— æ³•æŸ¥è¯¢ï¼\n");
-    printf("æœ€åä¸€ä¸ªå­¦å·è¾“å…¥åä¸èƒ½å†è¾“å…¥å›è½¦é”®ï¼\n");
+    printf("Çë½«ĞèÒª²éÑ¯µÄÑ§ÉúÑ§ºÅĞ´ÈëÎÄ¼şÖĞ\n");
+    printf("ÒªÇó£ºÃ¿ĞĞÒ»¸öÑ§ºÅ£¬Ã¿Á½¸öÑ§ºÅ¼äÓÃÒ»¸ö»Ø³µ·Ö¸ô£¬²»ÄÜÓĞ¿Õ¸ñ\n");
+    printf("×î´ó²éÑ¯ÉÏÏŞÎª1000¸ö£¬³¬³öÄÚÈİÎŞ·¨²éÑ¯£¡\n");
+    printf("×îºóÒ»¸öÑ§ºÅÊäÈëºó²»ÄÜÔÙÊäÈë»Ø³µ¼ü£¡\n");
     printf("\n");
-    printf("è¯·è¾“å…¥æ–‡ä»¶è·¯å¾„(è·¯å¾„ä¸¤æ—ä¸è¦å¸¦åŒå¼•å·ï¼):");
+    printf("ÇëÊäÈëÎÄ¼şÂ·¾¶(Â·¾¶Á½ÅÔ²»Òª´øË«ÒıºÅ£¡):");
     char filepath[1000];
     memset(filepath, 0, sizeof(filepath));
     s_gets(filepath, 1000);
     FILE* fp;
     fp = fopen(filepath, "r");
     if (fp == NULL) {
-        printf("æ‰“å¼€æ–‡ä»¶å¤±è´¥ï¼\n");
+        printf("´ò¿ªÎÄ¼şÊ§°Ü£¡\n");
+        system("pause");
         return;
     }
-    printf("é€‰æ‹©æ’åºæ–¹å¼ 1.æŸ¥è¯¢é»˜è®¤é¡ºåº 2.åŠ åˆ†åç»©ç‚¹é«˜ä½é¡ºåº 3.è¿”å›ä¸»èœå•\n");
-    printf("æé†’ï¼šè‹¥é€‰æ‹©ç¬¬äºŒç§æ–¹å¼ï¼Œè¾“å‡ºæ–‡ä»¶ä¸­ä¸å«æœ‰æŸ¥è¯¢ä¸åˆ°çš„ä¿¡æ¯ï¼\n");
-    printf("è¾“å…¥é€‰æ‹©ï¼š");
+    printf("Ñ¡ÔñÅÅĞò·½Ê½ 1.²éÑ¯Ä¬ÈÏË³Ğò 2.¼Ó·Öºó¼¨µã¸ßµÍË³Ğò 3.·µ»ØÖ÷²Ëµ¥\n");
+    printf("ÌáĞÑ£ºÈôÑ¡ÔñµÚ¶şÖÖ·½Ê½£¬Êä³öÎÄ¼şÖĞ²»º¬ÓĞ²éÑ¯²»µ½µÄĞÅÏ¢£¡\n");
+    printf("ÊäÈëÑ¡Ôñ£º");
     char choice[100];
     memset(choice, 0, sizeof(choice));
     s_gets(choice, 100);
@@ -448,10 +485,10 @@ void file_Inquire(ListNode* head, ListNode* tailer) {
     bool flag2 = str_same_cmp(choice, "2");
     bool flag3 = str_same_cmp(choice, "3");
     while (!flag1 && !flag2 && !flag3) {
-        printf("éæ³•è¾“å…¥ï¼\n");
-        printf("é€‰æ‹©æ’åºæ–¹å¼ 1.æŸ¥è¯¢é»˜è®¤é¡ºåº 2.åŠ åˆ†åç»©ç‚¹é«˜ä½é¡ºåº 3.è¿”å›ä¸»èœå•\n");
-        printf("æé†’ï¼šè‹¥é€‰æ‹©ç¬¬äºŒç§æ–¹å¼ï¼Œè¾“å‡ºæ–‡ä»¶ä¸­ä¸å«æœ‰æŸ¥è¯¢ä¸åˆ°çš„ä¿¡æ¯ï¼\n");
-        printf("è¾“å…¥é€‰æ‹©ï¼š");
+        printf("·Ç·¨ÊäÈë£¡\n");
+        printf("Ñ¡ÔñÅÅĞò·½Ê½ 1.²éÑ¯Ä¬ÈÏË³Ğò 2.¼Ó·Öºó¼¨µã¸ßµÍË³Ğò 3.·µ»ØÖ÷²Ëµ¥\n");
+        printf("ÌáĞÑ£ºÈôÑ¡ÔñµÚ¶şÖÖ·½Ê½£¬Êä³öÎÄ¼şÖĞ²»º¬ÓĞ²éÑ¯²»µ½µÄĞÅÏ¢£¡\n");
+        printf("ÊäÈëÑ¡Ôñ£º");
         memset(choice, 0, sizeof(choice));
         s_gets(choice, 100);
         flag1 = str_same_cmp(choice, "1");
@@ -464,16 +501,18 @@ void file_Inquire(ListNode* head, ListNode* tailer) {
     int i = 0;
     while (file_s_gets(studentID[i], 100, fp) != NULL) {
         if (studentID[i][8] != '\0') {
-            printf("æ–‡ä»¶ä¸­å­¦å·è¾“å…¥æˆ–æ–‡ä»¶æ ¼å¼éæ³•ï¼\n");
-            printf("è¯·è°ƒæ•´æ–‡ä»¶å†…å®¹æˆ–æ ¼å¼åå†å°è¯•\n");
+            printf("ÎÄ¼şÖĞÑ§ºÅÊäÈë»òÎÄ¼ş¸ñÊ½·Ç·¨£¡\n");
+            printf("Çëµ÷ÕûÎÄ¼şÄÚÈİ»ò¸ñÊ½ºóÔÙ³¢ÊÔ\n");
             fclose(fp);
+            system("pause");
             return;
         }
         for (int j = 0; j < 8; j++) {
             if (studentID[i][j] < '0' || studentID[i][j]>'9') {
-                printf("æ–‡ä»¶ä¸­å­¦å·è¾“å…¥æˆ–æ–‡ä»¶æ ¼å¼éæ³•ï¼\n");
-                printf("è¯·è°ƒæ•´æ–‡ä»¶å†…å®¹æˆ–æ ¼å¼åå†å°è¯•\n");
+                printf("ÎÄ¼şÖĞÑ§ºÅÊäÈë»òÎÄ¼ş¸ñÊ½·Ç·¨£¡\n");
+                printf("Çëµ÷ÕûÎÄ¼şÄÚÈİ»ò¸ñÊ½ºóÔÙ³¢ÊÔ\n");
                 fclose(fp);
+                system("pause");
                 return;
             }
         }
@@ -481,16 +520,18 @@ void file_Inquire(ListNode* head, ListNode* tailer) {
     }
     int num = i;
     if (i == 0) {
-        printf("æ–‡ä»¶ä¸­ä¸å«æœ‰æŸ¥è¯¢ä¿¡æ¯ï¼\n");
+        printf("ÎÄ¼şÖĞ²»º¬ÓĞ²éÑ¯ĞÅÏ¢£¡\n");
         fclose(fp);
+        system("pause");
         return;
     }
     i = 0;
     FILE* fp1;
     fp1 = fopen("result.txt", "w");
     if (fp1 == NULL) {
-        printf("è¾“å‡ºæ–‡ä»¶æ‰“å¼€å¤±è´¥ï¼\n");
+        printf("Êä³öÎÄ¼ş´ò¿ªÊ§°Ü£¡\n");
         fclose(fp);
+        system("pause");
         return;
     }
     int flag = 0;
@@ -500,7 +541,14 @@ void file_Inquire(ListNode* head, ListNode* tailer) {
             ListNode* p = head->next;
             while (p != tailer) {
                 if (str_same_cmp(p->studentID, studentID[i])) {
-                    fprintf(fp1,"ç¬¬%dä¸ªæŸ¥è¯¢ç»“æœï¼š", k);
+                    fprintf(fp1,"µÚ%d¸ö²éÑ¯½á¹û£º", k);
+                    if(p->CourseNum == 0){
+                        fprintf(fp1,"¸ÃÑ§ÉúĞÅÏ¢²»È«\n");
+                        k++;
+                        flag = 1;
+                        p = p->next;
+                        break;
+                    }
                     k++;
                     Print_stu_Information(p, 1, fp1,0);
                     flag = 1;
@@ -509,9 +557,9 @@ void file_Inquire(ListNode* head, ListNode* tailer) {
                 p = p->next;
             }
             if (!flag) {
-                fprintf(fp1,"ç¬¬%dä¸ªæŸ¥è¯¢ç»“æœï¼š", k);
+                fprintf(fp1,"µÚ%d¸ö²éÑ¯½á¹û£º", k);
                 k++;
-                fprintf(fp1, "æœªæ‰¾åˆ°è¯¥å­¦ç”Ÿä¿¡æ¯ï¼\n");
+                fprintf(fp1, "Î´ÕÒµ½¸ÃÑ§ÉúĞÅÏ¢£¡\n");
             }
             flag = 0;
             i++;
@@ -544,35 +592,39 @@ void file_Inquire(ListNode* head, ListNode* tailer) {
             }
         }
         if (k == 0) {
-            printf("æœªæŸ¥è¯¢åˆ°ä»»ä½•ä¿¡æ¯ï¼\n");
+            printf("Î´²éÑ¯µ½ÈÎºÎĞÅÏ¢£¡\n");
             free(p_array);
             fclose(fp1);
             fclose(fp);
+            system("pause");
             return;
         }
         qsort(p_array, k, sizeof(ListNode*), compare_grade);
         Print_stu_Information(p, 1, fp1, 1);
         for (int i = 0; i < k; i++) {
+            if(p->CourseNum == 0)
+                continue;
             Print_stu_Information(p_array[i], 1, fp1,2);
         }
         free(p_array);
     }
-    printf("æŸ¥è¯¢å®Œæ¯•ï¼ç»“æœå·²è¾“å‡ºåˆ°'æŸ¥è¯¢ç»“æœ.txt'æ–‡ä»¶(æºæ–‡ä»¶ç›®å½•ä¸‹)\n");
+    printf("²éÑ¯Íê±Ï£¡½á¹ûÒÑÊä³öµ½'result.txt'ÎÄ¼ş(Ô´ÎÄ¼şÄ¿Â¼ÏÂ)\n");
     fclose(fp1);
     fclose(fp);
+    system("pause");
     return;
 }
 
 
 
 // int main() {
-//     ListNode* head = malloc(sizeof(ListNode)); //é“¾è¡¨å¤´èŠ‚ç‚¹
-//     ListNode* tailer = malloc(sizeof(ListNode)); //é“¾è¡¨å°¾ç»“ç‚¹
+//     ListNode* head = malloc(sizeof(ListNode)); //Á´±íÍ·½Úµã
+//     ListNode* tailer = malloc(sizeof(ListNode)); //Á´±íÎ²½áµã
 //     head->next = tailer;
 //     tailer->father = head;
 //     ListNode* currentNode = head;
 //     for (int i = 0; i < 3; ++i) {
-//         // åˆ›å»ºæ–°ç»“ç‚¹
+//         // ´´½¨ĞÂ½áµã
 //         ListNode* newNode = (ListNode*)malloc(sizeof(ListNode));
 //         newNode->next = NULL;
 //         newNode->father = NULL;
