@@ -6,6 +6,8 @@
 #include <math.h>
 
 #include "definition.h"
+#include "Insert.h"
+#include "login.h"
 
 int maxThesisGradeKind = 6;
 int maxContestGradeKind = 5;
@@ -33,22 +35,20 @@ char ProGName[maxGradeType][maxListNameSize] = {
     "\t国家级优秀结题项目第二名\n"
 };
 
-//加分细则重置为计算机学院
-void resetGrade(){
-    int maxThesisGradeKind = 6;
-    int maxContestGradeKind = 5;
-    int maxProjectGradeKind = 2;
-    double TheGrade[maxGradeType] = {0.4,0.2,0.1,0.05,0.02,0.01};
-    double ConGrade[maxGradeType] = {0.4,0.2,0.1,0.05,0.02};
-    double ProGrade[maxGradeType] = {0.1,0.05};
-    memset(TheGName,0,sizeof(TheGName));
-    // strcpy(TheGName,"")
-}
+char GPA[11][4] = {"4.0","3.7","3.3","3.0","2.7","2.3","2.0","1.7","1.3","1.0","0.0"}; //默认GPA分值
+// char CourseType[5][20] = {
+//     "公共必修",
+//     "公共选修",
+//     "专业必修",
+//     "专业选修",
+//     "再修"
+// };
+
 
 //等级加分导入
-void GradeInput(ListNode* head,ListNode* preListEnd){
-    if(head != preListEnd){
-        printf("链表未清空,无法修改");
+void QualityGradeInput(ListNode* head,ListNode* tailer){
+    if(head->next != tailer){
+        printf("已保存数据,暂时无法修改");
         return;
     }
     FILE* fp;
@@ -88,8 +88,6 @@ void GradeInput(ListNode* head,ListNode* preListEnd){
                         ch = fgetc(fp);
                     }
                     fscanf(fp,"%lf",&ConGrade[i]);
-                    // printf("%s ",ConGName[i]);
-                    // printf("%.3lf\n",ConGrade[i]);
                     fgetc(fp);
                 }
                 break;
@@ -110,329 +108,504 @@ void GradeInput(ListNode* head,ListNode* preListEnd){
                         ch = fgetc(fp);
                     }
                     fscanf(fp,"%lf",&TheGrade[i]);
-                    // printf("%s ",TheGName[i]);
-                    // printf("%.3lf\n",TheGrade[i]);
                     fgetc(fp);
                 }
                 break;
             case 'P' :
-
+                fscanf(fp,"%d",&maxProjectGradeKind);
+                if(maxProjectGradeKind > maxGradeType)
+                    maxProjectGradeKind = maxGradeType;
+                memset(ProGName,0,sizeof(ProGName));
+                for(int i = 0;i < maxProjectGradeKind;i++){
+                    char ch = fgetc(fp);
+                    while(ch == '#'){
+                        strcat(ProGName[i],"\t");
+                        char temp[500];
+                        fscanf(fp,"%s",&temp);
+                        strcat(ProGName[i],temp);
+                        strcat(ProGName[i],"\n");
+                        fgetc(fp);
+                        ch = fgetc(fp);
+                    }
+                    fscanf(fp,"%lf",&ProGName[i]);
+                    fgetc(fp);
+                }
                 break;
             default :
 
-                break;
+                return;
         }
     }
     return;
 }
 
-//文件输入
-void fileInsert(ListNode** preListEnd){
-    char filePath[100];
-    printf("文件格式：");
-    printf("每组数据一行,使用space间隔,缺省信息使用#代替\n");
-    printf("开头 : 学号(不可缺省) 姓名\n");
-    printf("后续 : 类型:大创、科研、竞赛\n");
-    printf("之后按数据定义顺序\n");
-    printf("请输入文件路径(输入‘#’退出）：");
+//素质项目文件输入
+void QualityFileInsert(ListNode* head,ListNode* tailer,ListNode** currentNode){
+    char filePath[300];
+    printf("文件格式:略\n");
+    printf("请输入文件路径(输入'#'返回上级菜单):");
     scanf("%s",&filePath);
     if(filePath[0] == '#')
         return;
     FILE *fp = fopen(filePath,"r");
     int failureNum = 0;
-    while(!fp && failureNum < 5){
+    while(fp == NULL){
         failureNum++;
-        printf("文件打开失败，请重新输入(输入‘#’退出）：");
+        if(failureNum > 5){
+            printf("错误5次,返回\n");
+            return;
+        }
+        printf("文件打开失败，请重新输入(输入‘#’返回上级菜单):");
         scanf("%s",&filePath);
         if(filePath[0] == '#')
             return;
         fp = fopen(filePath,"r");
     }
-    duqu(preListEnd,fp);
+    QualityFileInput(head,tailer,currentNode,fp);
     fclose(fp);
     return;
 }
 
-void duqu(ListNode** preListEnd,FILE* fp){
+void QualityFileInput(ListNode* head,ListNode* tailer,ListNode** currentNode,FILE* fp){
+    int line = 0; //记录行号
     while(!feof(fp)){
-        gradeNode* tempGrade = malloc(sizeof(gradeNode));
-        tempGrade->studentName[0] = '#';
-        tempGrade->studentName[1] = '\0';
-        tempGrade->recognizedCredit = 0.0; //初始化
+        line++;
 
         //读取学号
-        char info[20];
-        fscanf(fp,"%s",&info);
+        char info[30];
+        memset(info,0,sizeof(info));
+        fscanf(fp,"%s",info);
         int len = 0;
-        for(len = 0;len < 20 && info[len] != '\0';len++){}
+        for(len = 0;len < 30 && info[len] != '\0';len++){
+            if(info[len] < '0' || info[len] > '9'){
+                printf("Line:%d : 学号错误,返回上级菜单\n",line);
+                return;
+            }
+        }
         if(len != 8){
-            printf("学号位数错误,退出");
-            free(tempGrade);
+            printf("Line:%d : 学号位数错误,返回上级菜单\n",line);
             return;
         }
-        strcpy(tempGrade->studentID,info); 
+
+        //搜索学号
+        bool CreateNewNode = InsertIDsearch(head,tailer,currentNode,info);
 
         //读取姓名
-        fscanf(fp,"%s",&info);
-        if(info[0] != '#'){
-            memset(tempGrade->studentName,0,sizeof(tempGrade->studentName));
-            strcpy(tempGrade->studentName,info);
+        fscanf(fp,"%s",info);
+        if(CreateNewNode){
+            memset((*currentNode)->studentName,0,sizeof((*currentNode)->studentName));
+            strcpy((*currentNode)->studentName,info);
+        }
+        else if(strcmp((*currentNode)->studentName,info) != 0){
+            printf("Line:%d : 姓名信息与历史信息矛盾,退出\n",line);
+            return;
         }
 
-        //读取类型
+        matchFacultyName_list(head, tailer);
+        // //读取学院
+        // fscanf(fp,"%s",info);
+        // if(CreateNewNode){
+        //     memset((*currentNode)->studentFaculty,0,sizeof((*currentNode)->studentFaculty));
+        //     strcpy((*currentNode)->studentFaculty,info);
+        // }
+        // else if(strcmp((*currentNode)->studentFaculty,info) != 0){
+        //     printf("Line:%d : 学院信息与历史信息矛盾,退出\n",line);
+        //     return;
+        // }
+
+        //可录入多条素质项目信息
+        fgetc(fp);
+        int num;
+        fscanf(fp,"%d",&num);
+        line++;
+        fgetc(fp);
         char kind;
-        fscanf(fp,"%c",&kind);
-        switch(kind){
-            case 'P' :
-                    tempGrade->gradeType = PROJECT;
-                    tempGrade->Project = projectFileInput(&fp);
-                    //fgetc(fp);
-            case 'T' :
-                    tempGrade->gradeType = THESIS;
+        for(int i = 0;i < num;i++){
+            QualityGradeNode* tempQualityGrade = malloc(sizeof(QualityGradeNode));
+            tempQualityGrade->recognizedCredit = 0.0; //初始化
+            line++;
+            fscanf(fp,"%c",&kind);
+            switch((int)kind){
+                case 'P' :
+                        if(!projectFileInput(&fp,&(tempQualityGrade->Project))){
+                            free(tempQualityGrade);
+                            printf("Line:%d : 大创项目信息错误\n",line);
+                            return;
+                        }
+                        tempQualityGrade->QualityGradeType = PROJECT;
+                        fgetc(fp);
+                        break;
+                case 'T' :
+                        if(!thesisFileInput(&fp,&(tempQualityGrade->Thesis))){
+                            free(tempQualityGrade);
+                            printf("Line:%d : 论文项目信息错误\n",line);
+                            return;
+                        }                
+                        tempQualityGrade->QualityGradeType = THESIS;
+                        fgetc(fp);
+                        break;
+                case 'C' :
+                        if(!contestFileInput(&fp,&(tempQualityGrade->Contest))){
+                            free(tempQualityGrade);
+                            printf("Line:%d : 竞赛项目信息错误\n",line);
+                            return;
+                        }
+                        tempQualityGrade->QualityGradeType = CONTEST;
+                        fgetc(fp);
+                        break;
+                default : 
+                        printf("Line:%d : 素质项目类型错误\n",line);
+                        free(tempQualityGrade);
+                        return;
+            }
 
-                    //fgetc(fp);
-            case 'C' :
-                    tempGrade->gradeType = CONTEST;
-
-                    //fgetc(fp);
-            default : 
-                    printf("素质项目类型错误");
-                    free(tempGrade);
-                    return;
+            //时间
+            tempQualityGrade->addTime = GetTime();
+            
+            QualityGradeMatch(tempQualityGrade);
+            (*currentNode)->QGrade[(*currentNode)->QualityGradeNum] = tempQualityGrade;
+            (*currentNode)->QualityGradeNum++;
+            (*currentNode)->AddQualityGrade = UpdataQualityGrade(*currentNode);
         }
+        line++;
+    }
+    printf("素质项目信息文件输入成功\n");
+    return;
+}
 
-        ListNode* temp = malloc(sizeof(ListNode));
-        temp->next = (*preListEnd)->next;
-        (*preListEnd)->next = temp;
-        *preListEnd = temp;
-        (*preListEnd)->t = tempGrade;
+bool projectFileInput(FILE** f,project** p){
+    project* temp = malloc(sizeof(project));
+    char ch = fgetc(*f);
+    if(ch == '\n')
+        return false;
+    fscanf(*f,"%d",&(temp->memberNum));
+    ch = fgetc(*f);
+    if(ch == '\n')
+        return false;
+    for(int i = 0;i < temp->memberNum;i++){
+        fscanf(*f,"%s",temp->members[i]);
+        ch = fgetc(*f);
+        if(ch == '\n')
+            return false;
+    }
+    ch = fgetc(*f);
+    if(ch == '\n')
+        return false;
+    fscanf(*f,"%s",temp->instructor);
+    ch = fgetc(*f);
+    if(ch == '\n')
+        return false;
+    fscanf(*f,"%s",temp->projrectName);
+    ch = fgetc(*f);
+    if(ch == '\n')
+        return false;
+    fscanf(*f,"%d",&(temp->itemNum));
+    ch = fgetc(*f);
+    if(ch == '\n')
+        return false;
+    fscanf(*f,"%d",&(temp->approvalTime));
+    ch = fgetc(*f);
+    if(ch == '\n')
+        return false;
+    fscanf(*f,"%d",&(temp->endTime));
+    fscanf(*f,"%d",&(temp->proG));
+    temp->proG--;
+    *p = temp;
+    return true;
+}
+
+bool thesisFileInput(FILE** f,thesis** t){
+    thesis* temp = malloc(sizeof(thesis));
+    // char ch = fgetc(*f);
+    // if(ch == '\n')
+    //     return false;
+    fscanf(*f,"%s",temp->thesisName);
+    // ch = fgetc(*f);
+    // if(ch == '\n')
+    //     return false;
+    fscanf(*f,"%d",&(temp->publicationTime));
+    // ch = fgetc(*f);
+    // if(ch == '\n')
+    //     return false;
+    fscanf(*f,"%d",&(temp->Grade));
+    temp->Grade--;
+    *t = temp;
+    return true;
+}
+
+bool contestFileInput(FILE** f,contest** c){
+    contest* temp = malloc(sizeof(contest));
+    // char ch = fgetc(*f);
+    // if(ch == '\n')
+    //     return false;
+    fscanf(*f,"%s",temp->contestName);
+    // ch = fgetc(*f);
+    // if(ch == '\n')
+    //     return false;
+    fscanf(*f,"%s",temp->organizer);
+    // ch = fgetc(*f);
+    // if(ch == '\n')
+    //     return false;
+    int memberNum = 0;
+    fscanf(*f,"%d",&memberNum);
+    // ch = fgetc(*f);
+    // if(ch == '\n')
+    //     return false;    
+    for(int i = 0;i < memberNum;i++){
+        fscanf(*f,"%s",temp->winners[i]);
+        // ch = fgetc(*f);
+        // if(ch == '\n')
+        //     return false;
+    }
+    // ch = fgetc(*f);
+    // if(ch == '\n')
+    //     return false;
+    fscanf(*f,"%d",&(temp->prizeTIme));
+    // ch = fgetc(*f);
+    // if(ch == '\n')
+    //     return false;
+    fscanf(*f,"%d",&(temp->conG));
+    temp->conG--;
+    *c = temp;
+    return true;
+}
+
+void QualityGradeMatch(QualityGradeNode* g){
+    switch(g->QualityGradeType){
+        case THESIS :
+                thesis* temp1 = g->Thesis;
+                int grade = temp1->Grade;
+                g->recognizedCredit = TheGrade[grade];
+                break;
+        case CONTEST :
+                contest* temp2 = g->Contest;
+                grade = temp2->conG;
+                g->recognizedCredit = ConGrade[grade];
+                break;
+        case PROJECT :
+                project* temp3 = g->Project;
+                grade = temp3->proG;
+                g->recognizedCredit = ProGrade[grade];
+                break;
+        default :
+                break;
     }
     return;
 }
 
-
-// void fileGetLineOne(gradeNode* t,FILE** f){
-//     char info[3][20];
-//     fscanf(*f,"%s%s%s",info[0],info[1],info[2]);
-//     int a[3] = {gradeNodeJudge(info[0]),gradeNodeJudge(info[1]),gradeNodeJudge(info[2])};
-//     for(int j = 0;j < 3;j++){
-//         switch(a[j]){
-//             case 0 : break;
-//             case 1 :
-//                 int i;
-//                 for(i = 0;info[j][i] != '\0';i++)
-//                     t->studentID[i] = info[j][i];
-//                 t->studentID[i] = info[j][i];
-//                 break;
-//             case 2 :
-//                 int fenmu = 10;
-//                 for(int i = 2;info[j][i] != '\0';i++){
-//                     t->recognizedCredit += (double)(info[j][i] - '0') / fenmu;
-//                     fenmu *= 10;
-//                 }
-//                 break;
-//             case 3 :
-//                 for(i = 0;info[j][i] != '\0';i++)
-//                     t->studentName[i] = info[j][i];
-//                 t->studentName[i] = info[j][i];
-//                 break;
-//             default :
-//                 printf("error");
-//                 break;           
-//         }
-//     }
-// }
-
-// int gradeNodeJudge(char* info){
-//     if(info[0] == '#')
-//         return 0;
-//     int len;
-//     for(len = 0;info[len] != '\0';len++){}
-//     if(len == 8){ //判断学号
-//         bool match = true;
-//         for(int i = 0;i < len;i++){
-//             if(info[i] < '0' || info[i] > '9'){
-//                 match = false;
-//                 break;
-//             }
-//         }
-//         if(match)
-//             return 1;
-//     }
-//     else if(info[0] == '0' && info[1] == '.'){
-//         bool match = true;
-//         for(int i = 2;info[i] != '\0';i++){
-//             if(info[i] < '0' || info[i] > '9'){
-//                 match = false;
-//                 break;
-//             }
-//         }
-//         if(match)
-//             return 2;
-//     }
-//     else{ //姓名
-//         bool match = true;
-//         for(int i = 0;i < len;i++){
-//             if(info[i] >= '0' && info[i] <= '9'){
-//                 match = false;
-//                 break;
-//             }
-//         }
-//         return 3;
-//     }
-//     return 4;
-// }
-
-project* projectFileInput(FILE** f){
-    project* p = malloc(sizeof(project));
-    fscanf(*f,"%d",&(p->memberNum)); 
-    for(int i = 0;i < p->memberNum;i++){
-        fscanf(*f,"%s",p->members[i]);
-    }
-    fscanf(*f,"%s%s%d%d%d",p->instructor,p->projrectName,&(p->itemNum),&(p->approvalTime),&(p->endTime));
-    return p;
-}
-
-
-
-//手动输入
-void singleInsert(ListNode** preListEnd){
-    gradeNode* g = malloc(sizeof(gradeNode));
+//素质手输
+void QualitySingleInsert(ListNode* head,ListNode* tailer,ListNode** currentNode){
     char info[50];
     int failNum = 0;
 
     //输入学号
-    printf("输入学号:");
-    scanf("%s",&info);
+    printf("请输入学号:");
+    scanf("%s",info);
     int len = 0;
-    for(len = 0;len < 20 && info[len] != '\0';len++){}
+    for(len = 0;len < 50 && info[len] != '\0';len++){
+        if(info[len] < '0' || info[len] > '9'){
+            failNum++;
+        }
+        if(failNum >= maxFailNum){
+            printf("输入错误满%d次,自动返回上级菜单\n",maxFailNum);
+            return;
+        }
+    }
     while(len != 8){
         failNum++;
-        if(failNum >= 5){
-            printf("错误5次,退出");
+        if(failNum >= maxFailNum){
+            printf("输入错误满%d次,自动返回上级菜单\n",maxFailNum);
             return;
         }
         printf("学号位数错误,重新输入:");
-        scanf("%s",&info);
+        scanf("%s",info);
         len = 0;
-        for(len = 0;len < 20 && info[len] != '\0';len++){}
+        for(len = 0;len < 20 && info[len] != '\0';len++){
+            if(info[len] < '0' || info[len] > '9'){
+                failNum++;
+            }
+            if(failNum >= maxFailNum){
+                printf("输入错误满%d次,自动返回上级菜单\n",maxFailNum);
+                return;
+            }            
+        }
     }
-    strcpy(g->studentID,info); 
-    
-    //输入姓名
-    printf("输入姓名:");
-    scanf("%s",&(g->studentName));
 
-    printf("输入素质项目类型: 1.科研 2.大创 3.竞赛\n");
-    printf("输入选项:");
-    int a = 0;
-    failNum = 0;
-    scanf("%d",&a);
-    while(a != 1 && a != 2 && a != 3){
-        failNum++;
-        if(failNum >= 5){
-            printf("错误5次,退出");
+    //搜索学号
+    bool CreateNewNode = InsertIDsearch(head,tailer,currentNode,info);
+
+    //姓名
+    if(CreateNewNode){
+        printf("请输入姓名:");
+        scanf("%s",&((*currentNode)->studentName));
+    }
+    else{
+        printf("已有姓名:%s ,无需再次输入\n",(*currentNode)->studentFaculty);
+    }
+
+    matchFacultyName_list(head, tailer);
+    // //学院
+    // if(CreateNewNode){
+    //     printf("请输入学院:");
+    //     scanf("%s",&((*currentNode)->studentFaculty));
+    // }
+    // else{
+    //     printf("已有学院:%s ,无需再次输入\n",(*currentNode)->studentFaculty);
+    // }
+
+    //
+    bool ContinueInput = true;
+    while(ContinueInput){
+        printf("素质项目类型: 1.科研 2.大创 3.竞赛 4.返回\n");
+        printf("请输入选项:");
+        char a[maxSwitchChoiceSIze];
+        failNum = 0;
+        scanf("%d",&a);
+        while(!SwitchCheck(a) || a[0] < 1 || a[0] > 4){
+            failNum++;
+            if(failNum >= maxFailNum){
+                printf("输入错误满%d次,自动上级菜单\n",maxFailNum);
+                return;
+            }  
+            printf("错误,重新输入:");
+            scanf("%d",&a);
+        }
+
+        QualityGradeNode* tempQualityGrade = malloc(sizeof(QualityGradeNode));
+        switch((int)a[0]){
+            case '1' :
+                tempQualityGrade->QualityGradeType = THESIS;
+                thesisSingleInput(tempQualityGrade);
+                break;
+            case '2' : 
+                tempQualityGrade->QualityGradeType = PROJECT;
+                projectSingleInput(tempQualityGrade);
+                break;
+            case '3' : 
+                tempQualityGrade->QualityGradeType = CONTEST;
+                contestSingleInput(tempQualityGrade);
+                break;
+            case '4' :
+                return;
+            default :
+                free(tempQualityGrade);
+                break;
+        }
+
+        //时间
+        tempQualityGrade->addTime = GetTime();
+
+        printf("素质项目输入成功\n");
+        (*currentNode)->QGrade[(*currentNode)->QualityGradeNum] = tempQualityGrade;
+        (*currentNode)->QualityGradeNum++;
+        (*currentNode)->AddQualityGrade = UpdataQualityGrade(*currentNode);
+
+        failNum = 0;
+        printf("是否需要继续输入其他素质项目? Y or N\n");
+        printf("输入:");
+        char choose[20];
+        scanf("%s",choose);
+        while(!SwitchCheck(choose) || failNum < maxFailNum){
+            if(strcmp(choose,"N") == 0){
+                ContinueInput = false;
+                break;
+            }
+            else if(strcmp(choose,"Y") == 0){
+                break;
+            }
+            else{
+                failNum++;
+                printf("错误,重新输入:");
+                scanf("%s",choose);
+            }
+        }
+        if(failNum >= maxFailNum){
+            printf("输入错误满%d次,自动返回上级菜单\n",maxFailNum);
             return;
         }
-        printf("错误,重新输入:");
-        scanf("%d",&a);
     }
-    switch(a){
-        case 1 :
-            g->gradeType = THESIS;
-            thesisSingleInput(g);
-            break;
-        case 2 : 
-            g->gradeType = PROJECT;
-            projectSingleInput(g);
-            break;
-        case 3 : 
-            g->gradeType = CONTEST;
-            contestSingleInput(g);
-            break;
-        default :
-            break;
-    }
-
-    printf("输入成功");
-    ListNode* temp = malloc(sizeof(ListNode));
-    temp->t = g;
-    temp->next = (*preListEnd)->next;
-    (*preListEnd)->next = temp;
-    (*preListEnd) = temp;
     return;
 }
 
-void projectSingleInput(gradeNode* g){
+void projectSingleInput(QualityGradeNode* g){
     project* p = malloc(sizeof(project));
 
-    printf("输入成员数量:");
+    printf("请输入成员数量:");
     scanf("%d",&(p->memberNum));
 
-    printf("输入成员名单");
+    printf("请输入成员名单");
     for(int i = 0;i < p->memberNum;i++){
         scanf("%s",&p->members[i]);
     }
 
-    printf("输入指导老师姓名:");
+    printf("请输入指导老师姓名:");
     scanf("%s",&p->instructor);
 
-    printf("项目名称:");
+    printf("请输入项目名称:");
     scanf("%s",&p->projrectName);
 
-    printf("项目编号:");
+    int num;
+    for(int i = 0;i < 5;i++){
+        printf("G%d:%s",i + 1,ProGName[i]);
+    }
+    printf("请输入等级:");
+    scanf("%d",&num);
+    if(num >= 1 && num <= maxProjectGradeKind){
+        p->proG = num - 1;
+        QualityGradeMatch(g);
+    }
+
+    printf("请输入项目编号:");
     scanf("%d",&p->itemNum);
 
-    printf("立项时间:");
+    printf("请输入立项时间:");
     scanf("%d",&p->approvalTime);
 
-    printf("结项时间:");
+    printf("请输入结项时间:");
     scanf("%d",&p->endTime);
 
     g->Project = p;
     return;
 }
 
-void thesisSingleInput(gradeNode* g){
+void thesisSingleInput(QualityGradeNode* g){
     thesis* t = malloc(sizeof(thesis));
     g->Thesis = t;
 
-    printf("输入论文标题:");
+    printf("请输入论文标题:");
     scanf("%s",t->thesisName);
 
-    printf("输入出版时间:");
+    printf("请输入出版时间:");
     scanf("%d",&t->publicationTime);
 
     getchar();
     for(int i = 0;i < 6;i++){
         printf("G%d:%s",i + 1,TheGName[i]);
     }
-    printf("输入等级数字:");
+    printf("输入等级论文等级:");
     int grade;
     scanf("%d",&grade);
     if(grade >= 1 && grade <= 6){
         t->Grade = grade - 1;
-        pipei(g);
+        QualityGradeMatch(g);
     }
-
-    //g->Thesis = t;
     return;
 }
 
-void contestSingleInput(gradeNode* g){
+void contestSingleInput(QualityGradeNode* g){
     contest* c = malloc(sizeof(contest));
     g->Contest = c;
 
-    printf("输入竞赛名:");
+    printf("请输入竞赛名:");
     scanf("%s",&c->contestName);
 
-    printf("输入主办单位:");
+    printf("请输入主办单位:");
     scanf("%s",&c->organizer);
 
-    printf("输入获奖人数:");
+    printf("请输入获奖人数:");
     int num = 0;
     scanf("%d",&num);
-    printf("输入获奖人:");
+    printf("请输入获奖名单:");
     for(int i = 0;i < num;i++){
         scanf("%s",&c->winners[i]);
     }
@@ -440,11 +613,11 @@ void contestSingleInput(gradeNode* g){
     for(int i = 0;i < 5;i++){
         printf("G%d:%s",i + 1,ConGName[i]);
     }
-    printf("输入等级数字:");
+    printf("请输入竞赛等级:");
     scanf("%d",&num);
     if(num >= 1 && num <= 5){
         c->conG = num - 1;
-        pipei(g);
+        QualityGradeMatch(g);
     }
 
     char ch;
@@ -461,44 +634,512 @@ void contestSingleInput(gradeNode* g){
         default : break;
     }
 
-    printf("输入获奖时间:");
+    printf("请输入获奖时间:");
     scanf("%d",&c->prizeTIme);
-
-    //g->Contest = c;
     return;
 }
 
 
+//成绩文件输入
+void CourseFileInsert(ListNode* head,ListNode* tailer,ListNode** currentNode){
+    char filePath[300];
+    printf("文件格式:略\n");
+    //
 
-void pipei(gradeNode* g){
-    switch(g->gradeType){
-        case THESIS :
-                thesis* temp1 = g->Thesis;
-                int grade = temp1->Grade;
-                g->recognizedCredit = TheGrade[grade];
+    printf("请输入文件路径(输入'#'返回):");
+    scanf("%s",&filePath);
+    if(filePath[0] == '#')
+        return;
+    FILE *fp = fopen(filePath,"r");
+    int failureNum = 0;
+    while(!fp && failureNum < 5){
+        failureNum++;
+        printf("文件打开失败，请重新输入(输入‘#’返回):");
+        scanf("%s",&filePath);
+        if(filePath[0] == '#')
+            return;
+        fp = fopen(filePath,"r");
+    }
+    CourseFileInput(head,tailer,currentNode,fp);
+    fclose(fp);
+    return;
+}
+
+void CourseFileInput(ListNode* head,ListNode* tailer,ListNode** currentNode,FILE* fp){
+    int line = 0; //记录行号
+    while(!feof(fp)){
+        line++;
+
+        //读取学号
+        char info[30];
+        memset(info,'\0',sizeof(info));
+        fscanf(fp,"%s",info);
+        int len = 0;
+        for(len = 0;len < 30 && info[len] != '\0';len++){
+            if(info[len] < '0' || info[len] > '9'){
+                printf("Line:%d : 学号错误,退出\n",line);
+                return;
+            }
+        }
+        if(len != 8){
+            printf("Line:%d : 学号位数错误,退出\n",line);
+            return;
+        }
+
+        //搜索学号
+        bool CreateNewNode = InsertIDsearch(head,tailer,currentNode,info);
+
+        //读取姓名
+        fscanf(fp,"%s",info);
+        if(CreateNewNode){
+            memset((*currentNode)->studentName,0,sizeof((*currentNode)->studentName));
+            strcpy((*currentNode)->studentName,info);
+        }
+        else if(strcmp((*currentNode)->studentName,info) != 0){
+            printf("Line:%d : 姓名信息与历史信息矛盾,退出\n",line);
+            return;
+        }
+
+        matchFacultyName_list(head, tailer);
+        // //读取学院
+        // fscanf(fp,"%s",info);
+        // if(CreateNewNode){
+        //     memset((*currentNode)->studentFaculty,0,sizeof((*currentNode)->studentFaculty));
+        //     strcpy((*currentNode)->studentFaculty,info);
+        // }
+        // else if(strcmp((*currentNode)->studentFaculty,info) != 0){
+        //     printf("Line:%d : 学院信息与历史信息矛盾,退出\n",line);
+        //     return;
+        // }
+
+        //可录入多条课程成绩信息
+        fgetc(fp);
+        int i = 0,index = 0;
+        fscanf(fp,"%d",&index);
+        while(i < index){
+            i++;
+            CourseGradeNode* c = malloc(sizeof(CourseGradeNode));
+            fscanf(fp,"%s%s%s%s%d",c->CourseNum,c->CourseName,c->CourseCredit,c->CourseGrade,&(c->gradeType));
+            char *ptr;
+            if(strtod(c->CourseCredit,&ptr) < 0.0){
+                printf("Line:%d : 学分为负数,退出\n",line);
+                free(c);
+                return;
+            }
+            c->gradeType--;
+            double grade = strtod(c->CourseGrade,&ptr);
+            if(grade < 0.0 || grade > 100.0){
+                printf("Line:%d : 成绩不在0~100之间,退出\n",line);
+                free(c);
+                return;
+            }
+            GPAMatch(c);
+
+            (*currentNode)->gradeNode[(*currentNode)->CourseNum] = c;
+            (*currentNode)->CourseNum++;
+            
+        }
+        (*currentNode)->AverageGrade = UpdateGPA(*currentNode);
+        fgetc(fp);
+    }   
+    printf("学科成绩文件输入成功\n");
+    fclose(fp);
+    return;
+}
+
+//课程手输
+void CourseSingleInsert(ListNode* head,ListNode* tailer,ListNode** currentNode){
+    char info[50];
+    int failNum = 0;
+
+    //输入学号
+    printf("输入学号:");
+    scanf("%s",info);
+    int len = 0;
+    for(len = 0;len < 50 && info[len] != '\0';len++){
+        if(info[len] < '0' || info[len] > '9'){
+            failNum++;
+        }
+        if(failNum >= maxFailNum){
+            printf("输入错误满%d次,自动返回上级菜单\n",maxFailNum);
+            return;
+        }
+    }
+    while(len != 8){
+        failNum++;
+        if(failNum >= maxFailNum){
+            printf("输入错误满%d次,自动返回上级菜单\n",maxFailNum);
+            return;
+        }
+        printf("学号位数错误,重新输入:");
+        scanf("%s",info);
+        len = 0;
+        for(len = 0;len < 20 && info[len] != '\0';len++){
+            if(info[len] < '0' || info[len] > '9'){
+                failNum++;
+            }
+            if(failNum >= maxFailNum){
+                printf("输入错误满%d次,自动上级菜单\n",maxFailNum);
+                return;
+            }            
+        }
+    }
+
+    //搜索学号
+    bool CreateNewNode = InsertIDsearch(head,tailer,currentNode,info);
+
+    //姓名
+    if(CreateNewNode){
+        printf("输入姓名:");
+        scanf("%s",&((*currentNode)->studentName));
+    }
+    else{
+        printf("已有姓名信息:%s ,无需再次输入\n",(*currentNode)->studentFaculty);
+    }
+
+    matchFacultyName_list(head, tailer);
+    // //学院
+    // if(CreateNewNode){
+    //     printf("输入学院:");
+    //     scanf("%s",&((*currentNode)->studentFaculty));
+    // }
+    // else{
+    //     printf("已有学院信息:%s ,无需再次输入\n",(*currentNode)->studentFaculty);
+    // }
+
+    //
+    
+    bool ContinueInput = true;
+    while(ContinueInput){
+        CourseGradeNode* c = malloc(sizeof(CourseGradeNode));
+        failNum = 0;
+        printf("输入课程编号:");
+        memset(info,'\0',sizeof(info));
+        scanf("%s",info);
+        while(!CorrectCourseNum(info)){
+            if(failNum >= maxFailNum){
+                printf("输入错误满%d次,自动返回上级菜单\n",maxFailNum);
+                return;
+            }
+            printf("错误,重新输入:");
+            scanf("%s",info);
+        }
+        memset(c->CourseNum,'\0',sizeof(c->CourseNum));
+        strcpy(c->CourseNum,info);
+        printf("请输入课程名:");
+        scanf("%s",c->CourseName);
+        printf("1.公共必修 2.公共选修 3.专业必修 4.专业选修 5.再修\n");
+        printf("请输入课程性质:");
+        int a;
+        scanf("%d",&a);
+        if(a >= 1 && a <= 5){
+            c->gradeType = a - 1;
+        }
+        else{
+            printf("错误,返回");
+            return;
+        }
+        printf("请输入学分:");
+        scanf("%s",c->CourseCredit);
+        char* ptr;
+        while(strtod(c->CourseCredit,&ptr) < 0.0){
+            printf("输入学分为负数,请重新输入:");
+            scanf("%s",c->CourseCredit);
+        }
+        printf("请输入成绩:");
+        scanf("%s",c->CourseGrade);
+        double grade = strtod(c->CourseGrade,&ptr);
+        while(grade < 0.0 || grade > 100.0){
+            printf("成绩应在0~100之间,请重新输入:");
+            scanf("%s",c->CourseGrade);
+            grade = strtod(c->CourseGrade,&ptr);
+        }
+        GPAMatch(c);
+        printf("已自动匹配绩点:%.1lf\n",grade);
+
+        printf("输入成功\n");
+        (*currentNode)->gradeNode[(*currentNode)->CourseNum] = c;
+        (*currentNode)->CourseNum++;
+
+        failNum = 0;
+        printf("是否需要继续输入此人其他学科成绩? Y or N\n");
+        printf("输入:");
+        char choose[20];
+        scanf("%s",choose);
+        while(failNum < maxFailNum){
+            if(strcmp(choose,"N") == 0){
+                ContinueInput = false;
                 break;
-        case CONTEST :
-                contest* temp2 = g->Contest;
-                grade = temp2->conG;
-                g->recognizedCredit = ConGrade[grade];
+            }
+            else if(strcmp(choose,"Y") == 0){
                 break;
-        // case PROJECT :
-        //         project* temp3 = g->Project;
-        //         grade = temp3->;
-        //         g->recognizedCredit = ProGrade[grade];
-        default :
-                break;
+            }
+            else{
+                failNum++;
+                printf("错误,重新输入:");
+                scanf("%s",choose);
+            }
+        }
+        if(failNum >= maxFailNum){
+            printf("输入错误满%d次,自动返回上级菜单\n",maxFailNum);
+            return;
+        }
+
+        (*currentNode)->AverageGrade = UpdateGPA(*currentNode);
     }
     return;
 }
 
-bool StrEqu(char *a,char *b){
-    int i = 0;
-    for(i = 0;a[i] != '\0' && b[i] != '\0';i++){
-        if(a[i] != b[i])
+
+//功能
+bool InsertIDsearch(ListNode* head,ListNode* tailer,ListNode** currentNode,char* info){
+    int isForward = 0;
+    while((*currentNode) != head && (*currentNode) != tailer){
+            int res = strcmp(info,(*currentNode)->studentID);
+             if(res == 0){
+                return false;
+             }
+             else if(res < 0 && isForward >= 0){
+                *currentNode = (*currentNode)->father;
+                isForward = 1;
+             }
+             else if(res > 0 && isForward <= 0){
+                *currentNode = (*currentNode)->next;
+                isForward = -1;
+             }
+             else if(res < 0 && isForward == -1){
+                ListNode* tempNode = malloc(sizeof(ListNode));
+                tempNode->father = (*currentNode)->father;
+                tempNode->next = *currentNode;
+                (*currentNode)->father->next = tempNode;
+                (*currentNode)->father = tempNode;
+                *currentNode = tempNode;
+                memset((*currentNode)->studentID,'\0',sizeof((*currentNode)->studentID));
+                strcpy((*currentNode)->studentID,info);
+                (*currentNode)->QualityGradeNum = 0;
+                (*currentNode)->CourseNum = 0;
+                return true;
+             }
+             else if(res > 0 && isForward == 1){
+                ListNode* tempNode = malloc(sizeof(ListNode));
+                tempNode->father = (*currentNode);
+                tempNode->next = (*currentNode)->next;
+                (*currentNode)->next->father = tempNode;
+                (*currentNode)->next = tempNode;
+                *currentNode = tempNode;
+                memset((*currentNode)->studentID,'\0',sizeof((*currentNode)->studentID));
+                strcpy((*currentNode)->studentID,info);
+                (*currentNode)->QualityGradeNum = 0;
+                (*currentNode)->CourseNum = 0;
+                return true;
+             }
+    }
+    if((*currentNode) == tailer){
+        ListNode* tempNode = malloc(sizeof(ListNode));
+        tempNode->father = (*currentNode)->father;
+        tempNode->next = *currentNode;
+        (*currentNode)->father->next = tempNode;
+        (*currentNode)->father = tempNode;
+        *currentNode = tempNode;
+    }
+    else{
+        ListNode* tempNode = malloc(sizeof(ListNode));
+        tempNode->father = (*currentNode);
+        tempNode->next = (*currentNode)->next;
+        (*currentNode)->next->father = tempNode;
+        (*currentNode)->next = tempNode;
+        *currentNode = tempNode;
+    }
+    memset((*currentNode)->studentID,'\0',sizeof((*currentNode)->studentID));
+    strcpy((*currentNode)->studentID,info);
+    //printf("%s",(*currentNode)->studentID);
+    (*currentNode)->QualityGradeNum = 0;
+    (*currentNode)->CourseNum = 0;
+    return true;
+}
+
+unsigned long long GetTime(){
+    time_t timep;
+    struct tm *p;
+    time(&timep);
+    p = localtime(&timep);
+    unsigned long long res = 0;
+    res += (p->tm_year + 1900) * 10000000000;
+    res += (p->tm_mon + 1) * 100000000;
+    res += (p->tm_mday) * 1000000;
+    res += (p->tm_hour) * 10000;
+    res += (p->tm_min) * 100;
+    res += p->tm_sec;
+    return res;
+}
+
+void ErrGetLine(){
+    char c = getchar();
+    while(c != '\n'){
+        c = getchar();
+    }
+	return;
+}
+
+bool CorrectCourseNum(char* info){
+    int i;
+    for(i = 0;i < 2;i++){
+        if(info[i] < 'a' || info[i] > 'z' || info[i] == '\0')
             return false;
     }
-    if(a[i] == '\0' && b[i] == '\0')
-        return true;
-    return false;
+    for(i = 2;i < 10;i++){
+        if(info[i] < '0' || info[i] > '9' || info[i] == '\0')
+            return false;
+    }
+    if(info[10] != '\0')
+        return false;
+    return true;
+}
+
+bool SwitchCheck(char* choice){
+    return choice[1] == '\0';
+}
+
+double UpdateGPA(ListNode* t){
+    double res;
+    double totalGrade = 0.0,totalCredit = 0.0;
+    if(t->CourseNum == 0)
+        return 0.0;
+    char* ptr;
+    for(int i = 0;i < t->CourseNum;i++){
+        if(t->gradeNode[i]->gradeType == Revise)
+            continue;
+        totalCredit += strtod(t->gradeNode[i]->CourseCredit,&ptr);
+        totalGrade += strtod(t->gradeNode[i]->CourseCredit,&ptr) * strtod(t->gradeNode[i]->GPA,&ptr);
+    }
+    res = totalGrade / totalCredit;
+    return res;
+}
+
+double UpdataQualityGrade(ListNode* t){
+    if(t->QualityGradeNum == 0)
+        return 0.0;
+    double res = 0.0;
+    char* ptr;
+    for(int i = 0;i < t->QualityGradeNum;i++)
+        res += t->QGrade[i]->recognizedCredit,&ptr;
+    res = fmin(res,maxQualityAddGrade);
+    return res;
+}
+
+void GPAMatch(CourseGradeNode* c){
+    char* ptr;
+    double grade = strtod(c->CourseGrade,&ptr);
+
+    if(c->gradeType == Revise){
+        if(grade > 60.0)
+            strcpy(c->GPA,"1.0");
+        else
+            strcpy(c->GPA,"0.0");
+        return;
+    }
+
+    if(grade >= 90.0)
+        strcpy(c->GPA,GPA[0]);
+    else if(grade >= 87.0)
+        strcpy(c->GPA,GPA[1]);
+    else if(grade >= 84.0)
+        strcpy(c->GPA,GPA[2]);
+    else if(grade >= 80.0)
+        strcpy(c->GPA,GPA[3]);
+    else if(grade >= 77.0)
+        strcpy(c->GPA,GPA[4]);
+    else if(grade >= 74.0)
+        strcpy(c->GPA,GPA[5]);
+    else if(grade >= 70.0)
+        strcpy(c->GPA,GPA[6]);
+    else if(grade >= 67.0)
+        strcpy(c->GPA,GPA[7]);
+    else if(grade >= 64.0)
+        strcpy(c->GPA,GPA[8]);
+    else if(grade >= 60.0)
+        strcpy(c->GPA,GPA[9]);
+    else
+        strcpy(c->GPA,GPA[10]);
+    return;
+}
+
+void Insert(ListNode* head,ListNode* tailer,ListNode** currentNode){
+InsertMenu1:
+    printf("输入方式: 1.文件输入\t2.手动输入\t3.返回上级菜单\n");
+    printf("请选择输入方式:");
+    char choose1[maxSwitchChoiceSIze];
+    int status = scanf("%s",choose1);
+    int failNum = 0;
+    while(!SwitchCheck(choose1) || status == 0 || choose1[0] < '1' || choose1[0] > '4'){
+        failNum++;
+        if(failNum >= maxFailNum){
+            printf("输入错误%d次,自动返回主菜单\n",maxFailNum);
+            return;
+        }
+        printf("输入错误,请重新输入:");
+        ErrGetLine();
+        status = scanf("%d",&choose1);
+    }
+
+    if(choose1[0] == '3'){ //
+        return;
+    }
+InsertMenu2: 
+    printf("成绩类型:1.学科成绩\t2.素质项目\t3.返回\n");
+    printf("请选择成绩类型:");
+    failNum = 0;
+    char choose2[maxSwitchChoiceSIze];
+    status = scanf("%s",choose2);
+    while(!SwitchCheck(choose2) || status == 0 || choose2[0] < '1' || choose2[0] > '3'){
+        failNum++;
+        if(failNum >= maxFailNum){
+            printf("输入错误%d次,自动返回主菜单\n",maxFailNum);
+            return;
+        }
+        printf("输入错误,重新输入:");
+        ErrGetLine();
+        status = scanf("%d",&choose2);
+    }
+
+    switch((int)choose1[0]){
+        case '1' :
+                switch((int)choose2[0]){
+                    case '1' :
+                        CourseFileInsert(head,tailer,currentNode);
+                        goto InsertMenu2;
+                        break;
+                    case '2' :
+                        QualityFileInsert(head,tailer,currentNode);
+                        goto InsertMenu2;
+                        break;
+                    case '3' :
+                        goto InsertMenu1;
+                        break;
+                    default : break;
+                }
+
+        case '2' : 
+                switch((int)choose2[0]){
+                    case '1' : 
+                            CourseSingleInsert(head,tailer,currentNode);
+                            goto InsertMenu2;
+                            break;
+                    case '2' : 
+                            QualitySingleInsert(head,tailer,currentNode);
+                            goto InsertMenu2;
+                            break;
+                    case '3' :
+                        goto InsertMenu1;
+                        break;
+                    default : 
+                            printf("返回\n");
+                            return;
+                }
+                break;
+        case '3' :
+            break;
+        default : break;
+    }
+    return;
 }
