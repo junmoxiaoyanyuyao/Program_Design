@@ -23,7 +23,7 @@ void Output(ListNode* head,ListNode* tailer){
         case 1 :
             printf("输入导出文件名(txt):");
             scanf("%s",FileName);
-            fp = fopen(FileName,"w");
+            fp = fopen(FileName,"wt+, ccs=UTF-8");
             if(!fp){
                 printf("创建文件失败");
                 return;

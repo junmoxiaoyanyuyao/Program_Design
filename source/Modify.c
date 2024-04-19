@@ -160,6 +160,7 @@ LOOP:
                 case 1 : 
                     printf("请输入修改后的论文名称:");
                     scanf("%s",q->Thesis->thesisName);
+                    printf("修改成功\n");
                     break;
                 case 2 :
                     printf("请输入修改后的出版时间:");
@@ -224,20 +225,24 @@ LOOP:
                 case 1 : 
                     printf("请输入修改后的竞赛名:");
                     scanf("%s",q->Contest->contestName);
+                    printf("修改成功\n");
                     break;
                 case 2 :
                     printf("请输入修改后的主办单位名称:");
                     scanf("%s",q->Contest->organizer);
+                    printf("修改成功\n");
                     break;
                 case 3 :
                     printf("请输入修改后的获奖名单人数:");
                     scanf("%d",&index);
                     for(int i = 0;i < index;i++)
                         scanf("%s",q->Contest->winners);
+                    printf("修改成功\n");
                     break;
                 case 4 :
                     printf("请输入修改后的获奖时间");
                     scanf("%d",&(q->Contest->prizeTIme));
+                    printf("修改成功\n");
                     break;
                 case 5 :
                     break;
@@ -248,7 +253,7 @@ LOOP:
         default :
             break;
     }
-    printf("修改成功\n");
+    // printf("修改成功\n");
     return;
 }
 

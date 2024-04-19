@@ -200,14 +200,14 @@ void Print_stu_Information(ListNode* p, int flag, FILE* fp, int isheader) {
     }
 
     if (isheader == 2) {
-        if (flag == 0) printf(dataFormat, p->studentID, p->studentName, p->studentFaculty, p->AverageGrade - p->AddQualityGrade, p->AverageGrade);
-        if (flag == 1) fprintf(fp, dataFormat, p->studentID, p->studentName, p->studentFaculty, p->AverageGrade - p->AddQualityGrade, p->AverageGrade);
+        if (flag == 0) printf(dataFormat, p->studentID, p->studentName, p->studentFaculty, p->AverageGrade, p->AverageGrade + p->AddQualityGrade);
+        if (flag == 1) fprintf(fp, dataFormat, p->studentID, p->studentName, p->studentFaculty, p->AverageGrade, p->AverageGrade  + p->AddQualityGrade);
     }
     if (isheader == 0) {
         if (flag == 0)printf("学号:%s    姓名:%s    学院:%s    平均绩点（加分前）:%.2f    平均绩点（加分后）:%.2f\n", p->studentID,
-            p->studentName, p->studentFaculty, p->AverageGrade - p->AddQualityGrade, p->AverageGrade);   //strtod字符串转double要求字符串已合法
+            p->studentName, p->studentFaculty, p->AverageGrade, p->AverageGrade + p->AddQualityGrade);   //strtod字符串转double要求字符串已合法
         if (flag == 1)fprintf(fp, "学号:%s    姓名:%s    学院:%s    平均绩点（加分前）:%.2f    平均绩点（加分后）:%.2f\n", p->studentID,
-            p->studentName, p->studentFaculty, p->AverageGrade - p->AddQualityGrade, p->AverageGrade);
+            p->studentName, p->studentFaculty, p->AverageGrade, p->AverageGrade  + p->AddQualityGrade);
     }
 }
 
@@ -380,7 +380,7 @@ void faculty_Inquire(ListNode* head, ListNode* tailer) {
             memset(filename,0,sizeof(filename));
             strcpy(filename, faculty);
             strcat(filename, ".txt");
-            char name[50] = "D:\\data\\vscode\\Program_Design\\build\\faculty_search.txt";
+            char name[100] = "D:\\data\\vscode\\Program_Design\\build\\faculty_search.txt";
             fp = fopen(name, "w");
             if (fp == NULL) {
                 printf("打开文件失败！\n");

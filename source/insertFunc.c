@@ -909,6 +909,8 @@ bool InsertIDsearch(ListNode* head,ListNode* tailer,ListNode** currentNode,char*
              }
              else if(res < 0 && isForward == -1){
                 ListNode* tempNode = malloc(sizeof(ListNode));
+                tempNode->AddQualityGrade = 0.0;
+                tempNode->AverageGrade = 0.0;
                 tempNode->father = (*currentNode)->father;
                 tempNode->next = *currentNode;
                 (*currentNode)->father->next = tempNode;
@@ -922,6 +924,8 @@ bool InsertIDsearch(ListNode* head,ListNode* tailer,ListNode** currentNode,char*
              }
              else if(res > 0 && isForward == 1){
                 ListNode* tempNode = malloc(sizeof(ListNode));
+                tempNode->AddQualityGrade = 0.0;
+                tempNode->AverageGrade = 0.0;
                 tempNode->father = (*currentNode);
                 tempNode->next = (*currentNode)->next;
                 (*currentNode)->next->father = tempNode;
@@ -936,6 +940,8 @@ bool InsertIDsearch(ListNode* head,ListNode* tailer,ListNode** currentNode,char*
     }
     if((*currentNode) == tailer){
         ListNode* tempNode = malloc(sizeof(ListNode));
+        tempNode->AddQualityGrade = 0.0;
+        tempNode->AverageGrade = 0.0;
         tempNode->father = (*currentNode)->father;
         tempNode->next = *currentNode;
         (*currentNode)->father->next = tempNode;
@@ -944,6 +950,8 @@ bool InsertIDsearch(ListNode* head,ListNode* tailer,ListNode** currentNode,char*
     }
     else{
         ListNode* tempNode = malloc(sizeof(ListNode));
+        tempNode->AddQualityGrade = 0.0;
+        tempNode->AverageGrade = 0.0;
         tempNode->father = (*currentNode);
         tempNode->next = (*currentNode)->next;
         (*currentNode)->next->father = tempNode;
